@@ -1,0 +1,81 @@
+<title>NetFeel Signal Pick List</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  /* Layout: one plain reading column, paper on desk like the consequence wheels */
+  :root { --paper:#ffffff; --desk:#ecebe7; --ink:#1a1a1a; --soft:#5c5c5c; --rule:#d6d4cf; --star:#ffe066;
+    --font:"Jost","Futura","Century Gothic","Avenir Next",system-ui,sans-serif; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#1e1f21; --desk:#141516; --ink:#ecebe7; --soft:#a9a9a6; --rule:#3a3b3e; --star:#8a7a2a; color-scheme:dark; } }
+  :root[data-theme="dark"] { --paper:#1e1f21; --desk:#141516; --ink:#ecebe7; --soft:#a9a9a6; --rule:#3a3b3e; --star:#8a7a2a; color-scheme:dark; }
+  *,*::before,*::after{box-sizing:border-box}
+  body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--font);font-weight:300;line-height:1.5;
+    padding-block:clamp(16px,4vw,48px);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .doc{max-width:740px;margin:0 auto;background:var(--paper);border-radius:3px;padding:clamp(20px,4vw,48px);box-shadow:0 1px 2px rgba(0,0,0,.06),0 20px 40px -24px rgba(0,0,0,.35)}
+  h1{font-weight:400;font-size:clamp(1.8rem,4vw,2.4rem);line-height:1.1;margin:0 0 .5rem}
+  .lead{color:var(--soft);margin:0 0 1.2rem}
+  h2{font-weight:500;font-size:1.15rem;margin:2rem 0 .4rem;padding-bottom:.35rem;border-bottom:1px solid var(--rule)}
+  h3{font-weight:500;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:1.4rem 0 .2rem}
+  .sig{padding:.8rem 0;border-bottom:1px solid var(--rule)}
+  .sig:last-child{border-bottom:0}
+  .sig h4{margin:0;font-weight:500;font-size:1.05rem;line-height:1.3;text-wrap:balance}
+  .sig .tag{display:block;font-size:.8rem;color:var(--soft);margin:.15rem 0 .3rem}
+  .sig p{margin:0;font-size:.98rem}
+  .must{background:color-mix(in srgb,var(--star) 22%,transparent);border-radius:6px;padding:0 1rem}
+  ul{margin:.3rem 0 0;padding-left:1.1rem}
+  li{margin:.35rem 0}
+  li b{font-weight:500}
+  .note{color:var(--soft);margin:.3rem 0 0}
+</style>
+
+<main class="doc">
+  <h1>NetFeel weak signals</h1>
+  <p class="lead">Each signal is named as what we can already see today. The line under it explains it and is ready to say on a slide.</p>
+
+  <h2>Must-haves</h2>
+  <div class="must">
+    <div class="sig"><h4>1. Everyone is getting a personal AI assistant, and it's starting to act for them</h4><span class="tag">Economics · W18</span>
+      <p>About 800 million people use ChatGPT every week, and assistants have started to buy and book things on our behalf. Next, they'll choose what we watch. “I need to calm down” goes to the assistant, and the assistant asks Netflix.</p></div>
+    <div class="sig"><h4>2. Kids already share their feelings with AI, but they don't love it</h4><span class="tag">Social relationships · W10 + W12</span>
+      <p>72% of US teens have used an AI companion, but only 11% enjoy AI “a lot”. Sharing feelings with machines is becoming normal, and people will stay only with the ones they trust.</p></div>
+    <div class="sig"><h4>3. People already use media to reach a feeling, not to pick a genre</h4><span class="tag">Individual behaviour · W6 + W1</span>
+      <p>Sleep sounds, ASMR and endless rewatches of <i>Friends</i> and <i>The Office</i> show it: people already choose content for how it makes them feel. Most ASMR viewers (about 63%) use it to fall asleep.</p></div>
+    <div class="sig"><h4>4. AI slop is flooding the feeds</h4><span class="tag">Education &amp; culture · W2</span>
+      <p>More than 20% of the videos YouTube shows new users are AI slop, and so are 57% of the videos in TikTok's kids category. The more slop there is, the more “verified human-made” is worth.</p></div>
+  </div>
+
+  <h2>More signals, by category</h2>
+  <h3>Individual behaviour</h3>
+  <div class="sig"><h4>5. Netflix has already tested searching by mood</h4><span class="tag">W9</span>
+    <p>In 2025 Netflix let some users search by feeling in an AI beta. The idea is proven; NetFeel is the version that works.</p></div>
+  <div class="sig"><h4>6. Young people may turn away from endless feeds</h4><span class="tag">T5 · our counter-trend</span>
+    <p>Today 73% of Gen Z discover content on social media. Our bet is that the next generation gets tired of feeds and wants fewer, curated, human-made things.</p></div>
+
+  <h3>Politics &amp; government</h3>
+  <div class="sig"><h4>7. Laws are making emotion data the user's own</h4><span class="tag">W19 + W20</span>
+    <p>The EU AI Act treats emotion recognition as high-risk, and the Digital Markets Act lets you take your data with you. By law, your feelings data is becoming yours.</p></div>
+  <div class="sig"><h4>8. Countries are banning social media for under-16s</h4><span class="tag">W7</span>
+    <p>Australia's ban has been law since December 2025, yet 81.5% of kids still use the banned apps. A ban alone doesn't work, so families need a safe place kids actually want to be.</p></div>
+
+  <h3>Education &amp; culture</h3>
+  <div class="sig"><h4>9. Fans want more than the show itself</h4><span class="tag">W15</span>
+    <p>46% of fans look for creator content around what they watch. A human-made making-of for every title keeps them in the story's world and proves real people made it.</p></div>
+
+  <h3>Environment</h3>
+  <p class="note">No signal. W21 (AI data centres use more and more power) was dropped. It's the one to bring back if someone asks about all six categories.</p>
+
+  <h2>Enablers</h2>
+  <p class="note">The tech already exists. Not weak signals.</p>
+  <ul>
+    <li><b>Wearables became continuous health monitors</b> (T1): watches and rings track heart rate, skin temperature and sleep all day.</li>
+    <li><b>Machines already read stress</b> (T3): WHOOP and Oura sell stress scores based on heart-rate variability.</li>
+    <li><b>Media already reacts to your heartbeat</b> (W4): a horror game that changes its music and enemies to match the player's pulse.</li>
+    <li><b>Screens fill young people's days</b> (T2): US teens spend over 8 hours a day on screen entertainment.</li>
+  </ul>
+
+  <h2>Contrast</h2>
+  <ul>
+    <li><b>Microdramas</b> (W16): short emotional hits made for phones. NetFeel is the opposite: long-form, human-made, feeling over clickbait.</li>
+  </ul>
+</main>

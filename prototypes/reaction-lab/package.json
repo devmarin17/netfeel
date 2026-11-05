@@ -1,0 +1,16 @@
+{
+  "name": "reaction-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "NetFeel 2046 reaction prototype: on-device face sensing turns viewing reactions into Feeling Receipts and a personal taste model. Plain static files (no npm, no build step); this manifest exists so `npm test` can load the .js ES modules under node.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devmarin17/netfeel.git"
+  },
+  "scripts": {
+    "test": "node test/algorithm.test.mjs",
+    "fetch-model": "bash scripts/fetch-model.sh"
+  }
+}

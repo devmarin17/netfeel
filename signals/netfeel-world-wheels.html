@@ -1,0 +1,532 @@
+<title>2046 World Wheels</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  /* Layout: the team's consequence-mapping template; sidebar picks one of four world wheels or the overview, sheet holds the wheel, text version below */
+  :root {
+    --paper: #ffffff; --desk: #ecebe7; --ink: #1a1a1a; --ink-soft: #5c5c5c;
+    --ring-label: #9a9a9a; --line: #1a1a1a; --btn-bg: #ffffff; --btn-border: #1a1a1a;
+    --focus: #2f6fed; --sel: #1a1a1a; --sel-ink: #ffffff;
+    --shadow: 0 1px 1px rgba(0,0,0,.08), 0 6px 14px -6px rgba(0,0,0,.35);
+    --font-ui: "Jost", "Futura", "Century Gothic", "Avenir Next", system-ui, sans-serif;
+    --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #1e1f21; --desk: #141516; --ink: #ecebe7; --ink-soft: #a9a9a6;
+      --ring-label: #7d7d7a; --line: #d8d7d3; --btn-bg: #1e1f21; --btn-border: #d8d7d3;
+      --focus: #7aa2ff; --sel: #ecebe7; --sel-ink: #141516;
+      --shadow: 0 1px 1px rgba(0,0,0,.4), 0 8px 18px -6px rgba(0,0,0,.8);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #1e1f21; --desk: #141516; --ink: #ecebe7; --ink-soft: #a9a9a6;
+    --ring-label: #7d7d7a; --line: #d8d7d3; --btn-bg: #1e1f21; --btn-border: #d8d7d3;
+    --focus: #7aa2ff; --sel: #ecebe7; --sel-ink: #141516;
+    --shadow: 0 1px 1px rgba(0,0,0,.4), 0 8px 18px -6px rgba(0,0,0,.8);
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--desk); color: var(--ink); font-family: var(--font-ui); font-weight: 300; }
+  .layout {
+    display: grid; grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+    gap: clamp(16px, 3vw, 40px); padding-block: clamp(16px, 3vw, 36px);
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+    max-width: 1500px; margin: 0 auto; align-items: start;
+  }
+  @media (max-width: 820px) { .layout { grid-template-columns: minmax(0, 1fr); } }
+  aside { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); min-width: 0; }
+  @media (max-width: 820px) { aside { position: static; } }
+  h1 { font-weight: 400; font-size: clamp(2rem, 3.4vw, 2.75rem); line-height: 1.08; margin: 0 0 .5rem; letter-spacing: -0.01em; }
+  .tagline { color: var(--ink-soft); font-size: .95rem; line-height: 1.4; margin: 0 0 1.2rem; }
+  .orders { margin: 0 0 1.3rem; padding: 0; list-style: none; font-size: .95rem; line-height: 1.45; }
+  .orders li { margin-bottom: .3rem; }
+  .orders b, .tool-heading { font-weight: 500; }
+  .tool-heading { font-size: 1rem; margin: 0 0 .6rem; }
+  .views { display: flex; flex-direction: column; gap: 4px; margin: 0 0 1.3rem; padding: 0; list-style: none; }
+  .views button {
+    width: 100%; text-align: left; font: inherit; font-size: .92rem; line-height: 1.25;
+    display: grid; grid-template-columns: 1.4em 1fr; gap: 6px; align-items: baseline;
+    background: transparent; color: var(--ink); border: 1px solid transparent; border-radius: 8px; padding: .38rem .55rem; cursor: pointer;
+  }
+  .views button:hover { border-color: var(--btn-border); }
+  .views button[aria-current="true"] { background: var(--sel); color: var(--sel-ink); }
+  .views .n { font-weight: 500; }
+  .views .sep { border-top: 1px solid var(--ring-label); margin: 4px 0; }
+  @media (max-width: 820px) { .views { flex-direction: row; flex-wrap: wrap; } .views li { flex: 1 1 calc(50% - 4px); min-width: 0; } .views .sep { display: none; } }
+  .legend { display: flex; flex-direction: column; gap: 6px; margin: 0 0 1rem; font-size: .9rem; }
+  .legend span { display: flex; align-items: center; gap: 8px; }
+  .legend i { width: 16px; height: 16px; border-radius: 2px; box-shadow: var(--shadow); display: inline-block; flex: none; }
+  .legend .tagdemo { display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); color: var(--paper); font-size: .66rem; font-weight: 500; flex: none; }
+  .edit-tools[hidden], .ov-tools[hidden] { display: none !important; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: .6rem; }
+  .swatch { width: 40px; height: 40px; border: 1px solid rgba(0,0,0,.18); border-radius: 2px; cursor: pointer; box-shadow: var(--shadow); display: grid; place-items: center; font-size: 1.3rem; font-weight: 300; color: #1a1a1a; transition: transform .12s ease; }
+  .swatch:hover { transform: translateY(-2px) rotate(-3deg); }
+  .hint { color: var(--ink-soft); font-size: .88rem; line-height: 1.45; margin: 0 0 1.1rem; max-width: 34ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .btn { font: inherit; font-weight: 400; font-size: .92rem; background: var(--btn-bg); color: var(--ink); border: 1px solid var(--btn-border); border-radius: 999px; padding: .42rem .95rem; cursor: pointer; }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .confirm { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: .7rem; font-size: .9rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 1rem; }
+  .chip { font: inherit; font-size: .9rem; font-weight: 500; min-width: 2.2rem; height: 2.2rem; padding: 0 .6rem; border-radius: 999px; background: var(--btn-bg); color: var(--ink); border: 1px solid var(--btn-border); cursor: pointer; }
+  .chip:hover { background: var(--ink); color: var(--paper); }
+  .chip[aria-pressed="true"] { background: var(--sel); color: var(--sel-ink); }
+  .patterns { margin: 0 0 1rem; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: .9rem; line-height: 1.35; }
+  .patterns b { font-weight: 500; }
+  .patterns small { color: var(--ink-soft); font-size: .82rem; }
+  :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  main { min-width: 0; display: flex; flex-direction: column; gap: clamp(16px, 2.5vw, 28px); }
+  .sheet { background: var(--paper); box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 20px 40px -24px rgba(0,0,0,.35); border-radius: 3px; padding: clamp(8px, 2vw, 24px); overflow: hidden; }
+  .sheet-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; padding: 4px 6px 10px; border-bottom: 1px solid var(--ring-label); margin-bottom: 8px; }
+  .sheet-head h2 { margin: 0; font-weight: 400; font-size: clamp(1.15rem, 2vw, 1.5rem); text-wrap: balance; }
+  .sheet-head p { margin: 0; color: var(--ink-soft); font-size: .88rem; }
+  .board { position: relative; width: 100%; max-width: min(100%, calc(100vh - 80px)); aspect-ratio: 1 / 1; margin: 0 auto; container-type: inline-size; touch-action: manipulation; user-select: none; }
+  .board svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .board svg text { font-family: var(--font-ui); }
+  .center-label { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 13.4%; min-height: 1em; text-align: center; font-size: clamp(7px, 1.55cqi, 15px); line-height: 1.15; font-weight: 400; outline: none; border-radius: 4px; padding: 2px; cursor: text; user-select: text; word-break: break-word; z-index: 1; }
+  .center-label:focus { box-shadow: 0 0 0 2px var(--focus); }
+
+  .note { position: absolute; display: flex; flex-direction: column; background: var(--note-bg); color: #1f1d1a; box-shadow: var(--shadow); border-radius: 1px 1px 3px 14px / 1px 1px 3px 6px; transform: rotate(var(--tilt, 0deg)); transition: box-shadow .15s ease, transform .2s ease, opacity .2s ease; z-index: 2; }
+  .note.dragging { transform: rotate(0deg) scale(1.05); box-shadow: 0 2px 3px rgba(0,0,0,.12), 0 18px 30px -10px rgba(0,0,0,.5); transition: none; }
+  .note-bar { display: flex; align-items: center; justify-content: space-between; height: 14px; padding: 0 2px 0 5px; background: rgba(0,0,0,.06); cursor: grab; touch-action: none; flex: none; }
+  .grip { flex: 1; height: 100%; display: flex; align-items: center; gap: 2px; opacity: .45; }
+  .grip span { width: 3px; height: 3px; border-radius: 50%; background: #1f1d1a; }
+  .note-tools { display: flex; gap: 1px; opacity: 0; transition: opacity .12s; }
+  .note:hover .note-tools, .note:focus-within .note-tools { opacity: 1; }
+  @media (hover: none) { .note-tools { opacity: 1; } }
+  .note-tools button { width: 14px; height: 14px; padding: 0; border: 0; background: transparent; color: #1f1d1a; font: 500 12px/1 var(--font-ui); cursor: pointer; border-radius: 50%; display: grid; place-items: center; }
+  .note-tools button:hover { background: rgba(0,0,0,.12); }
+  .note-tools .recolor::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: conic-gradient(#ffe066, #ffa3c4, #9fd3ff, #aee8a4, #ffc27a, #ffe066); border: 1px solid rgba(0,0,0,.25); }
+  .note textarea { flex: 1; resize: none; border: 0; outline: none; background: transparent; color: inherit; font-family: var(--font-hand); font-weight: 500; font-size: 14px; line-height: 1.05; padding: 2px 5px 6px; min-height: 0; width: 100%; overflow: hidden; user-select: text; }
+  .note textarea::placeholder { color: rgba(31,29,26,.45); }
+  .resize { position: absolute; right: 0; bottom: 0; width: 14px; height: 14px; cursor: nwse-resize; touch-action: none; background: linear-gradient(135deg, transparent 0 50%, rgba(0,0,0,.14) 50% 100%); border-radius: 0 0 3px 0; opacity: 0; transition: opacity .12s; }
+  .note:hover .resize, .note:focus-within .resize { opacity: 1; }
+  @media (hover: none) { .resize { opacity: 1; } }
+
+  /* overview notes: fixed, tagged */
+  .note.ov { padding: .55cqi .7cqi .5cqi; border-top: 1.1cqi solid rgba(0,0,0,.06); justify-content: space-between; }
+  .note.ov p { margin: 0; font-family: var(--font-hand); font-weight: 500; font-size: 1.6cqi; line-height: 1.02; }
+  .note.ov .tags { display: flex; flex-wrap: wrap; gap: .3cqi; margin-top: .3cqi; }
+  .note.ov .tags span { display: inline-grid; place-items: center; width: 1.75cqi; height: 1.75cqi; border-radius: 50%; background: #1f1d1a; color: #fff; font: 500 1.05cqi/1 var(--font-ui); }
+  .board.filtering .note.ov { opacity: .16; }
+  .board.filtering .note.ov.hit { opacity: 1; transform: rotate(0deg) scale(1.06); z-index: 5; }
+  .board.filtering .note.ov.hit .tags span.on { background: #e11d48; }
+
+  .readout { background: var(--paper); border-radius: 3px; padding: clamp(16px, 2.5vw, 28px); box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+  .readout h3 { margin: 0 0 .3rem; font-weight: 400; font-size: 1.2rem; }
+  .readout > p { margin: 0 0 1rem; color: var(--ink-soft); font-size: .9rem; }
+  .chains { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px 22px; }
+  .chain h4 { margin: 0 0 .35rem; font-weight: 500; font-size: .78rem; letter-spacing: .1em; text-transform: uppercase; }
+  .chain ol { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .chain li { display: grid; grid-template-columns: 2.4em 1fr; gap: 6px; align-items: baseline; font-size: .93rem; line-height: 1.35; transition: opacity .2s; }
+  .chain li b { font-weight: 500; font-size: .75rem; color: var(--ink-soft); }
+  .chain li i { display: inline-block; width: 9px; height: 9px; border-radius: 1px; margin-right: 6px; vertical-align: 1px; }
+  .chain li small { color: var(--ink-soft); font-size: .8rem; margin-left: 4px; }
+  .chains.filtering li.miss { opacity: .3; }
+  @media (prefers-reduced-motion: reduce) { .swatch, .note, .chain li { transition: none; } }
+</style>
+
+<div class="layout">
+  <aside>
+    <h1>2046<br>World<br>Wheels</h1>
+    <p class="tagline">What happens to the world if our four key weak signals grow up? No product on these wheels: just the world NetFeel will launch into.</p>
+    <ul class="orders">
+      <li><b>1st Order:</b> What happens immediately?</li>
+      <li><b>2nd Order:</b> What are the effects of the immediate impact?</li>
+      <li><b>3rd Order:</b> How do systems change?</li>
+    </ul>
+
+    <p class="tool-heading">Wheel</p>
+    <ul class="views" id="views"></ul>
+
+    <p class="tool-heading">Note colours</p>
+    <div class="legend">
+      <span><i style="background:#aee8a4"></i>Opportunity</span>
+      <span><i style="background:#ffa3c4"></i>Risk or harm</span>
+      <span><i style="background:#ffe066"></i>Neutral change</span>
+      <span class="ov-only"><span class="tagdemo">2</span>Wheel the note comes from</span>
+    </div>
+
+    <div class="edit-tools" id="editTools">
+      <div class="swatches" id="swatches"></div>
+      <p class="hint">Drag notes by their top strip and resize them from the corner. Double-click the map to add a note. Click the centre to edit the what-if. Edits stay in this browser.</p>
+      <div class="actions">
+        <button class="btn" id="tidyBtn" type="button">Straighten notes</button>
+        <button class="btn" id="resetBtn" type="button">Reset to draft</button>
+        <button class="btn" id="clearBtn" type="button">Clear all notes</button>
+      </div>
+      <div class="confirm" id="confirm" hidden>
+        <span id="confirmText"></span>
+        <button class="btn" id="confirmYes" type="button">Yes</button>
+        <button class="btn" id="confirmNo" type="button">Cancel</button>
+      </div>
+    </div>
+
+    <div class="ov-tools" id="ovTools" hidden>
+      <p class="tool-heading">Highlight a wheel</p>
+      <div class="chips" id="chips"></div>
+      <p class="tool-heading">What the four wheels share</p>
+      <ul class="patterns">
+        <li><b>Trust becomes scarce.</b> <small>Gatekeeping assistants, emotion-data leaks and AI slop all make people ask who they can trust.</small></li>
+        <li><b>Choice moves to machines.</b> <small>Assistants and mood-picking mean fewer conscious choices and narrower tastes.</small></li>
+        <li><b>Human-made gains value.</b> <small>The more AI fills screens and conversations, the more real human work and connection are worth.</small></li>
+        <li><b>Regulation follows everywhere.</b> <small>Neutrality rules, protected emotion data, wellbeing claims, AI labels.</small></li>
+      </ul>
+    </div>
+  </aside>
+
+  <main>
+    <section class="sheet" aria-labelledby="sigTitle">
+      <div class="sheet-head"><h2 id="sigTitle"></h2><p id="sigFrom"></p></div>
+      <div class="board" id="board">
+        <svg viewBox="0 0 1000 1000" id="map" aria-hidden="true"></svg>
+        <div class="center-label" id="centerLabel" spellcheck="false" role="textbox" aria-label="What-if question"></div>
+      </div>
+    </section>
+    <section class="readout" aria-labelledby="readTitle">
+      <h3 id="readTitle">The wheel as text</h3>
+      <p id="readSub">Each sector reads from the inside out: 1st order, then 2nd, then 3rd.</p>
+      <div class="chains" id="chains"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function () {
+  const DRAFT_VERSION = 1;
+  const COLORS = [ { name: "Yellow", bg: "#ffe066" }, { name: "Pink", bg: "#ffa3c4" }, { name: "Blue", bg: "#9fd3ff" }, { name: "Green", bg: "#aee8a4" }, { name: "Orange", bg: "#ffc27a" } ];
+  const CI = { y: 0, p: 1, b: 2, g: 3, o: 4 };
+  const SECTORS = [ ["Individual Behavior", 30], ["Politics & Government", 90], ["Environment", 150], ["Economics", 210], ["Education & Culture", 270], ["Social Relationships", 330] ];
+
+  // per sector: up to three notes for 1st, 2nd, 3rd order; null = left empty on purpose
+  const WHEELS = [
+    { id: "w1", title: "Everyone is getting a personal AI assistant, and it's starting to act for them", short: "AI assistants act for us", center: "What if everyone's AI assistant chooses what they watch?",
+      s: [
+        [["y","People stop browsing, they just ask"],["g","Less choice fatigue in the evening"],["p","Taste is shaped by the assistant, not the person"]],
+        [["p","A few assistant companies control the front door"],["y","Antitrust debate on assistant neutrality"],null],
+        [["p","Every request runs AI inference"],["g","Pressure moves AI onto the device"],null],
+        [["p","Assistants take a fee for every pick"],["p","Media brands disappear behind the assistant"],["y","Value moves to whoever holds people's preferences"]],
+        [["y","Discovery becomes a conversation"],null,null],
+        [["y","The assistant settles family choices"],["p","Fewer shared discoveries between friends"],null]
+      ]},
+    { id: "w2", title: "Kids already share their feelings with AI, but they don't love it", short: "Feelings shared with machines", center: "What if people share their feelings with machines every day?",
+      s: [
+        [["g","People learn to name what they feel"],["p","Some rely on machines to cope"],["y","Emotional self-tracking is as normal as counting steps"]],
+        [["p","Emotional data leaks and misuse cases"],["y","Emotion data becomes a protected category"],null],
+        [["p","Constant sensing needs more devices and servers"],["g","Privacy rules push processing onto the device"],null],
+        [["p","Companies try to sell to your moods"],["g","Trust becomes worth more than usage"],null],
+        [["g","Emotional literacy is taught early"],null,null],
+        [["p","Some talks with people are replaced by AI"],["p","Loneliness hides behind always-on companions"],["g","Demand grows for real human connection"]]
+      ]},
+    { id: "w3", title: "People already use media to reach a feeling, not to pick a genre", short: "Media chosen by feeling", center: "What if people choose all media by how they want to feel?",
+      s: [
+        [["y","People pick by mood, not genre"],["p","Media used to avoid hard feelings"],["g","Media becomes everyday emotional self-care"]],
+        [["y","Selling “calm” looks like a health claim"],["y","Rules for wellbeing claims in media"],null],
+        [["g","Less scrolling, fewer abandoned starts"],["g","Fewer streamed hours for the same satisfaction"],null],
+        [["g","Old comfort content gains value"],["y","Success is measured in feelings, not hours"],null],
+        [["y","Genres lose meaning"],["g","Stories are described by how they land"],null],
+        [["y","Households agree on a mood, not a title"],["p","Comfort bubbles: fewer challenging shared stories"],null]
+      ]},
+    { id: "w4", title: "AI slop is flooding the feeds", short: "AI slop floods the feeds", center: "What if most video online is AI-made?",
+      s: [
+        [["p","People stop trusting what they see"],["g","They look for curated, human-made places"],["y","People check “human-made” like “organic”"]],
+        [["y","Calls for AI content labels"],["y","Labelling and provenance become law"],null],
+        [["p","Mass generation burns energy"],["y","The carbon cost of AI video becomes a debate"],null],
+        [["p","Video becomes nearly free to make"],["p","Human creators are priced out of free platforms"],["y","Human-made becomes a premium, maybe a luxury"]],
+        [["p","Kids grow up on AI slop"],["g","Human craft is valued again"],null],
+        [["p","The shared sense of what's real erodes"],["p","Badge fraud and fake “human-made”"],null]
+      ]}
+  ];
+
+  // overview: per sector [1st], [2nd a, 2nd b], [3rd]; each [colour, text, wheels]
+  const OVERVIEW = [
+    [[["y","People ask and pick by feeling instead of browsing genres",[1,3]]],[["p","Fewer conscious choices; taste shaped by machines",[1,3]],["g","People learn to name what they feel",[2,3]]],[["y","Tracking feelings and checking “human-made” is everyday",[2,4]]]],
+    [[["p","Assistants and emotion data come under scrutiny",[1,2]]],[["y","Emotion data becomes a protected category",[2]],["y","AI labelling and provenance become law",[4]]],[["y","Rules for neutrality, wellbeing claims and labels",[1,3,4]]]],
+    [[["p","AI inference and mass generation burn energy",[1,4]]],[["g","Less scrolling, fewer wasted streams",[3]],["g","Pressure moves AI onto the device",[1,2]]],[["y","The carbon cost of AI becomes a public debate",[4]]]],
+    [[["p","Video nearly free to make; assistants take fees",[1,4]]],[["g","Trust is worth more than usage",[2]],["y","Success measured in feelings, not hours",[3]]],[["y","Value moves to whoever holds trust; human-made is a premium",[1,2,4]]]],
+    [[["y","Genres lose meaning; discovery becomes a conversation",[1,3]]],[["g","Emotional literacy is taught early",[2,3]],["p","Kids grow up on AI slop",[4]]],[["g","Human craft and long stories are valued again",[4]]]],
+    [[["p","Some talks with people are replaced by AI",[1,2]]],[["p","Comfort bubbles and fewer shared discoveries",[1,3]],["p","The shared sense of what's real erodes",[4]]],[["g","Demand grows for real human connection",[2,4]]]]
+  ];
+
+  /* ---------- Wheel drawing (template geometry) ---------- */
+  const svg = document.getElementById("map");
+  const NS = "http://www.w3.org/2000/svg";
+  const C = 500, R_CENTER = 67, R1 = 190, R2 = 300, R3 = 400, R_LINE = 470;
+  function el(tag, attrs, parent) { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); (parent || svg).appendChild(n); return n; }
+  const pt = (r, deg) => { const a = (deg - 90) * Math.PI / 180; return [C + r * Math.cos(a), C + r * Math.sin(a)]; };
+  function arcPath(r, deg, span, reverse) { const [x1, y1] = pt(r, deg - span / 2), [x2, y2] = pt(r, deg + span / 2); return reverse ? `M ${x2} ${y2} A ${r} ${r} 0 0 0 ${x1} ${y1}` : `M ${x1} ${y1} A ${r} ${r} 0 0 1 ${x2} ${y2}`; }
+  const defs = el("defs", {});
+  const lineStyle = { stroke: "var(--line)", fill: "none" };
+  [0, 60, 120].forEach(deg => {
+    const [ax, ay] = pt(R_LINE, deg), [bx, by] = pt(R_CENTER, deg), [cx, cy] = pt(R_CENTER, deg + 180), [dx, dy] = pt(R_LINE, deg + 180);
+    const d = { ...lineStyle, "stroke-width": 1.4, "stroke-dasharray": "7 6" };
+    el("line", { x1: ax, y1: ay, x2: bx, y2: by, ...d }); el("line", { x1: cx, y1: cy, x2: dx, y2: dy, ...d });
+  });
+  [R_CENTER, R1, R2, R3].forEach(r => el("circle", { cx: C, cy: C, r, ...lineStyle, "stroke-width": 2 }));
+  [["1st Order Effects", R_CENTER + 34], ["2nd Order Effects", R1 + 27], ["3rd Order Effects", R2 + 27]].forEach(([label, r], i) => {
+    el("path", { id: "ring" + i, d: arcPath(r, 0, 160, false) }, defs);
+    const t = el("text", { "font-size": 23, fill: "var(--ring-label)", "font-weight": 400 });
+    const tp = el("textPath", { href: "#ring" + i, startOffset: "50%", "text-anchor": "middle" }, t); tp.textContent = label;
+  });
+  SECTORS.forEach(([label, deg], i) => {
+    const bottom = deg > 90 && deg < 270, reverse = bottom || deg === 90;
+    const rr = (deg === 90 || bottom) ? R3 + 38 : R3 + 16;
+    el("path", { id: "sec" + i, d: arcPath(rr, deg, 120, reverse) }, defs);
+    const t = el("text", { "font-size": 27, fill: "var(--ink)", "font-weight": 300 });
+    const tp = el("textPath", { href: "#sec" + i, startOffset: "50%", "text-anchor": "middle" }, t); tp.textContent = label;
+  });
+
+  /* ---------- Helpers ---------- */
+  const board = document.getElementById("board");
+  const centerLabel = document.getElementById("centerLabel");
+  const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  const uid = () => Math.random().toString(36).slice(2, 10);
+  const randTilt = () => +(Math.random() * 6 - 3).toFixed(1);
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const ORD = ["1st", "2nd", "3rd"];
+
+  /* ---------- Single wheels: draft layout + state ---------- */
+  const RING_POS = [ { r: 130, w: 0.112, h: 0.092 }, { r: 246, w: 0.122, h: 0.094 }, { r: 348, w: 0.132, h: 0.094 } ];
+  function draftState(wh) {
+    const notes = [];
+    wh.s.forEach((sector, si) => sector.forEach((item, ri) => {
+      if (!item) return;
+      let { r, w, h } = RING_POS[ri];
+      let deg = SECTORS[si][1];
+      if (deg === 90 || deg === 270) { w = 0.094; h = 0.118; r = [128, 245, 350][ri]; }
+      if (deg === 30) deg += [0, 7, 4][ri];
+      if (deg === 330) deg -= [0, 7, 4][ri];
+      const [cx, cy] = pt(r, deg);
+      notes.push({ id: uid(), color: CI[item[0]], x: cx / 1000 - w / 2, y: cy / 1000 - h / 2, w, h, text: item[1], tilt: randTilt() });
+    }));
+    return { v: DRAFT_VERSION, center: wh.center, notes };
+  }
+  let current = null, state = null, zTop = 10;
+  const keyFor = wh => "world-wheel-" + wh.id;
+  function load(wh) {
+    try { const raw = localStorage.getItem(keyFor(wh)); if (raw) { const s = JSON.parse(raw); if (s && s.v === DRAFT_VERSION && Array.isArray(s.notes)) return s; } } catch (e) {}
+    return draftState(wh);
+  }
+  let saveTimer;
+  function save() {
+    if (!current) return;
+    clearTimeout(saveTimer);
+    const wh = current, snap = state;
+    saveTimer = setTimeout(() => { try { localStorage.setItem(keyFor(wh), JSON.stringify(snap)); } catch (e) {} }, 200);
+    renderChains();
+  }
+
+  const DEF_W = 0.13, DEF_H = 0.11, MIN_PX = 48;
+  function sizeNote(node, n) { node.style.width = ((n.w || DEF_W) * 100) + "%"; node.style.height = ((n.h || DEF_H) * 100) + "%"; }
+  function fitText(node) {
+    const ta = node.querySelector("textarea");
+    if (!ta || !node.offsetWidth) return;
+    let size = Math.max(9, Math.min(18, Math.max(node.offsetWidth, node.offsetHeight) * 0.16));
+    ta.style.fontSize = size + "px";
+    while (ta.scrollHeight > ta.clientHeight + 1 && size > 6) { size -= 0.5; ta.style.fontSize = size + "px"; }
+    ta.style.overflowY = ta.scrollHeight > ta.clientHeight + 1 ? "auto" : "hidden";
+    const bw = board.clientWidth; if (bw) ta.style.fontSize = (size / bw * 100).toFixed(3) + "cqi";
+  }
+  const fitAll = () => board.querySelectorAll(".note:not(.ov)").forEach(fitText);
+  function place(node, n) { node.style.left = (n.x * 100) + "%"; node.style.top = (n.y * 100) + "%"; }
+
+  function renderNote(n) {
+    const node = document.createElement("div");
+    node.className = "note"; node.dataset.id = n.id;
+    node.style.setProperty("--note-bg", COLORS[n.color % COLORS.length].bg);
+    node.style.setProperty("--tilt", (n.tilt || 0) + "deg");
+    node.style.zIndex = ++zTop; place(node, n); sizeNote(node, n);
+    node.innerHTML = `<div class="note-bar" tabindex="0" role="button" aria-label="Move note. Use arrow keys to nudge."><div class="grip"><span></span><span></span><span></span><span></span><span></span></div><div class="note-tools"><button type="button" class="recolor" aria-label="Change colour" title="Change colour"></button><button type="button" class="del" aria-label="Delete note" title="Delete note">×</button></div></div><textarea placeholder="Write a consequence…" aria-label="Note text"></textarea><div class="resize" title="Drag to resize" aria-hidden="true"></div>`;
+    const ta = node.querySelector("textarea");
+    ta.value = n.text || "";
+    ta.addEventListener("input", () => { n.text = ta.value; fitText(node); save(); });
+    ta.addEventListener("focus", () => { node.style.zIndex = ++zTop; });
+    requestAnimationFrame(() => fitText(node));
+    const handle = node.querySelector(".resize"); let rs = null;
+    handle.addEventListener("pointerdown", e => { e.preventDefault(); e.stopPropagation(); rs = { id: e.pointerId, x: e.clientX, y: e.clientY, w: node.offsetWidth, h: node.offsetHeight, rect: board.getBoundingClientRect() }; handle.setPointerCapture(e.pointerId); node.style.zIndex = ++zTop; });
+    handle.addEventListener("pointermove", e => { if (!rs || e.pointerId !== rs.id) return; const { rect } = rs; n.w = clamp(rs.w + e.clientX - rs.x, MIN_PX, rect.width * 0.45) / rect.width; n.h = clamp(rs.h + e.clientY - rs.y, MIN_PX, rect.height * 0.45) / rect.height; sizeNote(node, n); fitText(node); });
+    const endResize = e => { if (!rs || e.pointerId !== rs.id) return; rs = null; save(); };
+    handle.addEventListener("pointerup", endResize); handle.addEventListener("pointercancel", endResize);
+    node.querySelector(".del").addEventListener("click", e => { e.stopPropagation(); state.notes = state.notes.filter(x => x.id !== n.id); node.remove(); save(); });
+    node.querySelector(".recolor").addEventListener("click", e => { e.stopPropagation(); n.color = (n.color + 1) % COLORS.length; node.style.setProperty("--note-bg", COLORS[n.color].bg); save(); });
+    const bar = node.querySelector(".note-bar"); let drag = null;
+    bar.addEventListener("pointerdown", e => { if (e.target.closest("button")) return; e.preventDefault(); const rect = board.getBoundingClientRect(), nr = node.getBoundingClientRect(); drag = { id: e.pointerId, offX: e.clientX - nr.left, offY: e.clientY - nr.top, rect }; bar.setPointerCapture(e.pointerId); node.classList.add("dragging"); node.style.zIndex = ++zTop; });
+    bar.addEventListener("pointermove", e => { if (!drag || e.pointerId !== drag.id) return; const { rect } = drag, w = node.offsetWidth, h = node.offsetHeight; n.x = clamp(e.clientX - rect.left - drag.offX, -w * 0.4, rect.width - w * 0.6) / rect.width; n.y = clamp(e.clientY - rect.top - drag.offY, -h * 0.3, rect.height - h * 0.6) / rect.height; place(node, n); });
+    const end = e => { if (!drag || e.pointerId !== drag.id) return; drag = null; node.classList.remove("dragging"); save(); };
+    bar.addEventListener("pointerup", end); bar.addEventListener("pointercancel", end);
+    bar.addEventListener("keydown", e => {
+      const step = e.shiftKey ? 0.04 : 0.01, moves = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] };
+      if (moves[e.key]) { e.preventDefault(); n.x = clamp(n.x + moves[e.key][0], -0.05, 0.95); n.y = clamp(n.y + moves[e.key][1], -0.05, 0.95); place(node, n); save(); }
+      else if (e.key === "Delete" || e.key === "Backspace") { e.preventDefault(); node.querySelector(".del").click(); }
+      else if (e.key === "Enter") { e.preventDefault(); ta.focus(); }
+    });
+    board.appendChild(node);
+    return node;
+  }
+  function addNote(colorIndex, x, y) {
+    if (!current) return null;
+    const n = { id: uid(), color: colorIndex, x, y, w: DEF_W, h: DEF_H, text: "", tilt: randTilt() };
+    state.notes.push(n); const node = renderNote(n); save();
+    node.querySelector("textarea").focus({ preventScroll: true });
+    return node;
+  }
+  let spawn = 0;
+  const sw = document.getElementById("swatches");
+  COLORS.forEach((c, i) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "swatch"; b.style.background = c.bg; b.textContent = "+";
+    b.setAttribute("aria-label", "Add " + c.name.toLowerCase() + " note"); b.title = b.getAttribute("aria-label");
+    b.addEventListener("click", () => { const corners = [[0.01, 0.01], [0.84, 0.01], [0.01, 0.83], [0.84, 0.83]]; const k = spawn++, [cx, cy] = corners[k % 4], off = (Math.floor(k / 4) % 4) * 0.025; addNote(i, cx + off, cy + off); });
+    sw.appendChild(b);
+  });
+  let lastColor = 0;
+  board.addEventListener("dblclick", e => {
+    if (!current || e.target.closest(".note") || e.target === centerLabel) return;
+    const rect = board.getBoundingClientRect();
+    const node = addNote(lastColor, 0, 0); if (!node) return;
+    const w = node.offsetWidth / rect.width, n = state.notes[state.notes.length - 1];
+    n.x = clamp((e.clientX - rect.left) / rect.width - w / 2, -0.05, 0.95); n.y = clamp((e.clientY - rect.top) / rect.height - 0.03, -0.05, 0.95);
+    place(node, n); lastColor = (lastColor + 1) % COLORS.length; save();
+  });
+  centerLabel.addEventListener("input", () => { if (current) { state.center = centerLabel.innerHTML; save(); } });
+  centerLabel.addEventListener("keydown", e => { if (e.key === "Escape") centerLabel.blur(); });
+  centerLabel.addEventListener("paste", e => { e.preventDefault(); document.execCommand("insertText", false, (e.clipboardData || window.clipboardData).getData("text/plain")); });
+
+  function sectorOf(n) {
+    const cx = (n.x + (n.w || DEF_W) / 2) * 1000 - C, cy = (n.y + (n.h || DEF_H) / 2) * 1000 - C, dist = Math.hypot(cx, cy);
+    let deg = Math.atan2(cy, cx) * 180 / Math.PI + 90; if (deg < 0) deg += 360;
+    return [Math.floor(deg / 60) % 6, dist < R1 ? 0 : dist < R2 ? 1 : 2];
+  }
+
+  /* ---------- Overview ---------- */
+  const OV_RINGS = [ { r: 130, w: .112, h: .094, top: [0], side: [0], sr: 128 }, { r: 246, w: .108, h: .09, top: [-15, 15], side: [-13, 13], sr: 244 }, { r: 352, w: .118, h: .09, top: [0], side: [0], sr: 350 } ];
+  let ovNotes = [], ovActive = 0;
+  function renderOverview() {
+    ovNotes = []; let k = 0;
+    OVERVIEW.forEach((sector, si) => {
+      const base = SECTORS[si][1], side = base === 90 || base === 270;
+      sector.forEach((ring, ri) => {
+        const R = OV_RINGS[ri];
+        ring.forEach(([c, text, ws], ni) => {
+          const off = (side ? R.side : R.top)[ni], r = side ? R.sr : R.r;
+          let deg = base + off;
+          if (ri === 2 && base === 30) deg += 5; if (ri === 2 && base === 330) deg -= 5;
+          const [cx, cy] = pt(r, deg);
+          const node = document.createElement("div");
+          node.className = "note ov";
+          node.style.setProperty("--note-bg", COLORS[CI[c]].bg);
+          node.style.setProperty("--tilt", ((((k++) * 37) % 11) - 5) * 0.5 + "deg");
+          node.style.left = ((cx / 1000 - R.w / 2) * 100) + "%"; node.style.top = ((cy / 1000 - R.h / 2) * 100) + "%";
+          node.style.width = (R.w * 100) + "%"; node.style.height = (R.h * 100) + "%";
+          node.innerHTML = `<p>${esc(text)}</p><div class="tags">${ws.map(w => `<span data-w="${w}">${w}</span>`).join("")}</div>`;
+          board.appendChild(node);
+          ovNotes.push({ node, ws, si, ri, c, text });
+        });
+      });
+    });
+  }
+  const chipBox = document.getElementById("chips");
+  [["All", 0]].concat(WHEELS.map((w, i) => [String(i + 1), i + 1])).forEach(([label, v]) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = label; b.dataset.v = v;
+    b.setAttribute("aria-label", v ? "Highlight wheel " + v + ": " + WHEELS[v - 1].short : "Show all wheels");
+    b.addEventListener("click", () => applyFilter(v));
+    chipBox.appendChild(b);
+  });
+  function applyFilter(v) {
+    ovActive = v;
+    chipBox.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === v)));
+    board.classList.toggle("filtering", v > 0);
+    const chains = document.getElementById("chains"); chains.classList.toggle("filtering", v > 0);
+    let hits = 0;
+    ovNotes.forEach(n => { const hit = n.ws.includes(v); if (hit) hits++; n.node.classList.toggle("hit", hit); n.node.querySelectorAll(".tags span").forEach(s => s.classList.toggle("on", +s.dataset.w === v)); });
+    chains.querySelectorAll("li").forEach(li => li.classList.toggle("miss", v > 0 && !(li.dataset.w || "").split(",").map(Number).includes(v)));
+    document.getElementById("sigFrom").textContent = v ? hits + " of " + ovNotes.length + " notes from wheel " + v : ovNotes.length + " merged notes from the four wheels";
+  }
+
+  /* ---------- Text version ---------- */
+  function renderChains() {
+    const chains = document.getElementById("chains");
+    if (!current) {
+      chains.innerHTML = SECTORS.map(([label], si) => `<div class="chain"><h4>${esc(label)}</h4><ol>${ovNotes.filter(n => n.si === si).map(n => `<li data-w="${n.ws.join(",")}"><b>${ORD[n.ri]}</b><span><i style="background:${COLORS[CI[n.c]].bg}"></i>${esc(n.text)}<small>(${n.ws.join(", ")})</small></span></li>`).join("")}</ol></div>`).join("");
+      return;
+    }
+    const groups = SECTORS.map(() => []);
+    state.notes.forEach(n => { if (!n.text || !n.text.trim()) return; const [si, ri] = sectorOf(n); groups[si].push({ ri, n }); });
+    chains.innerHTML = SECTORS.map(([label], si) => {
+      const items = groups[si].sort((a, b) => a.ri - b.ri);
+      return `<div class="chain"><h4>${esc(label)}</h4><ol>${items.length ? items.map(({ ri, n }) => `<li><b>${ORD[ri]}</b><span><i style="background:${COLORS[n.color % COLORS.length].bg}"></i>${esc(n.text)}</span></li>`).join("") : `<li><b></b><span>No notes yet.</span></li>`}</ol></div>`;
+    }).join("");
+  }
+
+  /* ---------- Views ---------- */
+  const views = document.getElementById("views");
+  WHEELS.forEach((wh, i) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button type="button" data-v="${wh.id}"><span class="n">${i + 1}</span><span>${esc(wh.short)}</span></button>`;
+    li.querySelector("button").addEventListener("click", () => { location.hash = wh.id; });
+    views.appendChild(li);
+  });
+  const sep = document.createElement("li"); sep.className = "sep"; sep.setAttribute("aria-hidden", "true"); views.appendChild(sep);
+  const ovLi = document.createElement("li");
+  ovLi.innerHTML = `<button type="button" data-v="all"><span class="n">∑</span><span>All four wheels</span></button>`;
+  ovLi.querySelector("button").addEventListener("click", () => { location.hash = "all"; });
+  views.appendChild(ovLi);
+
+  const editTools = document.getElementById("editTools"), ovTools = document.getElementById("ovTools");
+  function clearBoard() { board.querySelectorAll(".note").forEach(n => n.remove()); board.classList.remove("filtering"); }
+  function showWheel(wh) {
+    current = wh; state = load(wh); clearBoard(); hideConfirm();
+    straight = false; tidyBtn.textContent = "Straighten notes";
+    editTools.hidden = false; ovTools.hidden = true;
+    document.querySelectorAll(".ov-only").forEach(e => e.hidden = true);
+    centerLabel.contentEditable = "true";
+    centerLabel.innerHTML = state.center != null ? state.center : wh.center;
+    document.getElementById("sigTitle").textContent = (WHEELS.indexOf(wh) + 1) + ". " + wh.title;
+    document.getElementById("sigFrom").textContent = state.notes.length + " notes";
+    document.getElementById("readSub").textContent = "Each sector reads from the inside out: 1st order, then 2nd, then 3rd.";
+    state.notes.forEach(renderNote);
+    renderChains();
+  }
+  function showOverview() {
+    current = null; state = null; clearBoard(); hideConfirm();
+    editTools.hidden = true; ovTools.hidden = false;
+    document.querySelectorAll(".ov-only").forEach(e => e.hidden = false);
+    centerLabel.contentEditable = "false";
+    centerLabel.innerHTML = "What if all four signals grow up by 2046?";
+    document.getElementById("sigTitle").textContent = "All four wheels";
+    document.getElementById("readSub").textContent = "Each sector reads from the inside out. The numbers say which wheels a note comes from.";
+    renderOverview(); renderChains(); applyFilter(0);
+  }
+  function route() {
+    const id = (location.hash || "").slice(1);
+    if (id === "all") showOverview(); else showWheel(WHEELS.find(w => w.id === id) || WHEELS[0]);
+    views.querySelectorAll("button").forEach(b => b.setAttribute("aria-current", String(b.dataset.v === (id === "all" ? "all" : (current ? current.id : "")))));
+  }
+
+  /* ---------- Actions ---------- */
+  const confirmBox = document.getElementById("confirm"); let pending = null;
+  function ask(text, fn) { pending = fn; document.getElementById("confirmText").textContent = text; confirmBox.hidden = false; }
+  function hideConfirm() { pending = null; confirmBox.hidden = true; }
+  document.getElementById("confirmYes").addEventListener("click", () => { const fn = pending; hideConfirm(); if (fn) fn(); });
+  document.getElementById("confirmNo").addEventListener("click", hideConfirm);
+  document.getElementById("clearBtn").addEventListener("click", () => { if (!current || !state.notes.length) return; ask("Remove all " + state.notes.length + " notes from this wheel?", () => { state.notes = []; clearBoard(); save(); }); });
+  document.getElementById("resetBtn").addEventListener("click", () => { if (!current) return; ask("Replace this wheel with the original draft?", () => { try { localStorage.removeItem(keyFor(current)); } catch (e) {} showWheel(current); }); });
+  let straight = false;
+  const tidyBtn = document.getElementById("tidyBtn");
+  tidyBtn.addEventListener("click", () => {
+    if (!current) return; straight = !straight;
+    board.querySelectorAll(".note").forEach(node => { const n = state.notes.find(x => x.id === node.dataset.id); if (!n) return; if (straight) { n._tilt = n.tilt; n.tilt = 0; } else { n.tilt = n._tilt ?? randTilt(); } node.style.setProperty("--tilt", n.tilt + "deg"); });
+    tidyBtn.textContent = straight ? "Tilt notes" : "Straighten notes"; save();
+  });
+
+  window.addEventListener("hashchange", route);
+  route();
+  if ("ResizeObserver" in window) new ResizeObserver(fitAll).observe(board);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+})();
+</script>

@@ -1,0 +1,33 @@
+{
+  "_note": "Real Netflix titles used as concept references. Runtimes are approximate (per episode for series). Tags are our own concept labels. youtube_id: paste the 11-character ID of an official trailer (e.g. from the Netflix YouTube channel) to embed it on the stage page. easter_egg: true titles never appear in normal picks; see EASTER_EGG in lib/model.js.",
+  "titles": [
+    { "id": "our-planet", "title": "Our Planet", "kind": "series", "runtime": 50, "tags": ["nature", "ambient-sound", "slow-pace", "documentary", "warm-voice"], "youtube_id": "aETNYyrqNYE" },
+    { "id": "night-on-earth", "title": "Night on Earth", "kind": "series", "runtime": 45, "tags": ["nature", "dark-palette", "slow-pace", "documentary"], "youtube_id": "o7Ql4xmu9xk" },
+    { "id": "my-octopus-teacher", "title": "My Octopus Teacher", "kind": "film", "runtime": 85, "tags": ["nature", "ambient-sound", "slow-pace", "documentary", "heavy-emotion"], "youtube_id": "3s0LTDhqe5A" },
+    { "id": "headspace-sleep", "title": "Headspace Guide to Sleep", "kind": "series", "runtime": 20, "tags": ["guided-breath", "slow-pace", "warm-voice", "low-dialogue"], "youtube_id": "GVzKqr3Dss0" },
+    { "id": "headspace-meditation", "title": "Headspace Guide to Meditation", "kind": "series", "runtime": 20, "tags": ["guided-breath", "warm-voice", "documentary"], "youtube_id": "H77PL7SlI1M" },
+    { "id": "bake-off", "title": "The Great British Baking Show", "kind": "series", "runtime": 60, "tags": ["food", "gentle-humor", "warm-voice", "low-stakes"], "youtube_id": "jGbqoKa2c0M" },
+    { "id": "midnight-diner", "title": "Midnight Diner: Tokyo Stories", "kind": "series", "runtime": 25, "tags": ["food", "slow-pace", "low-stakes", "subtitles", "warm-voice"], "youtube_id": "OCGDVHjPX0c" },
+    { "id": "chefs-table", "title": "Chef's Table", "kind": "series", "runtime": 50, "tags": ["food", "documentary", "loud-score", "heavy-emotion"], "youtube_id": "qKqj85oo2wI" },
+    { "id": "street-food-asia", "title": "Street Food: Asia", "kind": "series", "runtime": 30, "tags": ["food", "documentary", "fast-cuts", "subtitles"], "youtube_id": "eI_LjETc_Ak" },
+    { "id": "queer-eye", "title": "Queer Eye", "kind": "series", "runtime": 45, "tags": ["warm-voice", "heavy-emotion", "gentle-humor", "low-stakes"], "youtube_id": "GZMrivD2Aok" },
+    { "id": "heartstopper", "title": "Heartstopper", "kind": "series", "runtime": 30, "tags": ["gentle-humor", "low-stakes", "warm-voice"], "youtube_id": "FrK4xPy4ahg" },
+    { "id": "hill-house", "title": "The Haunting of Hill House", "kind": "series", "runtime": 60, "tags": ["tension-spike", "jump-scares", "dark-palette", "cliffhanger"], "youtube_id": "RAfRcVJ6-Fg" },
+    { "id": "midnight-mass", "title": "Midnight Mass", "kind": "series", "runtime": 65, "tags": ["tension-spike", "slow-pace", "dark-palette", "heavy-emotion"], "youtube_id": "89UV8vmWXlY" },
+    { "id": "bird-box", "title": "Bird Box", "kind": "film", "runtime": 124, "tags": ["tension-spike", "jump-scares", "loud-score"], "youtube_id": "o2AsIXSh2xo" },
+    { "id": "stranger-things", "title": "Stranger Things", "kind": "series", "runtime": 75, "tags": ["tension-spike", "cliffhanger", "loud-score", "fast-cuts"], "youtube_id": "b9EkMc79ZSU" },
+    { "id": "dark", "title": "Dark", "kind": "series", "runtime": 55, "tags": ["tension-spike", "cliffhanger", "dark-palette", "subtitles"], "youtube_id": "ESEUoa-mz2c" },
+    { "id": "squid-game", "title": "Squid Game", "kind": "series", "runtime": 55, "tags": ["tension-spike", "cliffhanger", "fast-cuts", "subtitles"], "youtube_id": "oqxAJKy0ii4" },
+    { "id": "black-mirror", "title": "Black Mirror", "kind": "series", "runtime": 60, "tags": ["tension-spike", "heavy-emotion", "dark-palette"], "youtube_id": "jDiYGjp5iFg" },
+    { "id": "undercover", "title": "Undercover", "kind": "series", "runtime": 45, "tags": ["tension-spike", "cliffhanger", "subtitles"], "youtube_id": "Vt4qQiM2Ahk" },
+    { "id": "ares", "title": "Ares", "kind": "series", "runtime": 35, "tags": ["tension-spike", "jump-scares", "dark-palette", "subtitles"], "youtube_id": "WhxAj6inPJ8" },
+    { "id": "drive-to-survive", "title": "Formula 1: Drive to Survive", "kind": "series", "runtime": 40, "tags": ["documentary", "fast-cuts", "loud-score", "cliffhanger"], "youtube_id": "wtJPe1ksS6E" },
+    { "id": "extraction", "title": "Extraction", "kind": "film", "runtime": 117, "tags": ["fast-cuts", "loud-score", "tension-spike"], "youtube_id": "L6P3nI6VnlY" },
+    { "id": "money-heist", "title": "Money Heist", "kind": "series", "runtime": 50, "tags": ["cliffhanger", "fast-cuts", "tension-spike", "subtitles"], "youtube_id": "_InqQJRqGW4" },
+    { "id": "marriage-story", "title": "Marriage Story", "kind": "film", "runtime": 137, "tags": ["heavy-emotion", "slow-pace", "warm-voice"], "youtube_id": "BHi-a1n8t7M" },
+    { "id": "roma", "title": "Roma", "kind": "film", "runtime": 135, "tags": ["heavy-emotion", "slow-pace", "subtitles", "low-dialogue"], "youtube_id": "6BS27ngZtxg" },
+    { "id": "hardline-goldstone", "title": "Jackson Goldstone's winning POV · Red Bull Hardline Tasmania", "kind": "pov", "runtime": 4, "easter_egg": true, "tags": ["pov", "downhill", "adrenaline", "loud-score"], "youtube_id": "PJ2MtTvpzp4" },
+    { "id": "hardline-vermette", "title": "Asa Vermette's winning POV · Red Bull Hardline Wales", "kind": "pov", "runtime": 3, "easter_egg": true, "tags": ["pov", "downhill", "adrenaline", "loud-score"], "youtube_id": "ZkeTM-HkqT4" },
+    { "id": "hardline-2022", "title": "Winning run POV · Red Bull Hardline 2022", "kind": "pov", "runtime": 3, "easter_egg": true, "tags": ["pov", "downhill", "adrenaline", "loud-score"], "youtube_id": "L0ifTtzbfB0" }
+  ]
+}

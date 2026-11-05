@@ -1,0 +1,1439 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Netfeel 2046 · Taste Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* Netflix palette: black + red (+ white text). Red = hot / simulated / brand; white = calm / evidence. */
+  :root {
+    --bg: #000000;
+    --surface: #141414;
+    --line: #2a2a2a;
+    --line-strong: #404040;
+    --text: #ffffff;
+    --muted: #b3b3b3;      /* 9.7:1 on black */
+    --faint: #8c8c8c;      /* 5.9:1 on black */
+    --red: #e50914;
+    --calm: #ffffff;
+    --calm-soft: #262626;
+    --hot: #ff4d55;        /* 6.3:1 on black, red text that stays readable */
+    --hot-soft: #2b0a0c;
+    --ok: #ffffff;
+    --r-lg: 18px; --r-md: 12px; --r-sm: 9px;
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body { background: var(--bg); color: var(--text); font: 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; font-feature-settings: "tnum" 1, "cv11" 1; }
+  button, select, input { font: inherit; color: inherit; }
+  button { cursor: pointer; }
+  [hidden] { display: none !important; }
+  :focus:not(:focus-visible) { outline: none; }
+  :focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+
+  /* ---------- header ---------- */
+  .top { display: flex; align-items: center; gap: var(--s5); padding: var(--s2) var(--s6); min-height: 60px; border-bottom: 1px solid var(--line); background: var(--bg); flex-wrap: wrap; }
+  .wordmark { font-weight: 800; letter-spacing: .04em; color: var(--red); font-size: 22px; line-height: 1; }
+  .wordmark span { color: var(--text); font-weight: 400; margin-left: 6px; letter-spacing: .02em; }
+  .top .right { margin-left: auto; display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; }
+  .pill { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; padding: 5px 11px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); white-space: nowrap; background: none; }
+  .pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--faint); }
+  .pill.live { color: var(--text); border-color: var(--line-strong); }
+  .pill.live .dot { background: var(--red); }
+  .pill.sim { color: var(--hot); border-color: var(--hot); }
+  .pill.sim .dot { background: var(--hot); }
+  button.pill:hover { background: var(--surface); }
+  .pill kbd, .btn kbd { font: 11px var(--mono); color: var(--faint); border: 1px solid var(--line); border-radius: 4px; padding: 0 4px; }
+
+  /* ---------- layout: one page. The screen and the pick on top, the proof underneath. ---------- */
+  .screen { width: min(100% - 48px, 1840px); margin: 0 auto; padding: var(--s5) 0 var(--s4); display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s5); align-items: start; }
+  /* With a pick: the video is the main thing (left), the heart sits beside it (right). */
+  .screen.has-pick { grid-template-columns: minmax(0, 1fr) clamp(300px, 24vw, 430px); }
+  .screen.has-pick #pickView { grid-column: 1; grid-row: 1; min-width: 0; }
+  .screen.has-pick .hero { grid-column: 2; grid-row: 1; position: sticky; top: var(--s4); }
+  .cue { display: block; text-align: center; color: var(--muted); font-size: 14px; text-decoration: none; padding: var(--s3); margin-bottom: var(--s3); }
+  .cue:hover { color: var(--text); }
+  .under { background: var(--surface); border-top: 1px solid var(--line); padding: var(--s7) var(--s6); }
+  .under-inner { max-width: 1440px; margin: 0 auto; }
+  .under-head { margin-bottom: var(--s5); }
+  .under-head h2 { font-size: 26px; letter-spacing: -.02em; }
+  .under-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--s5); align-items: start; }
+  .col3 { display: flex; flex-direction: column; gap: var(--s5); min-width: 0; }
+  .panel { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s5); font-size: 14px; }
+  .panel h2 { font-size: 18px; }
+  .panel > section + section { border-top: 1px solid var(--line); padding-top: var(--s5); margin-top: var(--s5); }
+  .under .spark { height: 96px; }
+  .card { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--s5); }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  h2 { font-size: 20px; font-weight: 600; letter-spacing: -.01em; margin-top: 2px; }
+  .side h2 { font-size: 18px; }
+  h3 { font-size: 14px; font-weight: 600; margin-bottom: var(--s3); }
+  .muted { color: var(--muted); }
+  .small { font-size: 14px; }
+  .stack > * + * { margin-top: var(--s5); }
+
+  /* ---------- buttons ---------- */
+  .btn { display: inline-flex; align-items: center; gap: var(--s2); background: var(--bg); border: 1px solid var(--line-strong); padding: 9px 14px; border-radius: var(--r-sm); font-size: 14px; font-weight: 500; transition: background .15s, border-color .15s; }
+  .btn:hover { background: var(--surface); }
+  .btn.dark { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn.dark:hover { background: #f40612; border-color: #f40612; }
+  .btn.ghost { border-color: transparent; padding-left: 8px; padding-right: 8px; color: var(--muted); }
+  .btn.ghost:hover { color: var(--text); background: var(--surface); }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .btn.danger { color: var(--hot); border-color: var(--hot); background: var(--hot-soft); }
+  .btn.dark kbd { color: #ffd9db; border-color: rgba(255,255,255,.5); }
+  .btns { display: flex; flex-wrap: wrap; gap: var(--s2); }
+
+  /* ---------- vault (left) ---------- */
+  .seg { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border-radius: var(--r-sm); padding: 3px; gap: 2px; }
+  .seg button { border: 0; background: none; border-radius: 7px; padding: 6px 0; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .seg button[aria-selected="true"] { background: var(--bg); color: var(--text); box-shadow: none; }
+  .hit { display: flex; align-items: baseline; gap: var(--s2); margin: var(--s2) 0 var(--s3); }
+  .hit b { font-size: 44px; font-weight: 600; letter-spacing: -.03em; line-height: 1; }
+  .dots { display: flex; gap: 3px; flex-wrap: wrap; }
+  .dots i { width: 8px; height: 8px; border-radius: 2px; background: var(--line); }
+  .dots i.h { background: var(--red); }
+  .bars { list-style: none; display: flex; flex-direction: column; gap: var(--s2); }
+  .bars li { display: grid; grid-template-columns: minmax(0, 1fr) 44px 46px; align-items: center; gap: var(--s2); }
+  .bars .track { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .bars .track b { display: block; height: 100%; background: var(--text); border-radius: 2px; }
+  .bars.avoid .track b { background: var(--red); }
+  .bars .n { color: var(--muted); text-align: right; font-size: 13px; }
+  .facts { display: flex; flex-direction: column; gap: var(--s2); }
+  .facts > div { display: flex; justify-content: space-between; gap: var(--s3); }
+  .ok { color: var(--ok); font-weight: 500; }
+  .warn { color: var(--hot); font-weight: 500; }
+  .zero { display: flex; justify-content: space-between; align-items: baseline; }
+  .zero b { font-size: 24px; font-weight: 600; color: var(--ok); }
+
+  .toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; background: none; border: 0; padding: 0; text-align: left; }
+  .toggle .chev { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; transition: transform .2s; color: var(--muted); }
+  .toggle[aria-expanded="true"] .chev { transform: rotate(180deg); }
+  .diagram { margin-top: var(--s4); }
+  .diagram .canvas { background: var(--surface); border-radius: var(--r-md); padding: var(--s3); overflow: auto; min-height: 120px; cursor: zoom-in; }
+  .diagram .canvas svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+  .legend { display: flex; gap: var(--s4); margin-top: var(--s3); font-size: 13px; color: var(--muted); align-items: center; flex-wrap: wrap; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+  .log { list-style: none; display: flex; flex-direction: column; gap: var(--s3); }
+  .log li { padding-left: var(--s3); border-left: 2px solid var(--line); }
+  .log li .c { font: 12px/1.5 var(--mono); color: var(--calm); }
+  .log li.fresh { border-color: var(--hot); }
+
+  /* ---------- stage (centre) ---------- */
+  .ask { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; margin: 0 auto; }
+  .ask label { color: var(--muted); font-size: 14px; }
+  .ask select, .ask input { border: 1px solid var(--line-strong); background: var(--bg); border-radius: var(--r-sm); padding: 7px 10px; font-weight: 500; font-size: 14px; }
+  .ask input { width: 78px; }
+  .ask .btn { padding: 7px 12px; }
+
+  /* The heart screen. No pick: it IS the first screen, full height. Pick: a compact panel beside the video. */
+  .hero { border-radius: var(--r-lg); background: var(--surface); padding: var(--s6) var(--s7); display: flex; flex-direction: column; gap: var(--s4); height: calc(100vh - 160px); height: calc(100dvh - 160px); min-height: 460px; }
+  .hero .row1 { display: flex; align-items: center; gap: var(--s2) var(--s3); flex-wrap: wrap; }
+  .hero .bpm { font-size: clamp(120px, 26vh, 300px); font-weight: 600; letter-spacing: -.05em; line-height: .9; display: flex; align-items: baseline; gap: var(--s4); }
+  .hero .bpm small { font-size: 30px; font-weight: 500; letter-spacing: 0; color: var(--muted); }
+  .hero .bpm .heart { color: var(--red); font-size: .22em; align-self: center; }
+  .hero .bpm .num.empty { color: var(--line-strong); }
+  .hero .state { font-size: 22px; color: var(--muted); }
+  .hero .state b { color: var(--text); font-weight: 600; }
+  .hero canvas { width: 100%; flex: 1 1 0; min-height: 90px; display: block; }
+  .hstats { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: var(--s4) var(--s6); align-items: end; }
+  .hs .k { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .hs .v { font-size: 26px; font-weight: 600; letter-spacing: -.01em; margin-top: 2px; }
+  .hs .v small { font-size: 14px; font-weight: 500; color: var(--muted); margin-left: 2px; }
+  .hactions { display: flex; gap: var(--s2); flex-wrap: wrap; }
+  .consent { border: 1.5px solid var(--red); background: var(--bg); border-radius: var(--r-md); padding: var(--s3) var(--s4); display: flex; flex-direction: column; gap: var(--s3); font-size: 15px; }
+  .consent b { font-weight: 600; }
+  .consent .small { color: var(--muted); font-size: 13px; }
+  .limits { margin-top: var(--s5); }
+  .limits h2 { font-size: 22px; letter-spacing: -.02em; margin-bottom: var(--s4); }
+  .limits-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5) var(--s6); }
+  .limits-grid h3 { font-size: 14px; margin-bottom: var(--s1); }
+  .limits-grid p { color: var(--muted); font-size: 14px; line-height: 1.55; }
+  .hero .note { font-size: 14px; color: var(--muted); }
+  .screen:not(.has-pick) #heroFeed { display: none; }
+  .screen.has-pick .when-empty { display: none; }
+  .screen.has-pick .hero { height: auto; min-height: 0; padding: var(--s5); gap: var(--s3); }
+  .screen.has-pick .hero .bpm { font-size: clamp(72px, 6.6vw, 118px); gap: var(--s3); }
+  .screen.has-pick .hero .bpm small { font-size: 20px; }
+  .screen.has-pick .hero .state { font-size: 15px; }
+  .screen.has-pick .hero canvas { flex: none; height: 150px; }
+  .screen.has-pick .hstats { grid-template-columns: 1fr 1fr; gap: var(--s3) var(--s4); }
+  .screen.has-pick .hs.wide { grid-column: 1 / -1; }
+  .screen.has-pick .hs .v { font-size: 20px; }
+  body.stale .num, body.stale .vbig b { color: var(--faint) !important; }
+  body.stale .heart { color: var(--faint) !important; animation: none !important; }
+
+  .pickcard { padding: var(--s5) 0 0; }
+  .pickgrid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s6); align-items: start; }
+  .pickside { display: flex; flex-direction: column; gap: var(--s3); }
+  .pickhead { margin-top: var(--s2); }
+  .pickhead h1 { font-size: clamp(28px, 2.6vw, 36px); font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+  .pickmeta { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; margin-top: var(--s3); font-size: 14px; color: var(--muted); }
+  .match { font-size: 15px; font-weight: 600; color: var(--calm); background: var(--calm-soft); padding: 4px 12px; border-radius: 999px; white-space: nowrap; }
+  .match.egg { color: var(--hot); background: var(--hot-soft); }
+  .why li.egg::before { content: "\2605"; color: var(--hot); }
+  .stamp { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); flex-wrap: wrap; padding: var(--s3) var(--s4); background: var(--surface); border-radius: var(--r-md); }
+  .stamp b { color: var(--ok); font-weight: 600; font-size: 16px; }
+  .stamp span { font: 13px var(--mono); color: var(--muted); }
+  .reranked { margin-bottom: var(--s4); font-size: 15px; font-weight: 500; color: var(--hot); background: var(--hot-soft); padding: var(--s3) var(--s4); border-radius: var(--r-md); }
+  .reranked.kept { color: var(--calm); background: var(--calm-soft); }
+  .why { list-style: none; display: flex; flex-direction: column; gap: var(--s2); font-size: 16px; margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); }
+  .why li { display: grid; grid-template-columns: 22px 1fr; }
+  .why li::before { content: "→"; color: var(--calm); }
+  .why li.live::before { content: "♥"; color: var(--red); }
+  .why li.out::before { content: "–"; color: var(--hot); }
+  .shelfwrap { margin-top: var(--s6); }
+
+  .np { display: flex; justify-content: space-between; align-items: center; gap: var(--s3); font-size: 14px; color: var(--muted); margin-bottom: var(--s2); }
+  .player-wrap { width: 100%; border-radius: var(--r-lg); overflow: hidden; background: #000; aspect-ratio: 16 / 9; position: relative; }
+  .player-wrap > div, .player-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .player-wrap .ph { display: flex; flex-direction: column; justify-content: flex-end; gap: var(--s2); padding: var(--s6); background: linear-gradient(160deg, #3a0508, #0d0d0d 70%); color: #fff; }
+  .player-wrap .ph b { font-size: 30px; font-weight: 600; letter-spacing: -.02em; }
+  .player-wrap .ph span { color: #cfcfcf; font-size: 14px; }
+  .player-wrap .ph a { color: #cfcfcf; font-size: 13px; }
+
+  .react { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: var(--s4); padding: var(--s3) 0 0; }
+  .react .rec { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+  .react .rec i { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+  .react.on .rec { color: var(--red); }
+  .react.on .rec i { background: var(--red); }
+  .react canvas { width: 100%; height: 36px; display: block; }
+
+  .shelf { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: var(--s3); }
+  .tile { text-align: left; border: 1px solid var(--line); background: var(--bg); border-radius: var(--r-md); padding: var(--s4); display: flex; flex-direction: column; gap: var(--s1); transition: border-color .15s; }
+  .tile:hover { border-color: var(--line-strong); }
+  .tile.on { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+  .tile .t { font-weight: 600; font-size: 15px; line-height: 1.3; }
+  .tile .m { font-size: 13px; color: var(--muted); }
+  .tile .badge { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text); }
+  .tile .badge.alt { color: var(--muted); }
+  .tile .badge.new { color: var(--hot); }
+  .more { margin-top: var(--s4); }
+  .more summary { cursor: pointer; font-size: 14px; color: var(--muted); list-style: none; }
+  .more summary::-webkit-details-marker { display: none; }
+  .more[open] summary { margin-bottom: var(--s3); }
+
+  /* ---------- vitals (right) ---------- */
+  .vhead { display: flex; justify-content: space-between; align-items: center; }
+  .tag { font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--surface); color: var(--muted); white-space: nowrap; }
+  .tag.real { background: var(--calm-soft); color: var(--calm); }
+  .tag.sim { background: var(--hot-soft); color: var(--hot); }
+  .vbig { display: flex; align-items: baseline; gap: var(--s2); margin: var(--s3) 0 var(--s1); }
+  .vbig b { font-size: 56px; font-weight: 600; letter-spacing: -.04em; line-height: 1; }
+  .vbig b.hot { color: var(--hot); }
+  .vbig small { color: var(--muted); font-size: 15px; }
+  .vsub { color: var(--muted); }
+  .spark { width: 100%; height: 56px; display: block; margin-top: var(--s3); }
+  .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4) var(--s4); }
+  .tiles .k { font-size: 12px; color: var(--muted); font-weight: 500; }
+  .tiles .v { font-size: 20px; font-weight: 600; letter-spacing: -.01em; margin-top: 2px; }
+  .tiles .v small { font-size: 12px; font-weight: 500; color: var(--muted); margin-left: 2px; }
+  .tiles .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .tiles .full { grid-column: 1 / -1; }
+  .stressbar { height: 6px; border-radius: 3px; background: var(--line); margin-top: var(--s2); overflow: hidden; }
+  .stressbar b { display: block; height: 100%; width: 0; background: var(--calm); border-radius: 3px; transition: width .4s ease, background .4s; }
+  .switch { display: flex; align-items: flex-start; gap: var(--s3); cursor: pointer; line-height: 1.4; }
+  .switch input { position: absolute; opacity: 0; pointer-events: none; }
+  .switch .knob { flex: 0 0 34px; height: 20px; border-radius: 10px; background: var(--line-strong); position: relative; transition: background .2s; margin-top: 1px; }
+  .switch .knob::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s; }
+  .switch input:checked + .knob { background: var(--red); }
+  .switch input:checked + .knob::after { transform: translateX(14px); }
+  .switch input:focus-visible + .knob { outline: 2px solid var(--text); outline-offset: 2px; }
+  .status { color: var(--muted); min-height: 1.5em; }
+  .backstage summary { cursor: pointer; color: var(--muted); }
+  .backstage .btns { margin-top: var(--s3); }
+  .foot { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* ---------- toast: feedback you can see from the back row ---------- */
+  .toast { position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 12px); background: var(--red); color: #fff; padding: 12px 20px; border-radius: 999px; font-size: 15px; font-weight: 500; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 30; max-width: min(720px, 92vw); text-align: center; }
+  .toast.on { opacity: 1; transform: translate(-50%, 0); }
+  .toast.err { background: #fff; color: #000; }
+
+  /* ---------- overlays ---------- */
+  .scrim { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(6px); display: grid; place-items: center; padding: var(--s6); z-index: 20; }
+  .sheet { background: var(--bg); border-radius: var(--r-lg); padding: var(--s5) var(--s6); width: min(1640px, 100%); max-height: 100%; overflow: auto; border: 1px solid var(--line); box-shadow: 0 24px 80px rgba(0,0,0,.6); }
+  .sheet .canvas { background: var(--surface); border-radius: var(--r-md); padding: var(--s3); margin-top: var(--s3); }
+  .scrim:has(.sheet) { padding: var(--s4); }
+  .sheet .canvas svg { display: block; margin: 0 auto; width: 100% !important; max-width: none !important; height: calc(100vh - 215px) !important; }
+  .sheet-head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--s4); }
+
+  .receipt { width: 400px; max-width: 100%; background: var(--surface); padding: var(--s6) var(--s5) var(--s7); font: 13px/1.6 var(--mono); color: var(--text); box-shadow: 0 24px 80px rgba(0,0,0,.6); border-radius: 4px; max-height: 100%; overflow: auto;
+    -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 100% / 16px 100% repeat-x; mask: radial-gradient(circle 6px at 50% 100%, transparent 98%, #000) 0 100% / 16px 100% repeat-x; }
+  .receipt .c { text-align: center; }
+  .receipt .logo { font: 800 18px var(--sans); color: var(--red); letter-spacing: .04em; }
+  .receipt .logo span { color: var(--text); font-weight: 400; }
+  .receipt hr { border: 0; border-top: 1px dashed var(--line-strong); margin: var(--s3) 0; }
+  .receipt .row { display: flex; justify-content: space-between; gap: var(--s3); }
+  .receipt .row span:first-child { color: var(--muted); }
+  .receipt .big { font: 600 18px var(--sans); text-align: center; margin: var(--s2) 0; }
+  .receipt .verdict { text-align: center; font-weight: 500; padding: var(--s2); border: 1px solid currentColor; border-radius: 6px; margin: var(--s3) 0; }
+  .receipt .verdict.yes { color: var(--text); }
+  .receipt .verdict.no { color: var(--hot); }
+  .receipt .learn div { color: var(--calm); }
+  .receipt .learn div.neg { color: var(--hot); }
+  .receipt canvas { width: 100%; height: 56px; display: block; margin: var(--s2) 0; }
+  .receipt .note { color: var(--muted); font-size: 12px; }
+  .receipt .simtag { color: var(--hot); font-weight: 600; }
+  .receipt .btns { justify-content: center; margin-top: var(--s4); font-family: var(--sans); }
+
+  .help { text-align: center; font-size: 13px; color: var(--muted); letter-spacing: .02em; padding: var(--s4) var(--s4) var(--s6); background: var(--surface); }
+
+  /* ---------- stage mode (P): only the screen and the pick, bigger, readable from the back row ---------- */
+  body.stage .under, body.stage .cue, body.stage .help, body.stage .ask { display: none; }
+  body.stage .pickhead h1 { font-size: clamp(34px, 3.4vw, 48px); }
+  body.stage .stamp b { font-size: 20px; }
+  body.stage .match { font-size: 18px; }
+  body.stage .why { font-size: 19px; }
+  body.stage .reranked { font-size: 18px; }
+  body.stage .screen { padding-bottom: var(--s7); }
+
+  @media (max-width: 1100px) {
+    .under-grid { grid-template-columns: 1fr 1fr; }
+    .under-grid > .col3:nth-child(2) { grid-column: 1 / -1; order: -1; }
+  }
+  @media (max-width: 1000px) {
+    .limits-grid { grid-template-columns: 1fr 1fr; }
+    .screen.has-pick { grid-template-columns: minmax(0, 1fr); }
+    .screen.has-pick .hero { grid-column: 1; grid-row: 2; position: static; }
+    .hstats { grid-template-columns: 1fr 1fr; }
+    .hs.wide { grid-column: 1 / -1; }
+  }
+  @media (max-width: 800px) {
+    .limits-grid { grid-template-columns: 1fr; }
+    .under-grid { grid-template-columns: 1fr; }
+    .under-grid > .col3:nth-child(2) { order: 0; }
+    .under { padding: var(--s6) var(--s4); }
+    .top { padding: var(--s3) var(--s4); }
+    .pickgrid { grid-template-columns: 1fr; gap: var(--s4); }
+    .screen { width: min(100% - 32px, 100%); }
+    .hero { padding: var(--s5); }
+  }
+  @media (max-width: 600px) {
+    .top .pill.proto, .top .pill.stagebtn { display: none; }
+    .react { grid-template-columns: 1fr auto; }
+    .react canvas { display: none; }
+    .hero { padding: var(--s5); }
+    .pickhead h1 { font-size: 30px; }
+    .scrim { padding: var(--s3); }
+    .sheet { padding: var(--s5); }
+  }
+  /* Motion only for people who haven't asked for less of it. */
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes blink { 50% { opacity: .25; } }
+    @keyframes beat { 0%,100% { transform: scale(1); } 14% { transform: scale(1.22); } }
+    @keyframes pop { from { background: var(--hot-soft); } to { background: transparent; } }
+    @keyframes fade { from { opacity: 0; } }
+    @keyframes print { from { transform: translateY(-24px); opacity: 0; } }
+    .pill.live .dot, .react.on .rec i { animation: blink 1.4s infinite; }
+    .hero .bpm .heart { animation: beat 1s infinite; }
+    .log li.fresh { animation: pop 1s ease; }
+    .scrim { animation: fade .2s ease; }
+    .receipt { animation: print .5s cubic-bezier(.2,.8,.2,1); }
+  }
+  @media print { body * { visibility: hidden; } .receipt, .receipt * { visibility: visible; } .receipt { position: absolute; top: 0; left: 0; box-shadow: none; } .receipt .btns { display: none; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wordmark">NETFEEL<span>2046</span></div>
+  <form class="ask" id="askForm">
+    <label for="feeling">I want to feel</label>
+    <select id="feeling"><option>calm</option><option>hype</option><option>dread</option><option>tears</option></select>
+    <label for="doneBy">done by</label>
+    <input id="doneBy" value="23:00" pattern="\d{1,2}:\d{2}" aria-label="Done by">
+    <button class="btn dark" type="submit">Get tonight's pick <kbd>A</kbd></button>
+  </form>
+  <div class="right">
+    <span class="pill" id="watchPill"><span class="dot"></span><span id="watchPillText">No watch</span></span>
+    <span class="pill proto">Concept prototype</span>
+    <button class="pill stagebtn" id="stageBtn" type="button" aria-pressed="false">Stage mode <kbd>P</kbd></button>
+  </div>
+</header>
+
+<!-- ================= THE SCREEN: what Claude picked, playing, and why ================= -->
+<main class="screen" id="stageCol">
+  <!-- The heart screen. First screen on open; with a pick it moves beside the video. -->
+  <div class="hero" id="heroHeart">
+    <div class="row1"><span class="eyebrow" id="heroEyebrow">Live heart</span><span class="tag sim" id="heroSim" hidden>Simulated · not a real heart</span></div>
+    <div class="bpm"><span class="heart" aria-hidden="true">♥</span><span class="num empty" id="heroBpm">—</span><small>bpm</small></div>
+    <div class="state" id="heroState">Connect your watch to see your heart live.</div>
+    <canvas id="heroChart" aria-hidden="true"></canvas>
+    <div class="hstats">
+      <div class="hs wide"><div class="k">Stress weight · what the model uses</div><div class="v" id="heroStress">—</div><div class="stressbar"><b id="heroStressFill"></b></div></div>
+      <div class="hs"><div class="k">vs resting</div><div class="v" id="heroDelta">—</div></div>
+      <div class="hs"><div class="k">Session range</div><div class="v" id="heroRange">—</div></div>
+    </div>
+    <div class="consent" id="consent" role="region" aria-label="Consent" hidden>
+      <div aria-live="assertive">Share this heart read with your model?<br><b id="consentRead"></b></div>
+      <div class="small">Nothing leaves your watch unless you say yes. You can delete it afterwards.</div>
+      <div class="hactions">
+        <button class="btn dark" id="consentYes" type="button">Share once <kbd>F</kbd></button>
+        <button class="btn" id="consentNo" type="button">Skip <kbd>Esc</kbd></button>
+      </div>
+    </div>
+    <div class="hactions">
+      <button class="btn dark" id="heroFeed" type="button" disabled>Re-rank with my heart <kbd>F</kbd></button>
+      <button class="btn" id="heroConnect" type="button">Connect watch <kbd>C</kbd></button>
+      <button class="btn ghost" id="heroForget" type="button">Forget tonight's heart</button>
+    </div>
+    <div class="note">Last 2 minutes · dashed line is your resting heart rate.<span class="when-empty"> Waiting for a pick: ask Claude Desktop, or press A.</span></div>
+  </div>
+
+  <!-- The pick: video first, the answer and its reasons right underneath -->
+  <div id="pickView" hidden>
+    <div class="np" id="np" hidden><span>Now playing: <b id="npTitle"></b></span><button class="btn ghost" id="npBack" type="button">← back to the pick</button></div>
+    <div class="player-wrap" id="playerWrap"><div id="player"></div></div>
+    <div class="react" id="react">
+      <span class="rec"><i></i><span id="recText">Press play to start reading your reaction</span></span>
+      <canvas id="reactChart" aria-hidden="true"></canvas>
+      <button class="btn" id="endBtn" type="button" disabled>End &amp; receipt</button>
+    </div>
+
+    <div class="pickcard">
+      <div class="reranked" id="reranked" hidden></div>
+      <div class="pickgrid">
+        <div>
+          <div class="eyebrow" id="pickEyebrow">Tonight's pick</div>
+          <div class="pickhead"><h1 id="pTitle"></h1></div>
+          <div class="pickmeta"><span class="match" id="pMatch"></span><span id="asked"></span></div>
+        </div>
+        <div class="pickside">
+          <div class="stamp"><b>✓ Paid placement: none</b><span id="auditId"></span></div>
+        </div>
+      </div>
+      <ul class="why" id="why"></ul>
+    </div>
+
+    <div class="shelfwrap">
+      <div class="eyebrow">What you can watch</div>
+      <h2 style="margin-bottom:var(--s4)">Fits tonight</h2>
+      <div class="shelf" id="shelf"></div>
+      <details class="more">
+        <summary>Everything in the catalog ↓</summary>
+        <div class="shelf" id="catalogShelf"></div>
+      </details>
+    </div>
+  </div>
+</main>
+
+<a class="cue" href="#under">Behind the pick: your heart · taste model · algorithm · audit ↓</a>
+
+<!-- ================= BEHIND THE PICK: the proof ================= -->
+<section class="under" id="under" aria-label="Behind the pick">
+  <div class="under-inner">
+    <div class="under-head">
+      <div class="eyebrow">Behind the pick</div>
+      <h2>What your body taught it, what it saw tonight, how it decided</h2>
+    </div>
+    <div class="under-grid">
+      <!-- Taste model -->
+      <div class="col3" id="vaultCol">
+        <div class="panel">
+          <section>
+            <div class="eyebrow">The vault</div>
+            <h2>Your taste model</h2>
+            <div class="stack" style="margin-top:var(--s4)">
+              <div class="seg" id="feelTabs" role="tablist" aria-label="Feeling">
+                <button role="tab" data-f="calm" aria-selected="true">Calm</button><button role="tab" data-f="hype" aria-selected="false">Hype</button><button role="tab" data-f="dread" aria-selected="false">Dread</button><button role="tab" data-f="tears" aria-selected="false">Tears</button>
+              </div>
+              <div role="tabpanel" aria-live="polite">
+                <div class="muted" id="hitLabel">Calm reached</div>
+                <div class="hit"><b id="hitText">–</b><span class="muted" id="hitOf"></span></div>
+                <div class="dots" id="hitBar"></div>
+              </div>
+              <div>
+                <h3>What your body taught it</h3>
+                <ul class="bars" id="effects"></ul>
+              </div>
+              <div>
+                <h3>What it leaves out</h3>
+                <ul class="bars avoid" id="avoids"></ul>
+              </div>
+              <div class="facts">
+                <div><span class="muted">Resting heart rate</span><span id="factRest">–</span></div>
+                <div><span class="muted">Audit chain</span><span id="factChain">–</span></div>
+              </div>
+              <div class="zero"><span class="muted">Paid placements, ever <span id="auditCount"></span></span><b id="paid">0</b></div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Heartbeat -->
+      <div class="col3" id="vitalsCol">
+        <div class="panel">
+          <section>
+            <div class="vhead"><span class="eyebrow">Heartbeat</span><span class="tag" id="hrTag">not connected</span></div>
+            <div class="vbig"><b id="bpm">—</b><small>bpm</small></div>
+            <div class="vsub" id="vsub">Waiting for the first beat</div>
+            <canvas class="spark" id="spark" aria-hidden="true"></canvas>
+          </section>
+
+          <section class="tiles">
+            <div><div class="k">Resting</div><div class="v" id="vRest">--<small>bpm</small></div><div class="sub" id="vRestSrc">default</div></div>
+            <div><div class="k">vs resting</div><div class="v" id="vDelta">—</div></div>
+            <div class="full">
+              <div class="k">Stress weight <span id="stressUse">· not shared</span></div>
+              <div class="v" id="vZone">—</div>
+              <div class="stressbar"><b id="stressFill"></b></div>
+              <div class="sub" id="stressScale">0% at resting + 4 · 100% at resting + 20</div>
+            </div>
+            <div><div class="k">Session low</div><div class="v" id="vMin">—</div></div>
+            <div><div class="k">Session high</div><div class="v" id="vMax">—</div></div>
+            <div hidden id="tHrv"><div class="k">HRV · RMSSD</div><div class="v" id="vHrv"></div></div>
+            <div hidden id="tRR"><div class="k">Beat interval</div><div class="v" id="vRR"></div></div>
+            <div hidden id="tContact"><div class="k">Skin contact</div><div class="v" id="vContact"></div></div>
+            <div hidden id="tBatt"><div class="k">Watch battery</div><div class="v" id="vBatt"></div></div>
+            <div hidden id="tSignal"><div class="k">Signal</div><div class="v" id="vSignal"></div></div>
+          </section>
+
+          <section class="stack">
+            <div class="btns">
+              <button class="btn" id="connectBtn" type="button">Connect watch <kbd>C</kbd></button>
+              <button class="btn" id="restBtn" type="button" disabled>Measure resting · 60 s</button>
+              <button class="btn dark" id="feedBtn" type="button" disabled>Re-rank with my heart <kbd>F</kbd></button>
+            </div>
+            <label class="switch"><input type="checkbox" id="askFirst" checked><span class="knob"></span><span>Ask me before each read is shared<br><span class="muted">On: Re-rank asks first (Share once / Skip).</span></span></label>
+            <label class="switch"><input type="checkbox" id="shareLive"><span class="knob"></span><span>Share my live heart with my model<br><span class="muted">Off by default. When on, every pick (also from Claude) uses it.</span></span></label>
+            <div class="status" id="status" role="status">On the watch: turn on Broadcast Heart Rate, then Connect.</div>
+            <details class="backstage">
+              <summary>Backstage</summary>
+              <div class="btns">
+                <button class="btn" id="simBtn" type="button">Simulated heart <kbd>S</kbd></button>
+                <button class="btn" id="clockBtn" type="button">Clock: demo 21:40</button>
+                <button class="btn" id="clearBtn" type="button">Clear pick</button>
+                <button class="btn" id="resetBtn" type="button">Reset model <kbd>R</kbd></button>
+              </div>
+            </details>
+          </section>
+          <p class="foot" id="foot">Concept prototype. The taste model's history is simulated. Connect a watch for a real heart rate.</p>
+        </div>
+      </div>
+
+      <!-- Algorithm + audit -->
+      <div class="col3">
+        <div class="panel">
+          <section>
+            <button class="toggle" id="algoToggle" aria-expanded="false" aria-controls="algo">
+              <span><span class="eyebrow">Algorithm</span><h2>How it decides</h2></span>
+              <span class="chev"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5"/></svg></span>
+            </button>
+            <div class="diagram" id="algo" hidden>
+              <div class="canvas" id="algoCanvas"><span class="small muted">Drawing…</span></div>
+              <div class="legend"><span><i style="background:var(--red)"></i>Path taken for the last pick</span><span><i style="background:var(--line-strong)"></i>Not used</span></div>
+              <div class="btns" style="margin-top:var(--s3)"><button class="btn ghost" id="algoExpand" type="button">Open full size ↗</button></div>
+            </div>
+          </section>
+        </div>
+        <div class="panel">
+          <section>
+            <div class="eyebrow">Audit trail</div>
+            <h2 style="margin-bottom:var(--s4)">What changed</h2>
+            <ul class="log" id="log"></ul>
+          </section>
+        </div>
+      </div>
+    </div>
+    <div class="panel limits" id="limits">
+      <div class="eyebrow">Limits, said out loud</div>
+      <h2>What 2026 can't tell</h2>
+      <div class="limits-grid">
+        <div><h3>Heart rate is arousal, not emotion</h3><p>A watch separates calm from keyed-up. It cannot tell dread from hype from tears: for those three, the receipt only checks that your heart went up.</p></div>
+        <div><h3>"Stress" means above your own resting rate</h3><p>Coffee, stairs and stage fright count too. The model uses one number, your bpm over your resting rate, and shows it to you.</p></div>
+        <div><h3>The history is invented</h3><p>Daan's 90 evenings are simulated. The pilot in our roadmap (2028) is the step that replaces them with real, consented ones.</p></div>
+        <div><h3>The counts overlap</h3><p>A nature show carries five tags, so "nature 16/16" re-counts the same evenings. Evidence is thin, which is why the model shows its counts, not just a score.</p></div>
+        <div><h3>What 2046 could add (concept)</h3><p>Ring HRV and skin temperature, breathing, gaze on the TV, your calendar. Each one only with your consent, per moment: the same Skip button.</p></div>
+        <div><h3>No watch? Words still work</h3><p>Without a heart read the model uses what you tell it and your history only. The body is an optional second opinion, never a requirement.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="help">C connect · F re-rank · A ask · S simulate · P stage mode · R reset · Esc close</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Full-size algorithm -->
+<div class="scrim" id="algoSheet" hidden role="dialog" aria-modal="true" aria-labelledby="algoTitle">
+  <div class="sheet">
+    <div class="sheet-head">
+      <div><div class="eyebrow">Algorithm</div><h2 id="algoTitle">How your taste model decides</h2><p class="small muted" style="margin-top:var(--s2);max-width:640px">Every step is plain counting over your own evenings. No ads, no engagement score, no publisher input. The dark path is what happened for the pick on screen.</p></div>
+      <button class="btn" data-close type="button">Close <kbd>Esc</kbd></button>
+    </div>
+    <div class="canvas" id="algoBig"></div>
+  </div>
+</div>
+
+<!-- Receipt -->
+<div class="scrim" id="receiptSheet" hidden role="dialog" aria-modal="true" aria-label="Watch receipt"><div class="receipt" id="receipt"></div></div>
+
+<!-- Mermaid is vendored so the diagram works without internet; CDN only as a fallback. -->
+<script src="/vendor/mermaid-10.9.1.min.js"></script>
+<script>window.mermaid || document.write('<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"><\/script>')</script>
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function api(method, path, body) {
+    return fetch(path, { method: method, headers: { "Content-Type": "application/json" }, body: body ? JSON.stringify(body) : undefined })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || r.status); return j; }); });
+  }
+  var C = { text: "#ffffff", muted: "#b3b3b3", faint: "#8c8c8c", line: "#2a2a2a", calm: "#ffffff", hot: "#ff4d55", red: "#e50914" };
+
+  var resting = 62;
+  var ALGO = { stress_start: 4, stress_full: 20 }; // replaced by the server's values on the first poll
+  var state = null, catalog = [];
+  var lastPickAt = null, lastLogAt = null, prevPickTitle = null, lastAsked = null;
+  var current = null;      // title on the player: {id, title, youtube_id}
+  var feedBanner = null;   // {audit, text, kept} shown after you press Re-rank
+
+  /* ---------- feedback you can see from the back row ---------- */
+  var toastTimer = null;
+  function say(msg, isErr) {
+    $("status").textContent = msg;
+    var t = $("toast");
+    t.textContent = msg; t.className = "toast on" + (isErr ? " err" : "");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.className = "toast"; }, isErr ? 6000 : 3800);
+  }
+
+  /* =================================================================
+     VAULT + PICK  (polls the model file once a second)
+     ================================================================= */
+  function plural(n, one, many) { return n + " " + (n === 1 ? one : many); }
+  function render(s) {
+    state = s;
+    resting = s.resting_hr;
+    ALGO = s.algorithm || ALGO;
+    var rs = s.resting || { how: "default" };
+    var measured = rs.how === "measured";
+    $("vRest").innerHTML = resting + "<small>bpm</small>";
+    $("vRestSrc").textContent = measured ? "measured " + new Date(rs.at).toLocaleDateString(undefined, { day: "numeric", month: "short" }) : "default · measure yours";
+    $("vRestSrc").className = "sub " + (measured ? "ok" : "warn");
+    $("factRest").innerHTML = resting + " bpm · " + (measured ? '<span class="ok">from your watch</span>' : '<span class="warn">default, not measured</span>');
+    $("stressScale").textContent = "0% at " + (resting + ALGO.stress_start) + " bpm · 100% at " + (resting + ALGO.stress_full) + " bpm";
+    var ch = s.audit_chain || {};
+    $("factChain").innerHTML = ch.ok ? '<span class="ok">verified ✓</span> <span class="muted">' + plural(ch.n, "entry", "entries") + "</span>" : '<span class="warn">broken at ' + esc(ch.broken_at) + "</span>";
+    var clock = s.settings && s.settings.demo_clock;
+    $("clockBtn").textContent = clock ? "Clock: demo " + clock : "Clock: real time";
+    renderFeeling();
+    $("paid").textContent = s.summary.paid_placements_ever;
+    $("auditCount").textContent = "· " + plural(s.audit_count, "pick", "picks") + " audited";
+
+    var newestLog = s.changelog[0] && s.changelog[0].at;
+    $("log").innerHTML = s.changelog.map(function (c, i) {
+      var fresh = i === 0 && lastLogAt && newestLog !== lastLogAt;
+      return '<li class="' + (fresh ? "fresh" : "") + '">' + esc(c.what) +
+        c.changes.map(function (x) { return '<div class="c">' + esc(x) + "</div>"; }).join("") + "</li>";
+    }).join("");
+    lastLogAt = newestLog;
+
+    var p = s.last_pick;
+    if (!p) {
+      if (lastPickAt !== null || $("pickView").hidden === false) showHeart();
+      prevPickTitle = null; lastPickAt = null; return;
+    }
+    if (p.at === lastPickAt) return;
+    renderPick(p);
+  }
+
+  // Vault tabs: the model learns per feeling; calm has the most data.
+  var vaultFeeling = "calm", vaultFeelingPinned = false;
+  function renderFeeling() {
+    if (!state) return;
+    var f = vaultFeeling;
+    [].forEach.call($("feelTabs").children, function (b) { b.setAttribute("aria-selected", String(b.getAttribute("data-f") === f)); });
+    var h = (state.state_hit && state.state_hit[f]) || { hits: 0, n: 0 };
+    $("hitLabel").textContent = f.charAt(0).toUpperCase() + f.slice(1) + " reached";
+    $("hitText").textContent = h.hits;
+    $("hitOf").textContent = "of " + plural(h.n, "evening", "evenings") + (h.n < 5 ? " · little data yet" : "");
+    var bar = "";
+    for (var i = 0; i < h.n; i++) bar += '<i class="' + (i < h.hits ? "h" : "") + '"></i>';
+    $("hitBar").innerHTML = bar;
+    $("effects").innerHTML = (state.summary.strongest_effects[f] || []).map(row).join("") || '<li class="muted">not enough evenings yet</li>';
+    $("avoids").innerHTML = (state.summary.avoids[f] || []).map(row).join("") || '<li class="muted">nothing yet</li>';
+  }
+  $("feelTabs").onclick = function (e) {
+    var f = e.target.getAttribute && e.target.getAttribute("data-f");
+    if (!f) return;
+    vaultFeeling = f; vaultFeelingPinned = true; renderFeeling();
+  };
+
+  function showHeart() {
+    $("pickView").hidden = true; $("stageCol").classList.remove("has-pick");
+    destroyPlayer(); current = null;
+    drawAlgo();
+  }
+
+  function setBanner(text, kept) {
+    var el = $("reranked");
+    el.hidden = !text; el.textContent = text || "";
+    el.className = "reranked" + (kept ? " kept" : "");
+  }
+
+  function renderPick(p) {
+    var changed = prevPickTitle && prevPickTitle !== p.pick.title;
+    var live = p.live_read;
+    var fromLive = !!(live && live.stress_weight > 0);
+    lastPickAt = p.at; lastAsked = p.asked;
+    if (!vaultFeelingPinned) { vaultFeeling = p.asked.feeling; renderFeeling(); }
+    $("pickView").hidden = false; $("stageCol").classList.add("has-pick");
+    $("pickEyebrow").textContent = (p.easter_egg ? "Easter egg · off-script · asked at " : "Tonight's pick · asked at ") + p.asked.clock_now;
+    $("asked").textContent = "asked for " + p.asked.feeling + " · done by " + p.asked.done_by + (p.asked.note && p.asked.note !== "asked on this page" ? " · " + p.asked.note : "");
+    $("pTitle").textContent = p.pick.title;
+    $("pMatch").textContent = (p.easter_egg ? "Off-script" : p.pick.state_match + "% match") + " · " + p.pick.runtime_min + " min";
+    $("pMatch").className = "match" + (p.easter_egg ? " egg" : "");
+    if (p.easter_egg) say("Off-script: the model found a bike.");
+    if (feedBanner && feedBanner.audit === p.audit_id) setBanner(feedBanner.text, feedBanner.kept);
+    else if (changed && fromLive) setBanner("Re-ranked by your " + (live.real ? "live" : "simulated") + " heart: " + prevPickTitle + " → " + p.pick.title);
+    else setBanner("");
+    $("why").innerHTML = p.why.map(function (w) {
+      var cls = /^(Live|Simulated) read|started stressed/.test(w) ? "live" : /^Left out/.test(w) ? "out" : /^Easter egg/.test(w) ? "egg" : "";
+      return '<li class="' + cls + '"><span>' + esc(w) + "</span></li>";
+    }).join("");
+    $("auditId").textContent = "audit " + p.audit_id;
+    prevPickTitle = p.pick.title;
+    renderShelf(p);
+    // Only swap the video if nothing is being watched right now.
+    if (!session) load(byTitle(p.pick.title) || { id: p.pick.id, title: p.pick.title, youtube_id: p.pick.youtube_id });
+    drawAlgo();
+  }
+
+  function byTitle(t) { return catalog.find(function (c) { return c.title === t; }); }
+
+  function tileHtml(t, badge, match, alt, tip) {
+    var on = current && current.id === t.id ? " on" : "";
+    return '<button class="tile' + on + '" type="button" data-id="' + esc(t.id) + '"' + (tip ? ' title="' + esc(tip) + '"' : "") + ">" +
+      (badge ? '<span class="badge' + (alt === "new" ? " new" : alt ? " alt" : "") + '">' + esc(badge) + "</span>" : "") +
+      '<span class="t">' + esc(t.title) + "</span>" +
+      '<span class="m">' + (match != null ? match + "% · " : "") + t.runtime + " min · " + (t.youtube_id ? "▶ trailer" : "no trailer") + "</span></button>";
+  }
+  function renderShelf(p) {
+    p = p || (state && state.last_pick);
+    if (!p) return;
+    var egg = !!p.easter_egg;
+    var items = [{ t: byTitle(p.pick.title), b: "Pick", m: egg ? null : p.pick.state_match }]
+      .concat(p.alternatives.map(function (a) { return { t: byTitle(a.title), b: egg ? "More Hardline" : "Also fits", m: egg ? null : a.state_match, alt: true }; }))
+      .concat(p.explore ? [{ t: byTitle(p.explore.title), b: "New for you", m: p.explore.state_match, alt: "new", tip: p.explore.why }] : [])
+      .filter(function (x) { return x.t; });
+    $("shelf").innerHTML = items.map(function (x) { return tileHtml(x.t, x.b, x.m, x.alt, x.tip); }).join("");
+    var shown = items.map(function (x) { return x.t.id; });
+    $("catalogShelf").innerHTML = catalog.filter(function (t) { return shown.indexOf(t.id) < 0 && !t.easter_egg; })
+      .sort(function (a, b) { return (b.youtube_id ? 1 : 0) - (a.youtube_id ? 1 : 0); })
+      .map(function (t) { return tileHtml(t); }).join("");
+  }
+  document.addEventListener("click", function (e) {
+    var tile = e.target.closest && e.target.closest(".tile");
+    if (!tile) return;
+    var t = catalog.find(function (c) { return c.id === tile.getAttribute("data-id"); });
+    if (!t) return;
+    if (session) endSession(true);
+    load(t);
+    tile.blur();
+    window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+  $("npBack").onclick = function () {
+    var p = state && state.last_pick;
+    if (!p) return;
+    if (session) endSession(true);
+    load(byTitle(p.pick.title) || { id: p.pick.id, title: p.pick.title, youtube_id: p.pick.youtube_id });
+  };
+
+  function row(txt) {
+    var m = /^(.*): (\d+)\/(\d+)$/.exec(txt);
+    if (!m) return "<li>" + esc(txt) + "</li>";
+    var pct = Math.round((+m[2] / +m[3]) * 100);
+    return '<li><span>' + esc(m[1]) + '</span><span class="track"><b style="width:' + pct + '%"></b></span><span class="n">' + m[2] + "/" + m[3] + "</span></li>";
+  }
+  function poll() {
+    api("GET", "/api/state").then(render).catch(function () { $("status").textContent = "Server not reachable. Is `npm start` running?"; });
+  }
+
+  /* =================================================================
+     PLAYER  (YouTube IFrame API, so we know when you are watching)
+     ================================================================= */
+  var yt = null, ytReady = false, ytQueue = null;
+  window.onYouTubeIframeAPIReady = function () { ytReady = true; if (ytQueue) { var q = ytQueue; ytQueue = null; load(q); } };
+  (function () { var s = document.createElement("script"); s.src = "https://www.youtube.com/iframe_api"; s.async = true; document.head.appendChild(s); })();
+
+  // Keys typed inside the YouTube iframe never reach this page (F would even toggle YouTube's fullscreen).
+  // So when focus falls into the player, hand it straight back: mouse clicks in the player still work.
+  window.addEventListener("blur", function () {
+    setTimeout(function () {
+      var a = document.activeElement;
+      if (a && a.tagName === "IFRAME") { a.blur(); window.focus(); }
+    }, 350);
+  });
+
+  function destroyPlayer() {
+    if (yt && yt.destroy) { try { yt.destroy(); } catch (e) {} }
+    yt = null;
+    $("playerWrap").innerHTML = '<div id="player"></div>';
+  }
+  function load(t) {
+    current = t;
+    renderShelf();
+    var pk = state && state.last_pick;
+    $("np").hidden = !pk || pk.pick.id === t.id;
+    $("npTitle").textContent = t.title;
+    $("recText").textContent = "Press play to start reading your reaction";
+    $("endBtn").disabled = true;
+    if (!t.youtube_id) {
+      destroyPlayer();
+      $("playerWrap").innerHTML = '<div class="ph"><b>' + esc(t.title) + '</b><span>Trailer not available in this demo.</span><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=' +
+        encodeURIComponent(t.title + " official trailer Netflix") + '">Search on YouTube ↗</a></div>';
+      return;
+    }
+    if (!ytReady || !window.YT || !YT.Player) {
+      ytQueue = t;
+      // Fallback if the API can't load: a plain embed (no reaction tracking).
+      $("playerWrap").innerHTML = '<iframe title="' + esc(t.title) + ' trailer" src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(t.youtube_id) + '?rel=0&modestbranding=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+      return;
+    }
+    if (yt && yt.loadVideoById) { yt.cueVideoById(t.youtube_id); return; }
+    $("playerWrap").innerHTML = '<div id="player"></div>';
+    yt = new YT.Player("player", {
+      host: "https://www.youtube-nocookie.com",
+      videoId: t.youtube_id,
+      playerVars: { rel: 0, modestbranding: 1, playsinline: 1, disablekb: 1 },
+      events: { onStateChange: onPlayerState },
+    });
+  }
+  function onPlayerState(e) {
+    if (e.data === YT.PlayerState.PLAYING) {
+      if (!session) startSession();
+      session.playing = true;
+    } else if (e.data === YT.PlayerState.PAUSED) {
+      if (session) session.playing = false;
+    } else if (e.data === YT.PlayerState.ENDED) {
+      if (session) endSession();
+    }
+    updateRec();
+  }
+
+  /* =================================================================
+     WATCH SESSION → RECEIPT  (read-only: nothing is written to the model)
+     ================================================================= */
+  var session = null;
+  function startSession() {
+    session = { title: current, samples: [], t0: Date.now(), playing: true };
+    $("endBtn").disabled = false;
+    $("react").classList.add("on");
+  }
+  function updateRec() {
+    if (!session) { $("react").classList.remove("on"); return; }
+    var sec = Math.round((Date.now() - session.t0) / 1000);
+    var hrNote = !samples.length ? " · no heart signal" : "";
+    $("recText").textContent = (session.playing ? "Reading your reaction · " : "Paused · ") + mmss(sec * 1000) + hrNote;
+  }
+  function endSession(silent) {
+    var s = session; session = null;
+    $("react").classList.remove("on");
+    $("endBtn").disabled = true;
+    $("recText").textContent = "Press play to start reading your reaction";
+    if (yt && yt.pauseVideo) { try { yt.pauseVideo(); } catch (e) {} }
+    if (silent || !s) return;
+    // The source is judged per sample: one simulated beat anywhere makes the whole receipt say so.
+    var nReal = s.samples.filter(function (x) { return x.real; }).length, nSim = s.samples.length - nReal;
+    s.source = !s.samples.length ? "none" : !nSim ? "real" : nReal ? "mixed" : "sim";
+    var feeling = (lastAsked && lastAsked.feeling) || "calm";
+    api("POST", "/api/receipt", { title_id: s.title.id, feeling: feeling, samples: s.samples.map(function (x) { return { t: x.t, bpm: x.bpm }; }), real: s.source === "real" })
+      .then(function (r) { showReceipt(r, s); })
+      .catch(function (e) { say("Receipt failed: " + e.message, true); });
+  }
+  function mmss(ms) { var s = Math.round(ms / 1000); return Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0"); }
+  function showReceipt(r, s) {
+    var d = new Date();
+    var st = r.stats;
+    var v = r.verdict;
+    var verdictTxt = !v.judged ? v.reason : v.reached ? "Your body reached " + r.feeling + "." : "Your body did not reach " + r.feeling + ".";
+    var srcTxt = { real: "watch, live", sim: "SIMULATED", mixed: "SIMULATED + watch", none: "none" }[s.source];
+    var html =
+      '<div class="c"><div class="logo">NETFEEL<span> 2046</span></div><div class="note">Watch receipt · ' + d.toLocaleDateString() + " " + d.toTimeString().slice(0, 5) + "</div></div><hr>" +
+      '<div class="big">' + esc(r.title) + "</div>" +
+      '<div class="c note">' + r.tags.map(function (t) { return t.replace(/-/g, " "); }).join(" · ") + "</div><hr>" +
+      line("Asked for", r.feeling) + line("Watched", mmss(r.watched_ms)) + line("Heart samples", r.samples) +
+      '<div class="row"><span>Source</span><span class="' + (s.source === "real" ? "" : "simtag") + '">' + esc(srcTxt) + "</span></div><hr>" +
+      (st ? line("Start", st.start + " bpm") + line("End", st.end + " bpm") + line("Low / high", st.min + " / " + st.max) + line("Average", st.avg + " bpm") + line("Resting", r.resting_hr + " bpm") : line("Heart", "no data")) +
+      '<canvas id="rcChart"></canvas>' +
+      '<div class="verdict ' + (v.judged ? (v.reached ? "yes" : "no") : "") + '">' + esc(verdictTxt) + "</div>" +
+      (v.judged ? '<div class="note">' + esc(v.rule) + (v.baseline ? " (" + v.baseline + " → " + v.end + " bpm)" : "") + "</div>" : "") + "<hr>" +
+      "<div><b>What this would teach your model</b></div>" +
+      '<div class="learn">' + (r.would_learn.length ? r.would_learn.map(function (l) { return '<div class="' + (/: -/.test(l) ? "neg" : "") + '">' + esc(l) + "</div>"; }).join("") : '<div class="note">Nothing to learn from this one.</div>') + "</div><hr>" +
+      line("Paid placement", "none") +
+      '<div class="note" style="margin-top:var(--s3)">Preview only. Nothing was written to your taste model. If you tell Claude how the evening went, it logs your heart\'s verdict instead of a guess.</div>' +
+      '<div class="btns"><button class="btn" type="button" onclick="window.print()">Print</button><button class="btn dark" type="button" data-close>Done</button></div>';
+    $("receipt").innerHTML = html;
+    openSheet($("receiptSheet"));
+    lineChart($("rcChart"), s.samples.map(function (x) { return { t: x.t, bpm: x.bpm }; }), { color: C.text, width: 2, resting: true, pad: 6 });
+  }
+  function line(k, v) { return '<div class="row"><span>' + esc(k) + "</span><span>" + esc(v) + "</span></div>"; }
+
+  /* =================================================================
+     HEART RATE  (Web Bluetooth: Heart Rate service 0x180D, Battery 0x180F)
+     ================================================================= */
+  var samples = []; // {t, bpm, real}
+  var rrs = [];     // {t, ms}
+  var simTimer = null, device = null, connected = false, wantConnected = false, reconnecting = false;
+  var lastBeatAt = 0, contact = null, battery = null, server = null;
+
+  function setSource() {
+    var tag = $("hrTag"), pill = $("watchPill"), txt = $("watchPillText");
+    pill.className = "pill";
+    $("heroSim").hidden = !simTimer;
+    $("heroEyebrow").textContent = simTimer ? "Simulated heart" : "Live heart";
+    if (simTimer) {
+      tag.textContent = "simulated"; tag.className = "tag sim"; pill.classList.add("sim"); txt.textContent = "Simulated heart";
+      $("foot").textContent = "Backup mode: this heart rate is simulated, not read from a watch. The taste model's history is simulated too.";
+    } else if (connected) {
+      tag.textContent = "live"; tag.className = "tag real"; pill.classList.add("live"); txt.textContent = (device && device.name) || "Watch live";
+      $("foot").textContent = "Concept prototype. The taste model's history is simulated; this heart rate is real, live from your watch.";
+    } else if (reconnecting) {
+      tag.textContent = "signal lost"; tag.className = "tag sim"; pill.classList.add("sim"); txt.textContent = "Watch lost · reconnecting";
+      $("foot").textContent = "The watch dropped. The number on screen is the last read, not live.";
+    } else {
+      tag.textContent = "not connected"; tag.className = "tag"; txt.textContent = "No watch";
+      $("foot").textContent = "Concept prototype. The taste model's history is simulated. Connect a watch for a real heart rate.";
+    }
+  }
+  // Same ramp as the model (lib/model.js stressWeight), so what you see is what it uses.
+  function stressOf(bpm) {
+    var d = bpm - resting;
+    var w = Math.max(0, Math.min(1, (d - ALGO.stress_start) / (ALGO.stress_full - ALGO.stress_start)));
+    var name = d < ALGO.stress_start ? "At rest" : w < 0.5 ? "Slightly up" : w < 1 ? "Running hot" : "Running hot · full";
+    return { d: d, w: w, name: name, color: w >= 0.5 ? C.hot : C.calm };
+  }
+  function median(a) { var b = a.slice().sort(function (x, y) { return x - y; }); var m = b.length >> 1; return b.length % 2 ? b[m] : Math.round((b[m - 1] + b[m]) / 2); }
+  // A steady read: the median of the last 30 s from the source on screen (one spike can't flip it).
+  function steadyRead(real) {
+    var r = samples.filter(function (s) { return Date.now() - s.t <= 30000 && s.real === real; }).map(function (s) { return s.bpm; });
+    return r.length ? { bpm: median(r), n: r.length } : null;
+  }
+  function onBeat(bpm, real, extra) {
+    var t = Date.now();
+    lastBeatAt = t;
+    samples.push({ t: t, bpm: bpm, real: !!real });
+    while (samples.length && t - samples[0].t > 30 * 60000) samples.shift();
+    if (extra && extra.rr) extra.rr.forEach(function (ms) { rrs.push({ t: t, ms: ms }); });
+    while (rrs.length && t - rrs[0].t > 120000) rrs.shift();
+    if (extra && extra.contact !== undefined) contact = extra.contact;
+    if (session && session.playing) session.samples.push({ t: t, bpm: bpm, real: !!real });
+    $("feedBtn").disabled = false;
+    $("restBtn").disabled = !!measuring || !connected;
+    if (measuring && real) measuring.bpms.push(bpm);
+    vitals();
+  }
+  function vitals() {
+    if (!samples.length) return;
+    var last = samples[samples.length - 1].bpm, z = stressOf(last), d = z.d;
+    var sign = d >= 0 ? "+" : "";
+    $("bpm").textContent = last; $("bpm").classList.toggle("hot", z.w >= 0.5);
+    $("heroBpm").textContent = last; $("heroBpm").classList.remove("empty");
+    $("vsub").textContent = z.name + " · " + sign + d + " vs your resting " + resting;
+    $("heroState").innerHTML = "<b>" + z.name + "</b> · " + Math.abs(d) + " bpm " + (d >= 0 ? "above" : "below") + " your resting " + resting + " · stress weight " + Math.round(z.w * 100) + "%";
+    $("vDelta").textContent = sign + d;
+    $("vDelta").style.color = z.w >= 0.5 ? C.hot : "";
+    $("vZone").innerHTML = Math.round(z.w * 100) + '<small>%</small> <span class="muted" style="font-size:14px;font-weight:500">' + z.name + "</span>";
+    $("stressFill").style.width = Math.round(z.w * 100) + "%";
+    $("stressUse").textContent = connected && !simTimer && $("shareLive").checked ? "· shared, picks use it" : "· used only when you re-rank";
+    $("stressFill").style.background = z.color;
+    var bs = samples.map(function (s) { return s.bpm; });
+    $("vMin").textContent = Math.min.apply(null, bs);
+    $("vMax").textContent = Math.max.apply(null, bs);
+    $("heroStress").innerHTML = Math.round(z.w * 100) + '<small>%</small> <span class="muted" style="font-size:15px;font-weight:500">' + z.name + "</span>";
+    $("heroStressFill").style.width = Math.round(z.w * 100) + "%";
+    $("heroStressFill").style.background = z.color;
+    $("heroDelta").textContent = sign + d;
+    $("heroDelta").style.color = z.w >= 0.5 ? C.hot : "";
+    $("heroRange").textContent = Math.min.apply(null, bs) + "–" + Math.max.apply(null, bs);
+    var recent = rrs.slice(-40);
+    if (recent.length >= 3) {
+      var sq = 0; for (var i = 1; i < recent.length; i++) sq += Math.pow(recent[i].ms - recent[i - 1].ms, 2);
+      setTile("tHrv", "vHrv", Math.round(Math.sqrt(sq / (recent.length - 1))) + "<small>ms</small>");
+      setTile("tRR", "vRR", Math.round(recent[recent.length - 1].ms) + "<small>ms</small>");
+    }
+    if (contact !== null) setTile("tContact", "vContact", contact ? "Good" : "Lost");
+    if (battery !== null) setTile("tBatt", "vBatt", battery + "<small>%</small>");
+  }
+  // Tiles with no data stay hidden: nothing on screen is a placeholder.
+  function setTile(tile, id, html) { $(tile).hidden = false; $(id).innerHTML = html; }
+  function signalTick() {
+    if (!lastBeatAt) return;
+    var age = (Date.now() - lastBeatAt) / 1000;
+    var stale = age > 5;
+    document.body.classList.toggle("stale", stale);
+    $("tSignal").hidden = false;
+    $("vSignal").textContent = simTimer ? "Simulated" : age < 3 ? "Strong" : age < 10 ? "Weak" : "Lost";
+    if (stale && samples.length) {
+      var lastBpm = samples[samples.length - 1].bpm;
+      $("heroState").innerHTML = "<b>Signal lost</b> · last read " + lastBpm + " bpm, " + Math.round(age) + " s ago";
+      $("vsub").textContent = "Signal lost · last read " + Math.round(age) + " s ago";
+    }
+  }
+
+  /* ---------- charts (drawn at the screen's real pixel size, so they stay sharp) ---------- */
+  function fit(c) {
+    var dpr = window.devicePixelRatio || 1, w = Math.round(c.clientWidth * dpr), h = Math.round(c.clientHeight * dpr);
+    if (!w || !h) return 0;
+    if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
+    return dpr;
+  }
+  function lineChart(c, pts, o) {
+    if (!c) return;
+    var dpr = fit(c);
+    if (!dpr) return;
+    var g = c.getContext("2d"), W = c.width, H = c.height, pad = (o.pad || 0) * dpr;
+    g.clearRect(0, 0, W, H);
+    var span = o.span, now = Date.now();
+    if (span) pts = pts.filter(function (s) { return now - s.t <= span; });
+    var t0 = span ? now - span : (pts[0] && pts[0].t), t1 = span ? now : (pts.length && pts[pts.length - 1].t);
+    var vals = pts.map(function (p) { return p.bpm; }).concat(o.resting ? [resting] : []);
+    var lo = Math.min.apply(null, vals.length ? vals : [50]) - 6, hi = Math.max.apply(null, vals.length ? vals : [100]) + 6;
+    if (o.fixed) { lo = Math.min(lo, o.fixed[0]); hi = Math.max(hi, o.fixed[1]); }
+    var y = function (b) { return pad + (H - 2 * pad) * (1 - (b - lo) / (hi - lo)); };
+    var x = function (t) { return t1 === t0 ? W : ((t - t0) / (t1 - t0)) * W; };
+    if (o.resting) {
+      g.strokeStyle = C.calm; g.globalAlpha = .55; g.setLineDash([6 * dpr, 6 * dpr]); g.lineWidth = 1.5 * dpr;
+      g.beginPath(); g.moveTo(0, y(resting)); g.lineTo(W, y(resting)); g.stroke(); g.setLineDash([]); g.globalAlpha = 1;
+      if (o.label) { g.fillStyle = C.calm; g.font = "500 " + 13 * dpr + "px Inter, sans-serif"; g.fillText("resting " + resting, 4 * dpr, y(resting) - 8 * dpr); }
+    }
+    if (pts.length < 2) return;
+    if (o.fill) {
+      var grad = g.createLinearGradient(0, 0, 0, H); grad.addColorStop(0, o.fill); grad.addColorStop(1, "rgba(0,0,0,0)");
+      g.fillStyle = grad; g.beginPath(); g.moveTo(x(pts[0].t), H);
+      pts.forEach(function (s) { g.lineTo(x(s.t), y(s.bpm)); }); g.lineTo(x(pts[pts.length - 1].t), H); g.closePath(); g.fill();
+    }
+    g.strokeStyle = o.color; g.lineWidth = o.width * dpr; g.lineJoin = "round"; g.lineCap = "round"; g.beginPath();
+    pts.forEach(function (s, i) { i ? g.lineTo(x(s.t), y(s.bpm)) : g.moveTo(x(s.t), y(s.bpm)); });
+    g.stroke();
+    var lp = pts[pts.length - 1];
+    g.fillStyle = o.color; g.beginPath(); g.arc(x(lp.t), y(lp.bpm), o.width * dpr * 1.8, 0, 7); g.fill();
+  }
+  function drawAll() {
+    $("heroFeed").disabled = $("feedBtn").disabled;
+    $("heroConnect").hidden = connected || !!simTimer || reconnecting;
+    var stale = document.body.classList.contains("stale");
+    var heartColor = stale ? C.faint : simTimer ? C.hot : C.red;
+    if (!$("heroHeart").hidden) lineChart($("heroChart"), samples, { span: 120000, color: heartColor, width: 3, resting: true, label: true, fill: "rgba(229,9,20,.18)", pad: 10, fixed: [resting - 4, resting + 20] });
+    lineChart($("spark"), samples, { span: 60000, color: stale ? C.faint : C.text, width: 2, resting: true, pad: 6 });
+    if (session) lineChart($("reactChart"), session.samples, { color: C.red, width: 2, resting: true, pad: 4 });
+    else { var rc = $("reactChart"); if (rc.width) rc.getContext("2d").clearRect(0, 0, rc.width, rc.height); }
+    updateRec(); signalTick();
+  }
+
+  /* ---------- Bluetooth ---------- */
+  function parseHR(v) {
+    var flags = v.getUint8(0), i = 1, out = {};
+    var wide = flags & 0x01;
+    out.bpm = wide ? v.getUint16(i, true) : v.getUint8(i); i += wide ? 2 : 1;
+    if (flags & 0x04) out.contact = !!(flags & 0x02);
+    if (flags & 0x08) i += 2; // energy expended (not shown)
+    if (flags & 0x10) { out.rr = []; for (; i + 1 < v.byteLength; i += 2) out.rr.push((v.getUint16(i, true) / 1024) * 1000); }
+    return out;
+  }
+  function onHR(e) { var r = parseHR(e.target.value); onBeat(r.bpm, true, r); }
+  // Connect to the watch's GATT server and start the heart-rate notifications (used for the first connect and for retries).
+  function subscribe(d) {
+    return d.gatt.connect()
+      .then(function (srv) { server = srv; return srv.getPrimaryService("heart_rate"); })
+      .then(function (svc) { return svc.getCharacteristic("heart_rate_measurement"); })
+      .then(function (ch) { ch.addEventListener("characteristicvaluechanged", onHR); return ch.startNotifications(); })
+      .then(function () { connected = true; reconnecting = false; setSource(); return server; });
+  }
+  // The watch dropped: say so, grey the number out (signalTick) and try to get it back without opening Chrome's chooser again.
+  function onGattDown() {
+    connected = false;
+    if (!wantConnected) { setSource(); return; }
+    reconnecting = true; setSource();
+    say("Watch lost. Reconnecting…", true);
+    retryConnect(0);
+  }
+  function retryConnect(n) {
+    if (!reconnecting) return;
+    if (n >= 10) { reconnecting = false; setSource(); say("Watch lost. Press C to pick it again, or S for the simulated heart.", true); return; }
+    setTimeout(function () {
+      if (!reconnecting) return;
+      subscribe(device).then(function (srv) { say("Watch is back: live again."); readBattery(srv); }).catch(function () { retryConnect(n + 1); });
+    }, 1500);
+  }
+  // showAll = true (Shift+C): list every nearby Bluetooth device, to check whether the watch is visible at all.
+  function connect(showAll) {
+    if (!navigator.bluetooth) { say("This browser has no Web Bluetooth. Use Chrome on the Mac, or press S for the simulated heart.", true); return; }
+    stopSim();
+    reconnecting = false;
+    say("Pick your watch in the Chrome pop-up…");
+    var opts = showAll === true
+      ? { acceptAllDevices: true, optionalServices: ["heart_rate", "battery_service"] }
+      : { filters: [{ services: ["heart_rate"] }], optionalServices: ["battery_service"] };
+    navigator.bluetooth.requestDevice(opts)
+      .then(function (d) {
+        if (device && device !== d) device.removeEventListener("gattserverdisconnected", onGattDown);
+        device = d;
+        d.addEventListener("gattserverdisconnected", onGattDown);
+        wantConnected = true;
+        return subscribe(d);
+      })
+      .then(function (srv) {
+        $("restBtn").disabled = false;
+        say("Connected: " + (device.name || "heart-rate sensor") + " · live");
+        readBattery(srv);
+      })
+      .catch(function (e) { connected = false; wantConnected = false; setSource(); say("Couldn't connect: " + e.message + " (press S for the simulated heart)", true); });
+  }
+  function readBattery(srv) {
+    // Many watches don't expose battery while broadcasting: then the tile simply stays hidden.
+    srv.getPrimaryService("battery_service")
+      .then(function (s) { return s.getCharacteristic("battery_level"); })
+      .then(function (ch) {
+        ch.addEventListener("characteristicvaluechanged", function (e) { battery = e.target.value.getUint8(0); vitals(); });
+        return ch.readValue().then(function (v) { battery = v.getUint8(0); vitals(); return ch.startNotifications().catch(function () {}); });
+      })
+      .catch(function () {});
+  }
+  function startSim() {
+    stopSim();
+    // The simulated heart replaces a real one on screen: let go of the watch so the two never mix.
+    if (device && device.gatt && device.gatt.connected) { wantConnected = false; reconnecting = false; try { device.gatt.disconnect(); } catch (e) {} }
+    contact = null;
+    say("Simulated heart: not a real read.");
+    // Starts running hot (resting + 20), so the re-rank has something to react to. Always labelled simulated.
+    var base = resting + 20;
+    simTimer = setInterval(function () {
+      // While a clip plays, the simulated heart slowly settles, so the receipt has something to show.
+      base += (Math.random() - 0.5) * 1.6 + (session && session.playing ? -0.12 : 0.02);
+      base = Math.max(resting + 2, Math.min(resting + 30, base));
+      // Only a bpm number: no invented HRV, beat interval, skin contact or battery.
+      onBeat(Math.round(base), false, {});
+    }, 1000);
+    setSource();
+  }
+  function stopSim() { if (simTimer) { clearInterval(simTimer); simTimer = null; } setSource(); }
+
+  /* =================================================================
+     MODEL ACTIONS
+     ================================================================= */
+  /* ---------- consent: the member says yes to each read ---------- */
+  var consentOpen = false, consentRead = null;
+  function openConsent(read, wantReal) {
+    consentRead = { read: read, real: wantReal };
+    consentOpen = true;
+    $("consentRead").textContent = read.bpm + " bpm · " + (wantReal ? "live from your watch" : "SIMULATED, not a real heart") + " · median of the last 30 s";
+    $("consent").hidden = false;
+    say("Share this read? F = share once · Esc = skip");
+  }
+  function closeConsent() { consentOpen = false; consentRead = null; $("consent").hidden = true; }
+  function consentYes() {
+    var c = consentRead; closeConsent();
+    if (!c) return;
+    if (c.real && !connected) { say("The watch is gone. Nothing was shared.", true); return; }
+    doFeed(c.read, c.real);
+  }
+  function consentNo() {
+    closeConsent();
+    api("POST", "/api/skip").then(function () { say("Skipped: nothing was shared."); poll(); }).catch(function (e) { say("Error: " + e.message, true); });
+  }
+
+  function feed() {
+    if (consentOpen) { consentYes(); return; } // pressing F again = Share once
+    // Only samples from the source on screen now, so a simulated read can never be sent as "real".
+    var wantReal = !simTimer;
+    if (wantReal && !connected) { say("No live watch. Press C to connect, or S for the simulated heart.", true); return; }
+    var read = steadyRead(wantReal);
+    if (!read) { say("No heart-rate data yet.", true); return; }
+    if ($("askFirst").checked) { openConsent(read, wantReal); return; }
+    doFeed(read, wantReal);
+  }
+  function doFeed(read, wantReal) {
+    var before = prevPickTitle;
+    $("feedBtn").disabled = true;
+    api("POST", "/api/live-read", { bpm: read.bpm, samples: samples.slice(-60), source: wantReal ? ((device && device.name) || "watch") + " (live, Bluetooth)" : "simulated heart (backup)", real: wantReal })
+      .then(function () { return api("POST", "/api/recommend", lastAsk()); })
+      .then(function (r) {
+        var d = read.bpm - resting, w = r.live_read ? Math.round(r.live_read.stress_weight * 100) : 0;
+        var kept = before === r.pick.title;
+        var text = "Fed " + read.bpm + " bpm (" + (d >= 0 ? "+" : "") + d + " vs resting, " + (wantReal ? "live" : "simulated") + ") · stress weight " + w + "% → " +
+          (kept ? "kept " + r.pick.title : (before ? before + " → " : "") + r.pick.title);
+        feedBanner = { audit: r.audit_id, text: text, kept: kept };
+        setBanner(text, kept);
+        say(kept ? "Re-ranked: the pick stays " + r.pick.title : "Re-ranked: " + (before ? before + " → " : "") + r.pick.title);
+        poll();
+      })
+      .catch(function (e) { say("Error: " + e.message, true); })
+      .then(function () { $("feedBtn").disabled = false; });
+  }
+
+  /* ---------- ownership: forget tonight's heart (two clicks, so it can't happen by accident) ---------- */
+  var forgetTimer = null;
+  function forgetReset() { clearTimeout(forgetTimer); var b = $("heroForget"); b.classList.remove("danger"); b.textContent = "Forget tonight's heart"; }
+  function clearHeartUI() {
+    samples.length = 0; rrs.length = 0; lastBeatAt = 0; contact = null; feedBanner = null;
+    document.body.classList.remove("stale");
+    setBanner("");
+    [].forEach.call($("why").querySelectorAll("li"), function (li) { if (/^(Live|Simulated) read/.test(li.textContent)) li.remove(); });
+    $("bpm").textContent = "—"; $("bpm").classList.remove("hot");
+    $("heroBpm").textContent = "—"; $("heroBpm").classList.add("empty");
+    $("vsub").textContent = "Heart data deleted";
+    $("heroState").textContent = "Heart data deleted. A watch that is still connected starts a fresh trace with its next beat.";
+    ["vDelta", "vZone", "vMin", "vMax", "heroStress", "heroDelta", "heroRange"].forEach(function (id) { $(id).textContent = "—"; });
+    $("stressFill").style.width = "0"; $("heroStressFill").style.width = "0";
+    ["tHrv", "tRR", "tContact", "tBatt", "tSignal"].forEach(function (id) { $(id).hidden = true; });
+    $("feedBtn").disabled = true;
+    $("shareLive").checked = false;
+    try { localStorage.setItem("shareLive", "0"); } catch (e) {}
+  }
+  function forgetClick() {
+    var b = $("heroForget");
+    b.blur();
+    if (!b.classList.contains("danger")) {
+      b.classList.add("danger"); b.textContent = "Really delete? Click again";
+      forgetTimer = setTimeout(forgetReset, 4000);
+      return;
+    }
+    forgetReset();
+    if (session) endSession(true);
+    closeConsent();
+    api("POST", "/api/delete-heart")
+      .then(function (r) { clearHeartUI(); say("Deleted: " + r.removed + " heart item" + (r.removed === 1 ? "" : "s") + " gone from your model and this page. Sharing is off."); poll(); })
+      .catch(function (e) { say("Error: " + e.message, true); });
+  }
+
+  // Stream a steady read every 5 s while a REAL watch is connected and sharing is on.
+  // The model treats it as fresh for 2 minutes, so Claude Desktop's picks use your heart too.
+  function stream() {
+    if (!connected || simTimer || !$("shareLive").checked) return;
+    var read = steadyRead(true);
+    if (!read || read.n < 5) return;
+    api("POST", "/api/live", { bpm: read.bpm, n: read.n, real: true, source: ((device && device.name) || "watch") + " (live, Bluetooth)" }).catch(function () {});
+  }
+  setInterval(stream, 5000);
+  $("shareLive").onchange = function () {
+    try { localStorage.setItem("shareLive", this.checked ? "1" : "0"); } catch (e) {}
+    say(this.checked ? "Sharing your live heart with your model." : "Not sharing: picks ignore your heart unless you press Re-rank.");
+    this.blur();
+  };
+  // Consent is off until you turn it on yourself (and it remembers your choice).
+  try { if (localStorage.getItem("shareLive") === "1") $("shareLive").checked = true; } catch (e) {}
+
+  // Resting heart rate: sit still for 60 s, watch on. The median becomes your resting heart rate.
+  var measuring = null;
+  function measureResting() {
+    if (measuring) return;
+    if (!connected || simTimer) { say("Measuring resting needs the real watch (a simulated heart doesn't count).", true); return; }
+    measuring = { bpms: [], t0: Date.now() };
+    $("restBtn").disabled = true;
+    var tick = setInterval(function () {
+      var left = 60 - Math.round((Date.now() - measuring.t0) / 1000);
+      if (left > 0) { $("status").textContent = "Sit still and breathe normally… " + left + " s (" + measuring.bpms.length + " beats read)"; return; }
+      clearInterval(tick);
+      var m = measuring; measuring = null; $("restBtn").disabled = !connected;
+      if (m.bpms.length < 30) { say("Too few readings (" + m.bpms.length + "). Check the watch and try again.", true); return; }
+      var bpm = median(m.bpms);
+      api("POST", "/api/resting", { bpm: bpm, seconds: 60, samples: m.bpms.length })
+        .then(function (r) { say("Resting heart rate saved: " + r.resting_hr + " bpm (was " + r.was + ")."); poll(); })
+        .catch(function (e) { say("Error: " + e.message, true); });
+    }, 1000);
+  }
+  function lastAsk() {
+    return lastAsked ? { feeling: lastAsked.feeling, done_by: lastAsked.done_by, note: lastAsked.note || "" } : { feeling: $("feeling").value, done_by: $("doneBy").value, note: "" };
+  }
+  function ask() {
+    if (session) endSession(true);
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); // so the shortcuts keep working
+    feedBanner = null;
+    api("POST", "/api/recommend", { feeling: $("feeling").value, done_by: $("doneBy").value.trim(), note: "asked on this page" })
+      .then(poll).catch(function (e) { say("Error: " + e.message, true); });
+  }
+  // Easter egg (key B): the same ask, with a bike in the note. The model goes off-script on purpose.
+  function askBike() {
+    if (session) endSession(true);
+    if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+    feedBanner = null;
+    api("POST", "/api/recommend", { feeling: "hype", done_by: $("doneBy").value.trim(), note: "mountain bike race, get me fired up" })
+      .then(poll).catch(function (e) { say("Error: " + e.message, true); });
+  }
+  function reset() {
+    if (!confirm("Reset the taste model to its simulated October month? (Rehearsal reset)")) return;
+    if (session) endSession(true);
+    feedBanner = null;
+    api("POST", "/api/reset").then(function () { prevPickTitle = null; poll(); say("Model reset."); });
+  }
+
+  /* =================================================================
+     ALGORITHM DIAGRAM  (Mermaid, generated from the live model state)
+     ================================================================= */
+  var algoKey = null, algoN = 0;
+  function q(s) { return '"' + String(s).replace(/"/g, "'") + '"'; }
+  function algoSource(dir) {
+    var p = state && state.last_pick;
+    var live = p && p.live_read;
+    var w = live ? live.stress_weight : 0;
+    var stressed = w >= 0.5;
+    var feeling = p ? p.asked.feeling : "calm", by = p ? p.asked.done_by : "23:00";
+    var avoids = (state && state.summary.avoids[feeling]) || [];
+    var rs = (state && state.resting) || { how: "default" };
+    var restBpm = state ? state.resting_hr : 62;
+    var chain = (state && state.audit_chain) || {};
+    var L = [
+      "flowchart " + dir,
+      "  A[" + q("You ask<br/><b>" + feeling + "</b>, done by " + by) + "]",
+      "  M[(" + q("Your taste model<br/>" + (state ? state.summary.evenings_learned_from : "–") + " evenings") + ")]",
+      "  RS[" + q("Resting " + restBpm + " bpm<br/>" + (rs.how === "measured" ? "measured with your watch" : "default, not measured")) + "]",
+      "  H[" + q((live && !live.real ? "Simulated heart" : "Live heart") + " · median of 30 s<br/>" + (live ? live.bpm + " bpm (" + (live.delta >= 0 ? "+" : "") + live.delta + ")" : "not shared")) + "]",
+      "  SW{{" + q("Stress weight<br/><b>" + Math.round(w * 100) + "%</b><br/>0% at +" + ALGO.stress_start + " · 100% at +" + ALGO.stress_full) + "}}",
+      "  F1[" + q("Fits before " + by + "?<br/>runtime + 10 min buffer") + "]",
+      "  F2[" + q("Leave out tags it's sure fail<br/>hit rate + 1 sd < " + Math.round(ALGO.avoid_upper * 100) + "%" + (stressed ? "<br/>stressed: < " + Math.round(ALGO.avoid_upper_stressed * 100) + "%" : "") + (avoids.length ? "<br/><i>" + avoids.length + " tag(s) now</i>" : "")) + "]",
+      "  S1[" + q("Tag evidence<br/>hit rate × confidence<br/>stressed evenings ×2 × weight") + "]",
+      "  S2[" + q("Title's own record<br/>counts like " + ALGO.title_k + " evenings") + "]",
+      "  S[" + q("Score = blend") + "]",
+      "  P([" + q(p ? "Pick: <b>" + p.pick.title + "</b><br/>" + p.pick.state_match + "% match" : "Pick") + "])",
+      "  ALT[" + q(p ? "2 alternatives" : "Alternatives") + "]",
+      "  NEW[" + q(p && p.explore ? "New for you:<br/><b>" + p.explore.title + "</b>" : "New for you<br/>" + (stressed ? "skipped when stressed" : "none fits")) + "]",
+      "  X[" + q(p ? p.left_out_count + " titles left out" : "Left out") + "]",
+      "  AU[(" + q("Audit chain<br/>" + (chain.ok ? "verified ✓ " + chain.n : "broken")) + ")]",
+      "  W[" + q("You watch<br/>heart trace recorded") + "]",
+      "  R[" + q("Receipt<br/>did your body get there?") + "]",
+      "  AD[/" + q("Paid placement") + "/]",
+      "  AD -. no input exists .-x S",
+      "  A --> M --> F1 --> F2",
+      "  RS --> SW",
+      "  H --> SW",
+      "  F2 --> S1",
+      "  F2 --> S2",
+      "  SW --> S1",
+      "  SW --> S2",
+      "  S1 --> S",
+      "  S2 --> S",
+      "  F1 -. too long .-> X",
+      "  F2 -. avoided .-> X",
+      "  S --> P",
+      "  S --> ALT",
+      "  S --> NEW",
+      "  P --> AU",
+      "  P --> W --> R",
+      "  R -. Claude logs your heart's verdict .-> M",
+      "  classDef on fill:#e50914,stroke:#e50914,color:#ffffff",
+      "  classDef off fill:#000000,stroke:#404040,color:#8c8c8c",
+      "  classDef base fill:#141414,stroke:#404040,color:#ffffff",
+      "  classDef pick fill:#262626,stroke:#ffffff,color:#ffffff",
+      "  classDef hot fill:#2b0a0c,stroke:#ff4d55,color:#ff4d55",
+      "  classDef warn fill:#000000,stroke:#ff4d55,color:#ff4d55,stroke-dasharray:4 3",
+      "  classDef ad fill:#000000,stroke:#e50914,color:#ff4d55,stroke-dasharray:4 3",
+      "  class W,R,X,ALT base",
+      "  class AD ad",
+    ];
+    L.push(rs.how === "measured" ? "  class RS on" : "  class RS warn");
+    if (p) {
+      L.push("  class A,M,F1,F2,S1,S2,S,AU on", "  class P pick");
+      L.push(live ? "  class H on" : "  class H off");
+      L.push(stressed ? "  class SW hot" : live ? "  class SW on" : "  class SW off");
+      L.push(p.explore ? "  class NEW on" : "  class NEW off");
+    } else L.push("  class A,M,H,SW,F1,F2,S1,S2,S,P,NEW,AU base");
+    return L.join("\n");
+  }
+  function drawAlgo(force) {
+    if (!window.mermaid) { $("algoCanvas").innerHTML = $("algoBig").innerHTML = '<span class="small muted">Diagram library did not load.</span>'; return; }
+    var open = !$("algo").hidden, big = !$("algoSheet").hidden;
+    if (!open && !big) return;
+    // Both top-down: measured, left-to-right is 2438 px wide and shrinks to ~9 px text in the sheet; top-down keeps ~10.5 px.
+    var smallSrc = algoSource("TD"), bigSrc = algoSource("TD");
+    var key = (open ? smallSrc : "") + "|" + (big ? bigSrc : "");
+    if (!force && key === algoKey) return;
+    algoKey = key;
+    if (open) mermaid.render("algo" + (++algoN), smallSrc).then(function (r) { $("algoCanvas").innerHTML = r.svg; })
+      .catch(function (e) { $("algoCanvas").textContent = "Diagram error: " + e.message; });
+    if (big) mermaid.render("algo" + (++algoN), bigSrc).then(function (r) { $("algoBig").innerHTML = r.svg; })
+      .catch(function (e) { $("algoBig").textContent = "Diagram error: " + e.message; });
+  }
+  if (window.mermaid) mermaid.initialize({
+    startOnLoad: false, securityLevel: "loose", theme: "base",
+    fontFamily: "Inter, -apple-system, Helvetica, Arial, sans-serif",
+    flowchart: { curve: "basis", nodeSpacing: 22, rankSpacing: 40, padding: 12, htmlLabels: true },
+    themeVariables: { fontSize: "16px", primaryColor: "#141414", primaryBorderColor: "#404040", primaryTextColor: "#ffffff", lineColor: "#8c8c8c", edgeLabelBackground: "#141414", tertiaryColor: "#141414" },
+  });
+  $("algoToggle").onclick = function () {
+    var open = $("algo").hidden;
+    $("algo").hidden = !open; this.setAttribute("aria-expanded", String(open));
+    try { localStorage.setItem("algoOpen", open ? "1" : "0"); } catch (e) {}
+    if (open) drawAlgo(true);
+  };
+  $("algoExpand").onclick = $("algoCanvas").onclick = function () { openSheet($("algoSheet")); drawAlgo(true); };
+  try { if (localStorage.getItem("algoOpen") !== "0") { $("algo").hidden = false; $("algoToggle").setAttribute("aria-expanded", "true"); } } catch (e) {}
+
+  /* =================================================================
+     CONTROLS
+     ================================================================= */
+  var sheetOpener = null;
+  function openSheet(el) {
+    sheetOpener = document.activeElement;
+    el.hidden = false;
+    var b = el.querySelector("button"); if (b) b.focus();
+  }
+  function closeSheets() {
+    var was = !$("algoSheet").hidden || !$("receiptSheet").hidden;
+    $("algoSheet").hidden = true; $("receiptSheet").hidden = true;
+    if (was && sheetOpener && sheetOpener.focus && document.contains(sheetOpener)) sheetOpener.focus();
+    else if (was && document.activeElement && document.activeElement.blur) document.activeElement.blur();
+  }
+  document.addEventListener("click", function (e) {
+    if (e.target.hasAttribute && (e.target.hasAttribute("data-close") || e.target.classList.contains("scrim"))) closeSheets();
+  });
+  function setStage(on) {
+    document.body.classList.toggle("stage", on);
+    $("stageBtn").setAttribute("aria-pressed", String(on));
+    $("stageBtn").blur();
+    window.scrollTo(0, 0);
+  }
+  $("stageBtn").onclick = function () { setStage(!document.body.classList.contains("stage")); };
+  $("askForm").onsubmit = function (e) { e.preventDefault(); ask(); };
+  $("feeling").onchange = function () { this.blur(); };
+  $("connectBtn").onclick = function (e) { connect(e.shiftKey); };
+  $("feedBtn").onclick = feed;
+  $("heroFeed").onclick = function () { this.blur(); feed(); };
+  $("heroConnect").onclick = function (e) { this.blur(); connect(e.shiftKey); };
+  $("heroForget").onclick = forgetClick;
+  $("consentYes").onclick = function () { this.blur(); consentYes(); };
+  $("consentNo").onclick = function () { this.blur(); consentNo(); };
+  $("askFirst").onchange = function () {
+    try { localStorage.setItem("askFirst", this.checked ? "1" : "0"); } catch (e) {}
+    this.blur();
+    say(this.checked ? "Re-rank will ask before sharing a read." : "Re-rank shares the read straight away.");
+  };
+  try { if (localStorage.getItem("askFirst") === "0") $("askFirst").checked = false; } catch (e) {}
+  $("endBtn").onclick = function () { endSession(); };
+  $("simBtn").onclick = function () { simTimer ? (stopSim(), say("Simulation stopped.")) : startSim(); };
+  $("restBtn").onclick = measureResting;
+  $("clockBtn").onclick = function () {
+    var demo = state && state.settings && state.settings.demo_clock;
+    api("POST", "/api/settings", { demo_clock: demo ? null : "21:40" }).then(poll).catch(function (e) { say("Error: " + e.message, true); });
+  };
+  $("clearBtn").onclick = function () { if (session) endSession(true); feedBanner = null; api("POST", "/api/clear-pick").then(poll).catch(function () { showHeart(); }); };
+  $("resetBtn").onclick = reset;
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { if (consentOpen) consentNo(); return closeSheets(); }
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    // Only skip the shortcuts while you are typing or choosing in a field (a focused button or switch must not block them).
+    var t = e.target, tn = t.tagName;
+    if (tn === "TEXTAREA" || tn === "SELECT" || (tn === "INPUT" && t.type !== "checkbox")) return;
+    var k = e.key.toLowerCase();
+    if (k === "c") connect(e.shiftKey); else if (k === "f") feed(); else if (k === "s") $("simBtn").onclick();
+    else if (k === "a") ask(); else if (k === "b") askBike(); else if (k === "r") reset(); else if (k === "p") setStage(!document.body.classList.contains("stage"));
+  });
+
+  api("GET", "/api/catalog").then(function (c) { catalog = c.titles; poll(); }).catch(function () { poll(); });
+  setInterval(poll, 1000);
+  setInterval(drawAll, 250);
+  setInterval(drawAlgo, 1500);
+  setSource();
+  // Rehearsal hook (console): __n46.watch() starts a reaction read without YouTube, __n46.end() prints the receipt.
+  window.__n46 = { watch: function () { if (!current) return; startSession(); }, end: function () { endSession(); } };
+})();
+</script>
+</body>
+</html>

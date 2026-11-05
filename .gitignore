@@ -1,0 +1,22 @@
+# node / npm
+node_modules/
+
+# large model binaries (fetch with: bash prototypes/reaction-lab/scripts/fetch-model.sh)
+*.task
+
+# runtime demo state (never ship real body data)
+prototypes/taste-model-mcp/data/stage.json
+data/stage.json
+
+# dev scratch
+.audit/
+
+# OS / editor junk
+.DS_Store
+*.log
+
+# video captures (the prototypes record nothing by default; keep any local captures out)
+*.mp4
+*.mov
+*.webm
+sessions/

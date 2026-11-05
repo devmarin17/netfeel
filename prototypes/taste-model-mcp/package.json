@@ -1,0 +1,20 @@
+{
+  "name": "netfeel-taste-model",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "commonjs",
+  "description": "NetFeel 2046: a member-owned taste model with an MCP server (stdio, zero dependencies) so any AI assistant can ask it for a feeling-based pick — with a hash-chained audit log and 'paid placement: none'.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devmarin17/netfeel.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "reset": "node scripts/seed.js",
+    "check": "node scripts/check.js"
+  }
+}

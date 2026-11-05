@@ -1,0 +1,1177 @@
+{
+  "_about": "Daan's taste model. Owned by Daan: readable, editable, exportable, deletable. Netflix 2046 concept prototype.",
+  "simulated": "Daan is a simulated member. His evenings are invented. Live heart-rate reads are real.",
+  "member": {
+    "name": "Daan",
+    "age": 28,
+    "city": "Amsterdam",
+    "owner": "Daan",
+    "resting_hr": 62,
+    "resting_source": {
+      "how": "default",
+      "note": "Not measured yet: measure yours with the watch on the stage page."
+    }
+  },
+  "ownership": {
+    "owner": "Daan",
+    "can": [
+      "read",
+      "correct",
+      "export",
+      "delete",
+      "donate"
+    ],
+    "paid_placement": "never — publishers cannot buy rank",
+    "callers": [
+      "Claude Desktop (local connector)",
+      "stage page (localhost)"
+    ]
+  },
+  "settings": {
+    "demo_clock": "21:40",
+    "buffer_min": 10,
+    "_demo_clock_note": "Picks are timed as if it's 21:40 (an evening). Set to null to use the real clock."
+  },
+  "effects": {
+    "cliffhanger": {
+      "hype": {
+        "hits": 10,
+        "n": 13
+      },
+      "dread": {
+        "hits": 6,
+        "n": 8
+      },
+      "tears": {
+        "hits": 0,
+        "n": 1
+      },
+      "calm": {
+        "hits": 0,
+        "n": 3
+      }
+    },
+    "fast-cuts": {
+      "hype": {
+        "hits": 12,
+        "n": 15
+      },
+      "tears": {
+        "hits": 0,
+        "n": 2
+      },
+      "calm": {
+        "hits": 1,
+        "n": 4
+      },
+      "calm@hot": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "tension-spike": {
+      "hype": {
+        "hits": 9,
+        "n": 11
+      },
+      "dread": {
+        "hits": 12,
+        "n": 15
+      },
+      "calm": {
+        "hits": 0,
+        "n": 4
+      }
+    },
+    "subtitles": {
+      "hype": {
+        "hits": 5,
+        "n": 6
+      },
+      "calm": {
+        "hits": 4,
+        "n": 8
+      },
+      "dread": {
+        "hits": 4,
+        "n": 4
+      },
+      "tears": {
+        "hits": 1,
+        "n": 3
+      },
+      "calm@hot": {
+        "hits": 0,
+        "n": 2
+      }
+    },
+    "nature": {
+      "calm": {
+        "hits": 16,
+        "n": 16
+      },
+      "calm@hot": {
+        "hits": 4,
+        "n": 4
+      },
+      "hype": {
+        "hits": 0,
+        "n": 1
+      },
+      "dread": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "ambient-sound": {
+      "calm": {
+        "hits": 13,
+        "n": 13
+      },
+      "calm@hot": {
+        "hits": 3,
+        "n": 3
+      },
+      "dread": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "slow-pace": {
+      "calm": {
+        "hits": 24,
+        "n": 26
+      },
+      "calm@hot": {
+        "hits": 8,
+        "n": 9
+      },
+      "tears": {
+        "hits": 3,
+        "n": 4
+      },
+      "dread": {
+        "hits": 3,
+        "n": 4
+      },
+      "hype": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "documentary": {
+      "calm": {
+        "hits": 19,
+        "n": 22
+      },
+      "hype": {
+        "hits": 3,
+        "n": 5
+      },
+      "calm@hot": {
+        "hits": 6,
+        "n": 9
+      },
+      "tears": {
+        "hits": 0,
+        "n": 2
+      },
+      "dread": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "warm-voice": {
+      "calm": {
+        "hits": 24,
+        "n": 29
+      },
+      "calm@hot": {
+        "hits": 8,
+        "n": 12
+      },
+      "tears": {
+        "hits": 9,
+        "n": 11
+      },
+      "dread": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "guided-breath": {
+      "calm": {
+        "hits": 7,
+        "n": 7
+      },
+      "calm@hot": {
+        "hits": 6,
+        "n": 6
+      }
+    },
+    "low-dialogue": {
+      "calm": {
+        "hits": 5,
+        "n": 5
+      },
+      "calm@hot": {
+        "hits": 4,
+        "n": 4
+      },
+      "tears": {
+        "hits": 1,
+        "n": 2
+      }
+    },
+    "loud-score": {
+      "hype": {
+        "hits": 7,
+        "n": 9
+      },
+      "calm": {
+        "hits": 0,
+        "n": 3
+      },
+      "calm@hot": {
+        "hits": 0,
+        "n": 2
+      },
+      "tears": {
+        "hits": 0,
+        "n": 1
+      },
+      "dread": {
+        "hits": 1,
+        "n": 1
+      }
+    },
+    "food": {
+      "calm": {
+        "hits": 7,
+        "n": 13
+      },
+      "calm@hot": {
+        "hits": 0,
+        "n": 6
+      },
+      "tears": {
+        "hits": 0,
+        "n": 1
+      }
+    },
+    "low-stakes": {
+      "calm": {
+        "hits": 7,
+        "n": 12
+      },
+      "tears": {
+        "hits": 7,
+        "n": 9
+      },
+      "calm@hot": {
+        "hits": 0,
+        "n": 4
+      }
+    },
+    "dark-palette": {
+      "dread": {
+        "hits": 10,
+        "n": 13
+      },
+      "calm": {
+        "hits": 3,
+        "n": 5
+      },
+      "hype": {
+        "hits": 0,
+        "n": 1
+      },
+      "calm@hot": {
+        "hits": 1,
+        "n": 1
+      }
+    },
+    "heavy-emotion": {
+      "tears": {
+        "hits": 8,
+        "n": 10
+      },
+      "dread": {
+        "hits": 4,
+        "n": 5
+      },
+      "calm": {
+        "hits": 3,
+        "n": 6
+      },
+      "calm@hot": {
+        "hits": 1,
+        "n": 3
+      }
+    },
+    "gentle-humor": {
+      "calm": {
+        "hits": 4,
+        "n": 8
+      },
+      "tears": {
+        "hits": 7,
+        "n": 9
+      },
+      "calm@hot": {
+        "hits": 0,
+        "n": 3
+      }
+    },
+    "jump-scares": {
+      "dread": {
+        "hits": 5,
+        "n": 7
+      }
+    }
+  },
+  "state_hit": {
+    "hype": {
+      "hits": 12,
+      "n": 16
+    },
+    "calm": {
+      "hits": 31,
+      "n": 43
+    },
+    "dread": {
+      "hits": 12,
+      "n": 16
+    },
+    "tears": {
+      "hits": 10,
+      "n": 15
+    }
+  },
+  "sessions": [
+    {
+      "date": "2026-08-01",
+      "title_id": "money-heist",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-02",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-03",
+      "title_id": "headspace-sleep",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-04",
+      "title_id": "drive-to-survive",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-05",
+      "title_id": "midnight-diner",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-06",
+      "title_id": "dark",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-07",
+      "title_id": "extraction",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-08",
+      "title_id": "marriage-story",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-09",
+      "title_id": "night-on-earth",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-10",
+      "title_id": "squid-game",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-11",
+      "title_id": "heartstopper",
+      "feeling": "calm",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-12",
+      "title_id": "black-mirror",
+      "feeling": "dread",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-13",
+      "title_id": "headspace-sleep",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-14",
+      "title_id": "my-octopus-teacher",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-15",
+      "title_id": "squid-game",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-16",
+      "title_id": "roma",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-17",
+      "title_id": "money-heist",
+      "feeling": "hype",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-18",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-19",
+      "title_id": "hill-house",
+      "feeling": "dread",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-20",
+      "title_id": "queer-eye",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-21",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-22",
+      "title_id": "money-heist",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-23",
+      "title_id": "my-octopus-teacher",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-24",
+      "title_id": "stranger-things",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-25",
+      "title_id": "headspace-meditation",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-26",
+      "title_id": "midnight-mass",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-27",
+      "title_id": "heartstopper",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-28",
+      "title_id": "bake-off",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-29",
+      "title_id": "drive-to-survive",
+      "feeling": "hype",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-30",
+      "title_id": "roma",
+      "feeling": "tears",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-08-31",
+      "title_id": "undercover",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-01",
+      "title_id": "stranger-things",
+      "feeling": "hype",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-02",
+      "title_id": "chefs-table",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-03",
+      "title_id": "queer-eye",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-04",
+      "title_id": "hill-house",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-05",
+      "title_id": "queer-eye",
+      "feeling": "tears",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-06",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-08",
+      "title_id": "heartstopper",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-09",
+      "title_id": "street-food-asia",
+      "feeling": "tears",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-10",
+      "title_id": "headspace-sleep",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-11",
+      "title_id": "midnight-mass",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-12",
+      "title_id": "money-heist",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-13",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-15",
+      "title_id": "dark",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-16",
+      "title_id": "queer-eye",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-17",
+      "title_id": "drive-to-survive",
+      "feeling": "tears",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-18",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-19",
+      "title_id": "stranger-things",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-20",
+      "title_id": "hill-house",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-22",
+      "title_id": "black-mirror",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-23",
+      "title_id": "night-on-earth",
+      "feeling": "hype",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-24",
+      "title_id": "midnight-mass",
+      "feeling": "calm",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-25",
+      "title_id": "our-planet",
+      "feeling": "dread",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-26",
+      "title_id": "marriage-story",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-27",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-28",
+      "title_id": "drive-to-survive",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-29",
+      "title_id": "heartstopper",
+      "feeling": "tears",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-09-30",
+      "title_id": "queer-eye",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-01",
+      "title_id": "street-food-asia",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-02",
+      "title_id": "stranger-things",
+      "feeling": "calm",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-03",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-04",
+      "title_id": "hill-house",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-05",
+      "title_id": "bake-off",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-06",
+      "title_id": "bake-off",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-07",
+      "title_id": "midnight-diner",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-08",
+      "title_id": "headspace-sleep",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-09",
+      "title_id": "dark",
+      "feeling": "calm",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-10",
+      "title_id": "drive-to-survive",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-11",
+      "title_id": "ares",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-12",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-13",
+      "title_id": "chefs-table",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-14",
+      "title_id": "night-on-earth",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-15",
+      "title_id": "squid-game",
+      "feeling": "calm",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-16",
+      "title_id": "bake-off",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-17",
+      "title_id": "midnight-mass",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-18",
+      "title_id": "queer-eye",
+      "feeling": "tears",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-19",
+      "title_id": "headspace-meditation",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-20",
+      "title_id": "street-food-asia",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-21",
+      "title_id": "my-octopus-teacher",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-22",
+      "title_id": "midnight-diner",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-23",
+      "title_id": "midnight-diner",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-24",
+      "title_id": "bird-box",
+      "feeling": "dread",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-25",
+      "title_id": "heartstopper",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-26",
+      "title_id": "our-planet",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-27",
+      "title_id": "headspace-sleep",
+      "feeling": "calm",
+      "reached": true,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-28",
+      "title_id": "heartstopper",
+      "feeling": "calm",
+      "reached": false,
+      "start": "hot",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-29",
+      "title_id": "night-on-earth",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-30",
+      "title_id": "extraction",
+      "feeling": "hype",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-10-31",
+      "title_id": "hill-house",
+      "feeling": "dread",
+      "reached": false,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    },
+    {
+      "date": "2026-11-01",
+      "title_id": "bake-off",
+      "feeling": "calm",
+      "reached": true,
+      "start": "normal",
+      "minutes_to_state": null,
+      "source": "simulated diary"
+    }
+  ],
+  "audit": [],
+  "live_reads": [],
+  "changelog": [
+    {
+      "at": "2026-11-04T20:26:26.066Z",
+      "what": "Model built from 90 simulated evenings (1 Aug – 1 Nov 2026).",
+      "changes": []
+    },
+    {
+      "at": "2026-11-04T20:26:26.067Z",
+      "what": "Reset to the simulated member default (resting 62) for the open-source release: no real body data ships in this repo.",
+      "changes": []
+    }
+  ]
+}

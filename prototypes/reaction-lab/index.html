@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reaction Lab — Netflix 2046</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">RL</span>
+      <span class="brand-name">Reaction Lab</span>
+      <span class="brand-sub">NetFeel 2046 · Sense → Learn → Ask → Own · v1</span>
+    </div>
+    <div class="topbar-actions">
+      <span class="privacy-note" title="The face model runs in this browser tab. No video or frames are stored or sent anywhere — only numbers.">⌁ runs on this laptop · no frames kept</span>
+      <button id="btn-export" class="btn" type="button">Export session JSON</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="col-main">
+
+      <div class="card player-card">
+        <div class="player-stage" id="player-stage">
+          <video id="video" controls playsinline></video>
+          <div id="yt-wrap"><div id="yt-player"></div></div>
+          <div class="stage-empty" id="stage-empty">
+            <div class="stage-empty-box">
+              <p class="stage-empty-title">Nothing playing</p>
+              <p>Load a few clips from your Mac, tag the feeling each one is <em>meant</em> to give,<br>then press play. Turn the camera on if you want your reactions read.</p>
+            </div>
+          </div>
+        </div>
+        <div class="player-bar">
+          <div class="now-playing">
+            <span id="now-playing-title" class="now-title">No clip loaded</span>
+            <span id="now-playing-tag" class="tag" hidden></span>
+            <span id="player-clock" class="player-clock">0:00 / 0:00</span>
+          </div>
+          <button id="btn-skip" class="btn btn-danger" type="button" disabled>Skip clip</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2 class="card-title">Library</h2>
+          <div class="card-actions">
+            <button id="btn-youtube" class="btn" type="button">Add YouTube link</button>
+            <label class="btn btn-primary file-btn">Load clips
+              <input id="file-input" type="file" accept="video/*" multiple hidden>
+            </label>
+          </div>
+        </div>
+        <form id="yt-form" class="yt-form" hidden>
+          <input id="yt-url" class="text-input" type="text" inputmode="url" autocomplete="off" placeholder="Paste a YouTube URL (or a video ID)">
+          <select id="yt-intended" class="clip-select" title="The feeling this clip is meant to give"></select>
+          <button class="btn btn-primary" type="submit">Add</button>
+          <button id="yt-cancel" class="btn" type="button">Cancel</button>
+        </form>
+        <p id="library-empty" class="empty-hint">No clips yet — load a few from your MacBook. Each one gets a tag for the feeling it is meant to give.</p>
+        <ul id="clip-list" class="clip-list"></ul>
+      </div>
+
+    </section>
+
+    <aside class="col-side">
+
+      <div class="card camera-card">
+        <div class="card-head">
+          <h2 class="card-title">The Skip Button</h2>
+          <span id="cam-state" class="chip chip-off">camera off</span>
+        </div>
+        <p class="fineprint">The camera is off until you press the button, and you can turn it off at any time. Face reading happens in this tab — video never leaves your machine, and we keep numbers, not frames.</p>
+        <button id="btn-camera" class="btn btn-primary btn-wide" type="button">Turn camera on</button>
+        <div class="cam-row" id="cam-row" hidden>
+          <video id="cam-preview" muted playsinline></video>
+          <span id="face-chip" class="chip">no face</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">Live signals</h2>
+        <div id="meters" class="meters"></div>
+        <p id="baseline-note" class="fineprint">Camera off — no signals.</p>
+      </div>
+
+      <div class="card" id="receipt-card">
+        <h2 class="card-title">Feeling Receipt</h2>
+        <p id="receipt-empty" class="empty-hint">Finish (or skip) a clip and your receipt appears here: what you felt, when it peaked, and whether the clip hit its intended feeling.</p>
+        <div id="receipt" hidden></div>
+      </div>
+
+      <div class="card">
+        <h2 class="card-title">What do you want to feel?</h2>
+        <div id="want-buttons" class="want-buttons"></div>
+        <p id="recs-empty" class="empty-hint">Pick a feeling and the Personal Algorithm ranks your unwatched clips for it — each with its reason.</p>
+        <ol id="recs" class="recs" hidden></ol>
+      </div>
+
+    </aside>
+  </main>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
