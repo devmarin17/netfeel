@@ -5,7 +5,7 @@
 ## What it does
 
 1. You load a few videos from the MacBook. Each video gets a tag for the feeling it is meant to give: **laugh**, **thrill**, **calm** or **moved**.
-2. You turn the camera on. The camera is off until you press the button, and you can turn it off at any time. This is "The Skip Button" from the pitch.
+2. You turn the camera on. The camera is off until you press the button, and you can turn it off at any time. This is "The Skip Button" from the concept.
 3. You watch a clip. A face model reads your face about 10 times a second. It runs **on the laptop, in the browser**. No video leaves the machine, and we keep no frames, only numbers.
 4. When the clip ends, you get a **Feeling Receipt**: what you felt, when the peaks were, and whether the clip hit its intended feeling (a **state-hit**).
 5. Your reactions update **your personal taste profile**. The app then answers "What do you want to feel?" with a ranked list of the next clips, each with a reason.

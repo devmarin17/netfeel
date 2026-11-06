@@ -37,7 +37,7 @@ Australia's ban has been law since December 2025, yet 81.5% of kids still use th
 46% of fans look for creator content around what they watch. A human-made making-of for every title keeps them in the story's world and proves real people made it.
 
 ### Environment
-No signal. W21 (AI data centres use more and more power) was dropped. It's the one to bring back if someone asks about all six categories.
+No signal. W21 (AI data centres use more and more power) was dropped. It's the first candidate to bring back if the map needs all six categories.
 
 ## Enablers (the tech already exists, not weak signals)
 - **Wearables became continuous health monitors** (T1): watches and rings track heart rate, skin temperature and sleep all day.

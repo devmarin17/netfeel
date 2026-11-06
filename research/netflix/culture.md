@@ -1,8 +1,8 @@
 # Netflix Culture — How the Company Actually Works
 
-> Curated from the project's raw research notes. Compiled from Netflix's own culture memo and careers pages, HBR, Variety, WSJ, NYT/BBC, Reuters and more — all quotes verbatim with source URLs. Siblings: [what-netflix-does.md](what-netflix-does.md) · [experiments.md](experiments.md) · [ceo-interview.md](ceo-interview.md)
+> Compiled from Netflix's own culture memo and careers pages, HBR, Variety, WSJ, NYT/BBC, Reuters and more — all quotes verbatim with source URLs. Siblings: [what-netflix-does.md](what-netflix-does.md) · [experiments.md](experiments.md) · [ceo-interview.md](ceo-interview.md)
 
-**Why this file matters for the pitch:** a 2046 concept pitched to Netflix lands in front of people trained by this culture to ask: *where's the data, what would we learn if it fails, and can we kill it cheaply?* (See the closing section.)
+**Why this file matters:** any 2046 concept for Netflix has to survive people trained by this culture to ask: *where's the data, what would we learn if it fails, and can we kill it cheaply?* (See the closing section.)
 
 ---
 
@@ -132,16 +132,16 @@ All verbatim from the 2024 memo (https://jobs.netflix.com/culture):
 
 ---
 
-## 11. What this culture means for someone pitching Netflix
+## 11. What this culture means for a new concept
 
 Ideas that survive contact with this culture:
 
-1. **Data-backed.** Your concept must arrive as a testable hypothesis with an obvious first A/B test and a named metric (hours viewed, retention — not applause). "We believe users will love X" gets answered with "what does the test say?" (See [experiments.md](experiments.md), Pattern 1 & 8.)
-2. **Candor-friendly.** Farm for your own dissent: name the strongest counter-argument in your deck and answer it. Overselling reads as naive in a room where withholding disagreement is formally disloyal. Expect the keeper-test question behind the question: *would I fight to keep this project?*
+1. **Data-backed.** A concept must arrive as a testable hypothesis with an obvious first A/B test and a named metric (hours viewed, retention — not applause). "We believe users will love X" gets answered with "what does the test say?" (See [experiments.md](experiments.md), Pattern 1 & 8.)
+2. **Candor-friendly.** Farm for your own dissent: name the strongest counter-argument and answer it. Overselling reads as naive in a room where withholding disagreement is formally disloyal. Expect the keeper-test question behind the question: *would I fight to keep this project?*
 3. **Long-term.** They respect "hard sacrifices for the long-term business" and tolerate dips — a concept whose payoff is years out is credible *if* the learning loop starts immediately.
-4. **Killable-scoped.** Frame it as an experiment that can die cheaply and quietly — one market, one format, one season — with a graceful fade designed in (Netflix never holds funerals; see [experiments.md](experiments.md), Pattern 7). "No longer a strategic priority" is how their experiments end; yours should be able to end that way too.
-5. **Learning-not-fear framing.** The winning close isn't "this will work" — it's "here's what we'll know in 90 days either way, and here's what Netflix learns even if it fails."
+4. **Killable-scoped.** Frame it as an experiment that can die cheaply and quietly — one market, one format, one season — with a graceful fade designed in (Netflix never holds funerals; see [experiments.md](experiments.md), Pattern 7). "No longer a strategic priority" is how their experiments end; a new concept should be able to end that way too.
+5. **Learning-not-fear framing.** The winning framing isn't "this will work" — it's "here's what we'll know in 90 days either way, and here's what Netflix learns even if it fails."
 
 ---
 
-*Full source list preserved in the project's raw research notes. The CEO's own words on culture are in [`ceo-interview.md`](ceo-interview.md) § "Netflix culture".*
+*The CEO's own words on culture are in [`ceo-interview.md`](ceo-interview.md) § "Netflix culture".*

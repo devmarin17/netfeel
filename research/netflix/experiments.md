@@ -1,6 +1,6 @@
 # Netflix Experiments — Scoreboard, Ledger, and Patterns
 
-> Curated from the project's raw research notes (sources published 2011–2026, URLs preserved). **This is the most important file in the research set: a 2046 concept must feel like the *next* experiment Netflix would run — this file is the ledger it would be joining.** Siblings: [what-netflix-does.md](what-netflix-does.md) · [culture.md](culture.md) · [ceo-interview.md](ceo-interview.md)
+> Sources published 2011–2026, URLs preserved. **This is the most important file in the research set: a 2046 concept must feel like the *next* experiment Netflix would run — this file is the ledger it would be joining.** Siblings: [what-netflix-does.md](what-netflix-does.md) · [culture.md](culture.md) · [ceo-interview.md](ceo-interview.md)
 
 ---
 
@@ -43,12 +43,12 @@ Sources: https://deadline.com/2011/03/netflix-to-enter-original-programming-with
 
 ### 2.2 The personalization/experimentation machine
 The homepage *is* the experiment: multiple alternate artworks per title per member (Stranger Things kids for drama fans, monster for horror fans), personalized rows, thousands of concurrent A/B tests — **80%+ of what members watch comes from algorithmic recommendations**. By 2026 Netflix post-trains LLMs for artwork personalization (research.netflix.com; arXiv 2026).
-**Lesson:** the deep pattern — product decisions are empirical, instrumented, reversible. Any pitch saying "users will love X" gets "what does the A/B test say?"
+**Lesson:** the deep pattern — product decisions are empirical, instrumented, reversible. Any proposal saying "users will love X" gets "what does the A/B test say?"
 Sources: https://netflixtechblog.com/artwork-personalization-c589f074ad76 ; https://netflixtechblog.com/learning-a-personalized-homepage-aa8ec670359a ; https://research.netflix.com/ ; https://askgib.substack.com/p/a-brief-history-of-netflix-personalization-31d
 
 ### 2.3 Binge release — and its disciplined partial retreat
 Netflix invented mainstream binge release (2013→), then selectively broke its own rule: reality/competition formats (*Love Is Blind*, *Squid Game: The Challenge*) went weekly "event" batches; live is inherently scheduled; drama stays binge. "Hybrid" is now standard.
-**Lesson:** the model is a dial, not a religion — don't pitch "Netflix would never change binge"; they change everything when the data says so.
+**Lesson:** the model is a dial, not a religion — don't assume "Netflix would never change binge"; they change everything when the data says so.
 Sources: https://observer.com/2025/08/netflix-streaming-release-strategy/ ; https://techcrunch.com/2026/07/06/netflix-invented-binge-watching-now-it-may-have-outgrown-it/
 
 ### 2.4 Global local content — 130 countries at once, then Money Heist, Dark, Lupin, Squid Game
@@ -162,7 +162,7 @@ Sources: https://www.nytimes.com/2026/05/01/business/media/netflix-narnia-movie-
 
 ### 4.5 The metric shift: stop counting subscribers, start counting engagement
 From Q1 2025: no quarterly subscriber counts. From 2027: engagement report annually instead of semiannually. Rationale: "keep the focus on our primary financial metrics, revenue and operating profit." Engagement per member is the internal north star.
-**Lesson:** Netflix defines its own scoreboard. A 2046 pitch should invoke hours viewed per member, retention, revenue per member-hour, franchise flywheel multipliers — *not* subscriber counts.
+**Lesson:** Netflix defines its own scoreboard. A 2046 concept should invoke hours viewed per member, retention, revenue per member-hour, franchise flywheel multipliers — *not* subscriber counts.
 Sources: https://www.thewrap.com/netflix-stop-reporting-subscriber-numbers-2025-engagement/ ; https://streamingbetter.com/now-netflix-is-cutting-back-on-how-often-we-get-engagement-data/
 
 ### 4.6 Netflix House expansion + consumer products (2026→)
@@ -177,15 +177,15 @@ Sources: https://www.reuters.com/business/netflix-shares-fall-after-downbeat-rev
 
 ## 5. Patterns in how Netflix experiments
 
-*The synthesis a credible "Netflix 2046" pitch should emulate or extend — each pattern grounded in the ledger above.*
+*The synthesis a credible "Netflix 2046" concept should emulate or extend — each pattern grounded in the ledger above.*
 
 **1. Data de-risks; taste commits; numbers close.** House of Cards was found by data overlap but committed with $100M and Fincher taste. Ads, paid sharing, and live were each validated by engagement telemetry in small tests before global rollout. → *Frame your concept as a testable hypothesis with an obvious first A/B test.*
 
-**2. Backlash is noise; churn is data.** Qwikster survived 23 days; password-sharing survived a year of hatred because the telemetry held. Netflix absorbs any amount of public anger for a move that measurably improves retention or revenue. → *Your "controversy slide" must answer "but will the data hold?"*
+**2. Backlash is noise; churn is data.** Qwikster survived 23 days; password-sharing survived a year of hatred because the telemetry held. Netflix absorbs any amount of public anger for a move that measurably improves retention or revenue. → *Any controversial idea must answer "but will the data hold?"*
 
 **3. Quick kill for features, long marinate for platforms.** Qwikster: 23 days. Interactive specials: 8 years. Games: 5+ years with serial sub-kills. Fast Laughs: parked 5 years, then became Clips. Product experiments get fast verdicts; platform bets get years of runway and leadership changes instead of cancellations. → *Say which kind your concept is — platform bets survive even when individual executions die.*
 
-**4. No sacred cows — the catechism can be rewritten.** "Never any ads" → ~250M ad viewers. "Binge forever" → weekly live events. "No theatrical" → a 49-day IMAX window. "Streaming only" → Netflix House. Each reversal came only after a hit experiment proved the new dogma. → *The most credible 2046 pitches violate a current Netflix principle — and show the de-risking experiment that would cause the violation.*
+**4. No sacred cows — the catechism can be rewritten.** "Never any ads" → ~250M ad viewers. "Binge forever" → weekly live events. "No theatrical" → a 49-day IMAX window. "Streaming only" → Netflix House. Each reversal came only after a hit experiment proved the new dogma. → *The most credible 2046 concepts violate a current Netflix principle — and show the de-risking experiment that would cause the violation.*
 
 **5. Flywheel compounding: every win must feed the next bet.** Squid Game: Korean original → global record → reality show → game → merch. KPop: stream → memes (Moments) → #1 song → #1 box-office sing-along → theatrical confidence → games. WWE → ads inventory → in-house ad tech. → *Design your concept to make at least three other Netflix businesses stronger.*
 
@@ -195,14 +195,13 @@ Sources: https://www.reuters.com/business/netflix-shares-fall-after-downbeat-rev
 
 **8. Engagement is the only true scoreboard.** Stars went when they measured the wrong thing; subscriber counts went when they measured the wrong era. The currency: hours viewed, retention, revenue per member-hour, franchise multipliers. → *Name your metric. "This grows hours per member because…" is the sentence Netflix executives are waiting for.*
 
-**9. Crisis is the catalyst.** The 2011 collapse produced the binge/originals strategy; April 2022 produced ads + paid sharing + live + discipline within 18 months. Netflix experiments most aggressively when the core metric alarms. → *Pitch your concept as the answer to a specific future alarm (attention loss, AI content flood, churn), not as a nice new feature.*
+**9. Crisis is the catalyst.** The 2011 collapse produced the binge/originals strategy; April 2022 produced ads + paid sharing + live + discipline within 18 months. Netflix experiments most aggressively when the core metric alarms. → *Frame a concept as the answer to a specific future alarm (attention loss, AI content flood, churn), not as a nice new feature.*
 
 **10. One pipe, infinite formats.** The 2016 "launch everywhere at once" instinct persists: the delivery platform is singular and global; everything else — content, games, live, podcasts, commerce, venues — is an experiment plugged into that pipe. → *Don't propose a new platform; propose a new format the pipe doesn't yet carry. That's where every historical Netflix breakthrough came from.*
 
-### One-paragraph summary (the pitch litmus test)
+### One-paragraph summary (the litmus test)
 
-Netflix's decision style is: **test small, instrument everything, absorb the backlash, kill quietly, scale loudly, and rewrite your own commandments only when the data commands it.** Its biggest wins (originals, ads, paid sharing, live, local-language, the KPop flywheel) all started as heresies; its biggest failures (Qwikster, interactive, Shops, AAA games) were all cases where the data or the friction said no — and the kill came without sentimentality. A 2046 pitch is credible to a Netflix executive exactly to the degree that it looks like the next entry in this ledger: **a heresy, tested, instrumented, and aimed at the metric that matters — engagement.**
+Netflix's decision style is: **test small, instrument everything, absorb the backlash, kill quietly, scale loudly, and rewrite your own commandments only when the data commands it.** Its biggest wins (originals, ads, paid sharing, live, local-language, the KPop flywheel) all started as heresies; its biggest failures (Qwikster, interactive, Shops, AAA games) were all cases where the data or the friction said no — and the kill came without sentimentality. A 2046 concept is credible to a Netflix executive exactly to the degree that it looks like the next entry in this ledger: **a heresy, tested, instrumented, and aimed at the metric that matters — engagement.**
 
 ---
 
-*Full consolidated source list preserved in the project's raw research notes.*

@@ -1,6 +1,6 @@
 # CEO Interview — Ted Sarandos on the Future of Entertainment (WSJ Tech Live, Oct 2024)
 
-> Curated from the project's raw research notes; transcript near-verbatim from YouTube auto-captions, minor caption artifacts retained. Kept essentially intact. Siblings: [what-netflix-does.md](what-netflix-does.md) · [culture.md](culture.md) · [experiments.md](experiments.md)
+> Transcript near-verbatim from YouTube auto-captions, minor caption artifacts retained. Kept essentially intact. Siblings: [what-netflix-does.md](what-netflix-does.md) · [culture.md](culture.md) · [experiments.md](experiments.md)
 
 ---
 
@@ -26,7 +26,7 @@
 | **Interviewer** | Emma Tucker, Editor in Chief, The Wall Street Journal |
 | **Speaker** | Ted Sarandos, co-CEO of Netflix (co-CEO with Greg Peters; ~25-year Netflix anniversary at time of recording) |
 
-**Why this one:** title-level match to the assignment ("the Future of Entertainment"), 40+ minutes on a major journalistic stage, with future-of-Netflix themes front to back — streaming's next 5 years, generative AI, ads, games, live sports, pricing/engagement, YouTube/TikTok, Netflix House — plus a long, unusually candid segment on Netflix culture itself (the 2024 memo rewrite, keeper test, co-CEO model, succession).
+**Why this one:** literally about "the Future of Entertainment", 40+ minutes on a major journalistic stage, with future-of-Netflix themes front to back — streaming's next 5 years, generative AI, ads, games, live sports, pricing/engagement, YouTube/TikTok, Netflix House — plus a long, unusually candid segment on Netflix culture itself (the 2024 memo rewrite, keeper test, co-CEO model, succession).
 
 **Alternatives found and considered (verified metadata via yt-dlp):**
 1. "Netflix CEO Ted Sarandos Makes the Case for Buying Warner Bros." — The Town with Matt Belloni, 2026-02-18, 40:28 — https://www.youtube.com/watch?v=eHuMgP5ploI (strong but M&A-focused)
@@ -556,4 +556,4 @@ It's phenomenal.
 
 ---
 
-*Source: the project's raw research notes. Cross-references: the culture segment is unpacked in [culture.md](culture.md); the ads and live themes map to [experiments.md](experiments.md) §2.6–2.7.*
+*Cross-references: the culture segment is unpacked in [culture.md](culture.md); the ads and live themes map to [experiments.md](experiments.md) §2.6–2.7.*

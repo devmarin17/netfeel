@@ -1,6 +1,6 @@
 # Tech to 2046 — Technologies Reshaping Entertainment
 
-**Curated from:** the project's raw research notes (evidence window 2024 – mid-2026; every claim carries a source URL + date in the raw file).
+**Evidence window:** 2024 onward.
 **Maturity tags:** **[shipping]** = in daily commercial use · **[scaling]** = shipping, growing fast, costs falling · **[emerging]** = real products/trials, not yet mainstream economics · **[speculative]** = no credible near-term path, but worth scenario use. Claims flagged **[unverified]** could not be independently confirmed — do not cite without checking.
 
 ---
@@ -27,7 +27,7 @@
 
 **State (2025–26):** Sora 2 shipped cameos (verified likenesses in generated video) — but the consumer app died: ~1M users peak, **compute cost never officially disclosed — estimates ranged ~$1M–$15M/day**, **shut down April 26, 2026** (OpenAI); Disney's linked **$1B** licensing deal (200+ characters generatable in Sora) died with it, after SAG-AFTRA/WGA open letters and estate revolts (MLK, Robin Williams). Model leadership is contested: Sora 2 Pro ranked *below* ByteDance **Seedance 2.0**, **Runway 4.5**, **Kling 3.0** (Artificial Analysis, early 2026); Veo 3 added native synchronized audio (May 2025). Cost curve: per finished minute down **~97%** in two years — **$0.50–$30 vs $1,000–$50,000** traditional *for suitable shots*. Studios actually use it: **El Eternauta** (Netflix, Apr 2025) — first GenAI final footage in a Netflix original, "**10 times as fast**" (Sarandos, Jul 17, 2025 call); *House of David* (Amazon): 73 AI shots S1 → **~212 in S2**; *Critterz* (OpenAI): AI feature under **$30M**, ~9 months.
 **Trajectory (2027–30):** consistency (character/physics across scenes) is the frontier and improves every generation; realistic near-term: minutes-long fully generated segments at TV quality by ~2027–28; AI-assisted hybrid episodes standard at Netflix scale now.
-**Credible 2046:** generation is a commodity layer inside editing tools; scarce goods = **rights, taste, compute, brand trust**. A 2046 "episode" is a master scene-graph (OpenUSD-style) compiled into thousands of personalized renders (language, rating, length). Synthetic stars are expensive *rights* objects; live human stars command premiums precisely because they're un-replicable. The Sora shutdown keeps pitches honest: **demand without unit economics dies**.
+**Credible 2046:** generation is a commodity layer inside editing tools; scarce goods = **rights, taste, compute, brand trust**. A 2046 "episode" is a master scene-graph (OpenUSD-style) compiled into thousands of personalized renders (language, rating, length). Synthetic stars are expensive *rights* objects; live human stars command premiums precisely because they're un-replicable. The Sora shutdown keeps forecasts honest: **demand without unit economics dies**.
 **Unlocks:** instant zero-marginal-cost localization; de-aging as a normal tool; format revivals from licensed likenesses; micro-budget prestige one-offs; previs→final collapse (iterate a scene in hours).
 
 ## 2. Production technology — [shipping]/[scaling]
@@ -55,7 +55,7 @@
 
 **State:** **Netflix AI search** (from May 7, 2025): natural-language, mood-based discovery ("funny and sad, like a heist…") built on OpenAI models; AI-tailored ad formats from Q4 2025. **Gemini for Home** replaces Google Assistant; Google opened an MCP server so third-party agents (Claude, ChatGPT) control devices — signal: *agents, not apps*, become the interface. Eye tracking: research/ad-tech only (Tobii); consumer TVs do NOT ship with couch-distance eye tracking. Haptics for watching TV: **[speculative]**. **BCI — honest assessment [emerging, medical only]:** Neuralink ~21+ patients, cursor/text control — *a high-bandwidth mouse, not a media channel*; Synchron raised **$200M (2025)** for commercialization; market ≈ **$6.2B by 2030** (WEF) — medical need, not Netflix subscribers.
 **Trajectory:** conversational, proactive discovery ("build tonight's watchlist from my family's moods"); attention analytics live in ad-tech, not living rooms; glasses are the more credible 2046 attention sensor.
-**Credible 2046:** the agent layer is the platform war — whoever's agent curates owns the customer. Implanted BCIs serve thousands-to-low-millions of *patients* (accessibility is the real, dignified use case — pitch it that way); consumer "thought interface" media stays **[speculative]**. Holograms-in-the-brain is science fiction within this evidence base.
+**Credible 2046:** the agent layer is the platform war — whoever's agent curates owns the customer. Implanted BCIs serve thousands-to-low-millions of *patients* (accessibility is the real, dignified use case — frame it that way); consumer "thought interface" media stays **[speculative]**. Holograms-in-the-brain is science fiction within this evidence base.
 **Unlocks:** accessibility-first interactive formats (BCI + eye + voice as one stack); conversational discovery; attention-verified ad formats; the agent as the next battleground.
 
 ## 6. Network & compute — the physics and economics layer — [shipping]/[constraint]
@@ -74,14 +74,14 @@
 
 ---
 
-## Tech rules for a credible 2046 pitch
+## Tech rules for a credible 2046
 
 1. **Compute is the script's budget line.** Sora's app died under a compute bill estimated at $1M–$15M/day; El Eternauta's AI shot was "10x faster," not free. Any format assuming near-free infinite generation must name its energy/compute economics. Overhyped: "AI makes content free." Underestimated: **energy-aware production planning** as an executive discipline.
 2. **Rights are infrastructure, not paperwork.** Disney paid $1B for character licenses; SAG-AFTRA made consent a workflow; estates have opt-out switches. No likeness-rights plumbing story = not credible to a production exec.
 3. **The TV stays the hearth; glasses are the penumbra.** Vision Pro's retreat vs Ray-Ban Display's $799 traction: ambient AR *over* shared screens beats headset-native worlds. Design living-room-first, ambient-second.
 4. **Live is the moat that was actually built.** 65M concurrents (2024) → clean weekly NFL/WWE (2025–26): the boring hardening happened. Interactive live at 100M+ is the *earned* assumption; per-viewer-customized live is the stretch.
 5. **Personalization grows discovery → format → co-creation, inside a legal box.** AI search (2025) → adaptive episodes (2030s) → labeled co-created content (2040s). EU AI Act Article 50 and companion-safety case law are the rails; unlabeled "infinite content" is already illegal in major markets.
-6. **Localization is the sleeping giant.** AI + visual dubbing (Deepdub/Flawless/Papercup) makes every 2046 title natively 50-language with synced faces — the single most under-scoped unlock in student pitches.
+6. **Localization is the sleeping giant.** AI + visual dubbing (Deepdub/Flawless/Papercup) makes every 2046 title natively 50-language with synced faces — the single most under-scoped unlock in 2046 scenarios.
 7. **Open standards are the quiet plot.** OpenUSD ("HTML of 3D") + AV1 (30% of Netflix) = scene-graph-driven, codec-agnostic, edge-rendered media. A concept that names its data standards reads as engineered, not imagined.
 8. **Assume regression to human, not replacement by machine.** PwC's own headline: "digital innovation drives demand for human experiences"; ABBA Voyage grossed $150M+ on nostalgic humans watching digital doubles *together*. Durable 2046 formats fuse cheap synthetic capacity with scarce live/human presence — BCI, haptics and home holograms are accessibility/niche layers, not mass media.
 

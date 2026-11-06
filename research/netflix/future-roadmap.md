@@ -1,8 +1,7 @@
 # Netflix Future Roadmap — Where Netflix Is Actually Heading (curated)
 
-**Curated from:** the project's raw research notes (deep-research pass #2, compiled 2026-10-13).
 **Labels preserved:** **[V]** = verified (source cited) · **[R]** = reported (credible outlet, unconfirmed by Netflix) · **[RUMOR]** = unverified — treat with caution.
-**Why this matters:** Netflix in late 2026 is profitable but *anxious* — growing slower than it wants, cutting staff, and hunting for wins. A 2046 concept pitched into that mood beats one pitched into a complacent company.
+**Why this matters:** Netflix in late 2026 is profitable but *anxious* — growing slower than it wants, cutting staff, and hunting for wins. A 2046 concept that answers that mood lands better than one aimed at a complacent company.
 
 ---
 
@@ -88,7 +87,7 @@
 | Revenue CAGR to 2030 | 10% revenue / 15% op income / 18% FCF | [R — Morningstar, Apr 2025] |
 | US streaming market | $113.3B by 2030 (6.8% CAGR) | [V — PwC Outlook 2025] |
 
-**Synthesis:** even the bears model Netflix at **~$75–80B revenue by 2030**. The pitch-worthy question: when subs saturate (~410–450M), growth must come from **ads, price, live/events, gaming, experiential, and new surfaces** (free tier, vertical, AI-personalized formats). Netflix says it's only **~5% of global TV view share**, audience *"approaching 1 billion people."* [V — Q1'26 letter]
+**Synthesis:** even the bears model Netflix at **~$75–80B revenue by 2030**. The key question: when subs saturate (~410–450M), growth must come from **ads, price, live/events, gaming, experiential, and new surfaces** (free tier, vertical, AI-personalized formats). Netflix says it's only **~5% of global TV view share**, audience *"approaching 1 billion people."* [V — Q1'26 letter]
 
 ---
 
@@ -99,7 +98,7 @@
 - **Live-broadcast infrastructure is the freshest Netflix engineering story.** The 3-part **"Behind the Streams"** tech-blog series (Jul 15–Oct 20, 2025): **cloud-based ingest** (no broadcast-hardware heritage — venue feeds land directly in cloud), custom **Netflix Live Origin** server bridging cloud and **Open Connect** (their own CDN), **real-time recommendations during live events**, streaming to **100M devices in under a minute**. The Tyson–Paul buffering storm (Nov 2024) was the forcing function. [V — netflixtechblog.com; InfoQ Dec 2025; NPR 2024-11-21]
 - **Virtual production:** a dedicated Production Innovation team; published *"Virtual Production: A Validation Framework for Unreal Engine"* + RGB LED-stage color-calibration research; **Dark Bay (Babelsberg, built for 1899)** as flagship LED volume; **Partner Help Center publishes on-set virtual-production infrastructure specs partners must meet**. [V — research.netflix.com; partnerhelp.netflixstudios.com]
 - **Cloud production/post:** partner-facing camera-to-cloud specs; GenAI in **~300 titles in 2026, concentrated in post-production**; InterPositive = AI-native editorial/pre-viz being productized in-house. [V — Q2'26 letter]
-- **Media Production Suite + Tool Library (Sep 2026):** Mallett's IBC 2026 keynote confirms MPS at scale (Money Heist ~1PB; *Society of the Snow* multi-country VFX) and a **Tool Library** onboarding *external* tools under "security, rights and responsibility" criteria — a **named intake surface for partner innovation** (any 2046 production-side pitch should present itself as a Tool Library candidate). [V — about.netflix.com/news/anna-mallett-ibc-2026]
+- **Media Production Suite + Tool Library (Sep 2026):** Mallett's IBC 2026 keynote confirms MPS at scale (Money Heist ~1PB; *Society of the Snow* multi-country VFX) and a **Tool Library** onboarding *external* tools under "security, rights and responsibility" criteria — a **named intake surface for partner innovation** (any 2046 production-side concept could present itself as a Tool Library candidate). [V — about.netflix.com/news/anna-mallett-ibc-2026]
 - **Ads-tech + EMEA footprint:** UK/Germany/France/Italy/Spain among the 12 existing ad markets, **+15 more countries from 2027** → more EMEA ad-funded originals + product-placement formats; advertisers get AI tools to build custom creative from Netflix IP. [V — Q4'25 letter; Upfront pages]
 - **Live + sports + short form is a named remit of the EMEA production-ops org** ("how we build the capabilities behind new formats like live, sports, and short form"). The WBC-Japan regional-exclusive template, **TF1 integration (France: linear channels + on-demand inside Netflix, June 2026)**, and vertical video all flow through regional production-ops teams. [V]
 - **ESG:** 2025 ESG report — decarbonizing productions continues (June 2026). Expect **sustainability + AI + live reliability** to be the three Production-Solutions briefs of 2027–2030. [V — Q2'26 letter]
@@ -116,7 +115,7 @@
 4. **PROJECTION — AI moves from recommending content to generating it.** ~300 titles touched by GenAI in 2026 + InterPositive → by 2046, on-demand, personalized, IP-true content with humans as creative directors. (Source: Q2'26 letter; about.netflix.com InterPositive; Reuters 2025-07-18.)
 5. **PROJECTION — Fandom is the moat: Netflix becomes a place.** Tudum (232M visits), Netflix House (Philly/Dallas/Vegas), KPop Demon Hunters concert tour → by 2046 a theme-park-scale brand economy with physical-digital collectibles. (Source: Q4'25 letter; ir.netflix.net; Media Play News 2026-05-13.)
 6. **PROJECTION — Games and shows erase their boundary on the TV screen.** Cloud-first + phone-controller + IP (the FIFA sim) → the 2046 entertainment bundle mixes party games, narrative IP games and series; kids are the beachhead (Playground: **+600% kids engagement**). (Source: Q4'25 letter; GamesIndustry.biz 2026.)
-7. **PROJECTION — The company shape: builders with a high bar who occasionally swing.** WBD walk (+$2.8B fee) + InterPositive buy → selective mega-M&A, aggressive tech tuck-ins, $25B+ buybacks; pitch to a company that funds few, big, disciplined bets. (Source: Q1/Q2'26 letters; TechCrunch 2026-10-11.)
+7. **PROJECTION — The company shape: builders with a high bar who occasionally swing.** WBD walk (+$2.8B fee) + InterPositive buy → selective mega-M&A, aggressive tech tuck-ins, $25B+ buybacks; a company that funds few, big, disciplined bets. (Source: Q1/Q2'26 letters; TechCrunch 2026-10-11.)
 8. **PROJECTION — The engagement crisis is the design brief.** Hours grew ~2% while members grew faster; YouTube owns 14.2% of US TV time vs Netflix 7.8%. The 2046 concept that wins is the one that solves *quality attention* per member — exactly what Sarandos admits he needs. (Source: LA Times 2026-10-09; Nielsen via Q4'25 letter; Bloomberg 2026-10-01.)
 
 ---

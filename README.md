@@ -1,126 +1,171 @@
 <p align="center">
-  <img src="docs/images/hero.svg" alt="NETFEEL 2046: not what you want to watch, how you want to feel. Sense, Learn, Ask, Own." width="100%">
+  <img src="docs/images/hero.svg" alt="NETFEEL 2046: not what you want to watch, how you want to feel. Weak signals, prototypes, a design fiction." width="100%">
 </p>
 
-> **A Netflix 2046 design fiction:** *what if Netflix didn't ask what you want to watch, but how you want to feel?*
+<p align="center">
+  <a href="LICENSE"><img alt="Code: MIT" src="https://img.shields.io/badge/code-MIT-e50914"></a>
+  <a href="LICENSE-DOCS.md"><img alt="Docs: CC BY 4.0" src="https://img.shields.io/badge/docs-CC%20BY%204.0-e50914"></a>
+  <img alt="Node 18 or newer" src="https://img.shields.io/badge/node-%E2%89%A518-333">
+  <img alt="Zero dependencies" src="https://img.shields.io/badge/dependencies-0-333">
+  <img alt="On-device" src="https://img.shields.io/badge/inference-on--device-333">
+</p>
+
+<p align="center">
+  <b>A collection of weak signals and working prototypes about one question:</b><br>
+  <i>what if Netflix didn't ask what you want to watch, but how you want to feel?</i>
+</p>
+
+<p align="center">
+  <a href="#-the-weak-signals">Weak signals</a> ·
+  <a href="#-where-they-lead">Consequences</a> ·
+  <a href="#-the-prototypes">Prototypes</a> ·
+  <a href="#-the-idea-they-add-up-to">The idea</a> ·
+  <a href="#-run-it-yourself">Run it</a> ·
+  <a href="#-whats-inside">What's inside</a>
+</p>
 
 > [!IMPORTANT]
-> **This is a design fiction.** NetFeel is a concept study created for the Design Future Course (the brief: *imagine Netflix in 2046*). It is **not affiliated with, endorsed by, or produced by Netflix**. The research in this repo mixes **real, dated sources (2011–2025)** with **projected 2026–2046 events written in the same citation style**. That mix is the method, not an attempt to pass fiction off as reporting. Where a claim could not be verified, it is flagged in the text.
-
-**Contents:** [The concept](#the-concept) · [See it working](#see-it-working) · [The method](#the-method-weak-signals) · [What's in this repo](#whats-in-this-repo) · [Run the prototypes](#run-the-prototypes) · [License](#license)
+> **This is a design fiction.** NetFeel is a speculative concept study, created for the Design Future Course around the brief *imagine Netflix in 2046*. It is **not affiliated with, endorsed by, or produced by Netflix**. The signals are built on real, sourced evidence; everything set after today is projection, written in the same citation style on purpose. Unverified claims are flagged where they appear.
 
 ---
 
-## The concept
+## 📡 The weak signals
 
-In 2046 Netflix doesn't ask *what* you want to watch. It asks **how you want to feel**.
+A weak signal is something small you can already see today that hints at a bigger change. We scanned widely, ranked 21 signals by how much weight they carry, and kept **nine**. Together they point at one shift: people already pick media for how it makes them *feel*, assistants are starting to choose for them, and trust is becoming the scarce thing.
 
-A wearable you already own reads heart rate, HRV, skin temperature and movement while you watch. **NetFeel** learns a personal mood profile: which content produces which feeling, *for you*. You search by feeling ("I need a good cry tonight") in the app, or your personal AI assistant calls NetFeel on your behalf. And the profile is yours: on-device, visible, exportable, deletable, never sold.
+| # | Signal | What you can see today | Where it points |
+|:-:|---|---|---|
+| 1 | **Media is used to reach a feeling** | ~63% of ASMR viewers use it to fall asleep; comfort rewatching tops the charts | Netflix sells *states*, not hours |
+| 2 | **The assistant becomes (almost) the remote** | ~800M people use ChatGPT weekly; assistants now buy and book for you | "I need to calm down" goes to the assistant, and it asks Netflix |
+| 3 | **We trust machines with feelings, but trust beats usage** | 72% of US teens have used an AI companion; only 11% enjoy AI "a lot" | Whoever earns trust wins, not whoever gets the most use |
+| 4 | **Mood search has already been tested** | Netflix ran an AI search beta that understands moods | The tech is ready; feeling becomes the search box |
+| 5 | **AI slop floods the feeds** | >20% of videos shown to new YouTube users are AI slop | "Verified human-made" becomes worth paying for |
+| 6 | **Counter-trend: back to curated, human-made** | 73% of Gen Z discover through social today | The next generation tires of feeds; curation is the moat |
+| 7 | **Under-16 social-media bans** | Australia's ban is law, yet 81.5% of kids still use the apps | Bans alone don't build trust; a safe place kids *want* does |
+| 8 | **A human-made making-of for every title** | 46% of fans seek creator content around what they watch | Proof-of-human as a feature |
+| 9 | **Rules for emotion data** | The EU AI Act treats emotion recognition as high-risk; the DMA makes data portable | Your mood profile is legally becoming yours |
 
-| Step | What happens |
-|---|---|
-| **1. Sense** | The body already broadcasts. Any wearable with Broadcast Heart Rate works today. |
-| **2. Learn** | An on-device taste model learns which feelings each title produces *on you*, judged by your body, not your clicks. |
-| **3. Ask** | You ask for a feeling; your assistant asks *your* model. One pick and why, and the model always answers **"paid placement: none."** |
-| **4. Own** | Consent per read, deletion that actually deletes, an audit log that can't be silently edited. |
+→ Full signals with sources: [`signals/`](signals/) · the 21-signal longlist: [§2 of the paper](paper/netfeel-paper.md#2-trends-and-weak-signals) · the evidence base: [`research/`](research/)
 
-The showcase metric is the **State-Hit Rate**: the share of evenings your body confirms the feeling you asked for. In the fiction it replaces watch-hours as the metric Netflix optimizes, piloted as a 12-week A/B test in 2028.
+## 🌀 Where they lead
 
-**The thesis:** Netflix's constraint is attention, not money (YouTube ~15.8% vs Netflix ~7.7% of US TV time in 2026). It can't out-upload YouTube, so it wins on the one thing the ad-and-data model can't copy: **trust with your feelings.** *AI does the sensing; humans do the storytelling.*
+Each signal was pushed forward to 2046 on a consequence wheel: first-, second- and third-order effects across six areas (social relationships, individual behaviour, politics, environment, economics, education & culture).
 
-## See it working
+<table>
+  <tr>
+    <td width="50%"><a href="signals/netfeel-world-wheels.html"><img src="docs/images/world-wheels.png" alt="2046 World Wheels: sticky notes on a three-ring consequence wheel for 'everyone gets an AI assistant that acts for them'"></a></td>
+    <td width="50%"><a href="signals/netfeel-consequence-overview.html"><img src="docs/images/consequence-overview.png" alt="Consequence Overview: 36 merged notes from all nine signals on one wheel"></a></td>
+  </tr>
+  <tr>
+    <td><b>2046 World Wheels</b>: the four key signals, one wheel each</td>
+    <td><b>Consequence Overview</b>: all nine signals, 162 notes merged into 36</td>
+  </tr>
+</table>
 
-Two working prototypes show the parts of NetFeel that already exist today.
+Four patterns came out of the wheels:
 
-### Heart-sensing taste model + MCP server
+- **Trust is the engine.** People stay because they choose to, not because they're locked in. *(signals 2, 3, 7, 9)*
+- **Human-made is the proof.** The worse the feeds get, the more curated, human-made work is worth. *(signals 5, 6, 8)*
+- **On the device, by design.** Privacy, regulation and energy all point to local processing. *(signals 3, 7, 9)*
+- **The risks sit in economics and social life:** gatekeeping assistants, compliance costs, human-made as a luxury, comfort bubbles.
 
-A member-owned taste model fed by a real Garmin heart rate. Any AI assistant that speaks MCP (e.g. Claude Desktop) can ask it for a pick, with consent per heart read and a hash-chained "paid placement: none" audit log.
+The wheels are interactive: open them in a browser, highlight a signal, move notes or add your own.
+
+## 🧪 The prototypes
+
+Two working prototypes show that the core of the idea is buildable today, with the privacy stances implemented, not just claimed.
+
+### Taste model + MCP server · *heart sensing*
+
+A taste model the member owns, fed by a live heart rate from a Garmin watch. Any AI assistant that speaks [MCP](https://modelcontextprotocol.io) (like Claude Desktop) can ask it for tonight's pick. Every pick comes with its reasons and an audit entry that says **"paid placement: none"**, hash-chained so silent edits are detectable.
 
 | Before a pick: your live heart | After a pick: the reasons and what's behind them |
 |---|---|
 | ![The stage page before a pick: a big live heart-rate number against your resting rate](docs/images/stage-heart.png) | ![The stage page after a pick: reason lines, other titles that fit tonight, and the vault, heartbeat and algorithm panels](docs/images/stage-pick-reasons.png) |
 
-→ [`prototypes/taste-model-mcp/`](prototypes/taste-model-mcp/)
+- **Consent per read:** the heart is shared only when you say so (share once or skip).
+- **Forgetting is real:** "Forget tonight's heart" deletes every raw reading; the audit log still verifies because it never stored them.
+- **The model is a file you own:** readable JSON, exportable, deletable.
 
-### Reaction Lab: face sensing, on-device
+→ [`prototypes/taste-model-mcp/`](prototypes/taste-model-mcp/) · zero dependencies · 6 self-tests
 
-Webcam + MediaPipe in the browser → six signals → Feeling Receipts → a personal taste model with explainable recommendations. The camera is off until you turn it on, and no frames are kept.
+### Reaction Lab · *face sensing*
+
+Watch a clip while a face model reads your reaction in the browser (MediaPipe, fully on-device). Six signals become a **Feeling Receipt** (what you felt, when it peaked, whether the clip hit its intended feeling), and a personal taste model recommends what to watch next, with a reason for every pick.
 
 ![Reaction Lab: the player, the camera-off Skip Button, live signals, the feeling receipt and the feeling picker](docs/images/reaction-lab.png)
 
-→ [`prototypes/reaction-lab/`](prototypes/reaction-lab/)
+- **The Skip Button:** the camera is off until you turn it on.
+- **Numbers, not frames:** video never leaves your machine and no frames are kept.
 
-## The method (weak signals)
+→ [`prototypes/reaction-lab/`](prototypes/reaction-lab/) · deterministic scoring core · 9 unit tests
 
-The concept was built in layers: a wide scan of sourced weak signals → 21 signals tiered by how much weight they carry (5 key / 8 support / 8 background, plus 5 enabling trends) → **9 final signals** mapped onto six consequence areas.
+## 💡 The idea they add up to
 
-1. **Media is used to reach a feeling** (63% of ASMR viewers watch to reach a state)
-2. **The assistant becomes (almost) the remote** (~800M weekly ChatGPT users; assistants that act, not just answer)
-3. **People trust machines with feelings, but trust wins over usage** (72% of teens have used AI companions; 11% enjoy AI "a lot")
-4. **Mood search has already been tested** (a mood-based search beta, 2025)
-5. **AI slop floods the feeds** (>20% of new-user YouTube; 278 slop channels)
-6. **Counter-trend: back to curated, human-made** (73% of Gen Z fans discover through social; curation becomes the moat)
-7. **Under-16 social-media bans** (Australia's law barely bit: 81.5% still use it; regulation alone isn't trust)
-8. **A human-made making-of for every title** (46% of fans want between-release content; proof-of-human as a feature)
-9. **Rules for emotion data** (the EU AI Act restricts emotion recognition; the DMA forces data portability)
+Put the signals together and you get **NetFeel**: in 2046, Netflix doesn't ask *what* you want to watch. It asks **how you want to feel**.
 
-Each signal was then pushed forward to 2046 on a consequence wheel (1st, 2nd and 3rd-order effects across six areas):
+| | Step | What happens | Signals behind it |
+|:-:|---|---|:-:|
+| ♥ | **Sense** | A wearable you already own reads heart rate, HRV, skin temperature and movement while you watch. | 1 |
+| ◐ | **Learn** | An on-device model learns which titles produce which feelings *on you*, judged by your body, not your clicks. | 1 |
+| ? | **Ask** | You ask for a feeling ("I need a good cry tonight"), or your assistant asks *your* model for you. One pick, and why. | 2, 4, 6 |
+| 🔒 | **Own** | Consent per read, deletion that actually deletes, an audit log nobody can quietly edit. Never sold, never used for ads. | 3, 7, 9 |
 
-| 2046 world wheels: the four key signals | All nine signals on one wheel |
-|---|---|
-| [![2046 World Wheels: sticky notes on a three-ring consequence wheel for "everyone gets an AI assistant that acts for them"](docs/images/world-wheels.png)](signals/netfeel-world-wheels.html) | [![NetFeel Consequence Overview: 36 merged notes from all nine signals on one wheel](docs/images/consequence-overview.png)](signals/netfeel-consequence-overview.html) |
+The success metric changes too: instead of watch-hours, the **State-Hit Rate**, the share of evenings your body confirms the feeling you asked for.
 
-The wheels are interactive HTML pages: open them in a browser to filter by signal, drag notes or add your own. Full detail with sources: [`signals/final-signals.md`](signals/final-signals.md) and §2 of the paper.
+*AI does the sensing; humans do the storytelling.*
 
-## What's in this repo
+The full scenario (one evening in 2046, how Netflix gets there, who wins and who loses, and the guardrails) is in [`paper/netfeel-paper.md`](paper/netfeel-paper.md), or the [2-page version](paper/netfeel-paper-short.md).
 
-```
-netfeel/
-├── paper/              the full paper and a 2-page short version
-├── signals/            the 9 final signals, the picklist, and the interactive consequence wheels
-├── research/           the curated evidence base and source library
-├── prototypes/
-│   ├── reaction-lab/       face sensing in the browser (on-device)
-│   └── taste-model-mcp/    heart sensing + MCP server for AI assistants
-└── docs/               the earlier concept, and the images used in these READMEs
-```
+## ▶️ Run it yourself
 
-| Path | What it is |
-|---|---|
-| [`paper/netfeel-paper.md`](paper/netfeel-paper.md) | The full paper (~6k words): situation → trends & signals → a 2046 evening → how Netflix stays current → the concept → consequences. Every claim source-checked. |
-| [`paper/netfeel-paper-short.md`](paper/netfeel-paper-short.md) | The 2-page version. |
-| [`signals/`](signals/) | The **9 final signals** ([final-signals.md](signals/final-signals.md)), the [picklist](signals/signal-picklist.md), and the consequence visuals ([world wheels](signals/netfeel-world-wheels.html), [nine-signal overview](signals/netfeel-consequence-overview.html)). The 21 tiered signals (W1–W21 + T1–T5) are in the paper. |
-| [`research/`](research/) | Netflix strategy, culture, experiments, a CEO interview and roadmap; the tech horizon to 2046; the kids-media landscape; the attention battleground; and the [source library](research/sources/source-library.md). |
-| [`prototypes/reaction-lab/`](prototypes/reaction-lab/) | **Face sensing:** webcam + MediaPipe (on-device) → six signals → Feeling Receipts → a taste model with explainable recommendations. Deterministic core, 9 unit tests. |
-| [`prototypes/taste-model-mcp/`](prototypes/taste-model-mcp/) | **Heart sensing + MCP server:** a member-owned taste model (real Garmin heart rate) that any AI assistant can call over MCP, with consent per read and a hash-chained audit log. |
-| [`docs/feeling-line-2046-earlier-concept.md`](docs/feeling-line-2046-earlier-concept.md) | The earlier, bigger concept ("The Feeling Line"), kept as history. |
-
-## Run the prototypes
-
-**Reaction Lab** (any modern browser, Python 3 for the static server):
+**Reaction Lab** (any modern browser + Python 3 for a static server):
 
 ```bash
 cd prototypes/reaction-lab
-bash scripts/fetch-model.sh     # one-time model download (Apache-2.0, see models/README.md)
+bash scripts/fetch-model.sh     # one-time face model download (Apache-2.0)
 python3 -m http.server 8046     # open http://localhost:8046
-npm test                        # the algorithm, tested headlessly
+npm test                        # the scoring algorithm, tested headlessly
 ```
 
-**Taste model + MCP server** (Node ≥ 18, zero dependencies; Chrome for Web Bluetooth):
+**Taste model + MCP server** (Node ≥ 18, no `npm install`; Chrome for Web Bluetooth):
 
 ```bash
 cd prototypes/taste-model-mcp
-npm run check                   # self-test incl. audit tamper detection + MCP handshake
+npm run check                   # self-test: picks, consent, deletion, audit tamper detection, MCP handshake
 npm run reset                   # rebuild the simulated member's model
-npm start                       # stage page on http://localhost:4046
+npm start                       # open http://localhost:4046
 ```
 
-Then connect Claude Desktop (`npm run check` prints the config) and a Garmin watch, or press **S** for a simulated heart. Full guide: [`SETUP.md`](prototypes/taste-model-mcp/SETUP.md).
+No watch? Press **S** on the page for a simulated heart. To connect Claude Desktop, `npm run check` prints the exact config; the full walkthrough is in [`SETUP.md`](prototypes/taste-model-mcp/SETUP.md).
 
-Both prototypes implement the concept's privacy stances for real: sensing off by default, all inference on-device, consent before any heart read, deletion that actually deletes. The member "Daan" and his history are simulated; no real body data ships in this repo.
+> The member in the demo, "Daan", and his viewing history are simulated. No real body data ships in this repo.
 
-## License
+## 📁 What's inside
 
-Code: **MIT** (see [LICENSE](LICENSE)). The paper, signals and research documents: **CC-BY-4.0** (remix with attribution). Third-party assets keep their own licenses: the MediaPipe face model (Apache-2.0, fetched, not committed) and the vendored mermaid bundle (MIT, license included).
+```
+netfeel/
+├── signals/                  the 9 weak signals and the interactive consequence wheels
+├── research/                 the evidence base: Netflix, tech horizon, kids & media, attention, sources
+├── prototypes/
+│   ├── taste-model-mcp/      heart sensing + a member-owned taste model over MCP
+│   └── reaction-lab/         face sensing, on-device, in the browser
+├── paper/                    the 2046 scenario that ties it together (full + 2-page)
+└── docs/                     the earlier "Feeling Line" concept, and the images
+```
 
-Netflix and all title names are trademarks of their respective owners and are used here only as references in a speculative concept study.
+| Folder | Start with |
+|---|---|
+| [`signals/`](signals/) | [`final-signals.md`](signals/final-signals.md) for the nine signals, then the [wheels](signals/netfeel-world-wheels.html) |
+| [`research/`](research/) | [`research/README.md`](research/README.md); the [source library](research/sources/source-library.md) lists every source with its verification status |
+| [`prototypes/`](prototypes/) | the README in each prototype folder |
+| [`paper/`](paper/) | the [short version](paper/netfeel-paper-short.md) first |
+| [`docs/`](docs/) | [The Feeling Line](docs/feeling-line-2046-earlier-concept.md): the earlier, bigger concept, kept as history |
+
+## 📜 License
+
+- **Code** (everything runnable in `prototypes/`): [MIT](LICENSE)
+- **Signals, research, paper, docs and images**: [CC BY 4.0](LICENSE-DOCS.md). Share and remix freely, with credit.
+- **Third-party:** the vendored mermaid bundle (MIT, license included) and the MediaPipe face model (Apache-2.0, downloaded by a script, not committed). Quoted sources remain their owners' work.
+
+Netflix and all title names are trademarks of their respective owners, used here only as references in a speculative design fiction.

@@ -1,6 +1,6 @@
 # Threat Map — Who Is Fighting Netflix for Humanity's Attention Hours
 
-**Curated from:** the project's raw research notes (data window: mid-2025 → Oct 2026; Nielsen, earnings releases, trade press, platform newsrooms).
+**Sources:** Nielsen, earnings releases, trade press and platform newsrooms (data from mid-2025 onward).
 **Core idea:** engagement time is **zero-sum**. Total media time is capped at ~the waking day (**12h 42m/day with media in 2025 — up only 2 minutes**, OMD). Every front below is a fight over slices of that pie.
 
 ---
@@ -56,7 +56,7 @@ Sources: sec.gov (Roblox Q3'25 letter, Oct 30, 2025) · about.roblox.com · this
 
 **What this means for Netflix 2046**
 - "Watching" is becoming a *mode inside* worlds (concerts in Fortnite, premieres in Roblox, seasons as game events). A 2046 Netflix concept must answer where *its* world is — not just its catalog.
-- Netflix's Roblox/Fortnite presence is marketing, not territory. A 2046 pitch could be a persistent Netflix "storyverse."
+- Netflix's Roblox/Fortnite presence is marketing, not territory. A 2046 Netflix could be a persistent "storyverse."
 - The 2046 core audience (born ~2020–2035) will have logged more Roblox hours than TV hours; interactive-adjacent storytelling is table stakes.
 
 ### FRONT 4 — Streamer-vs-streamer (the incumbents regroup)
@@ -75,7 +75,7 @@ Sources: variety.com (Mar 24, 2026) · theguardian.com (Dec 27, 2025; Jul 18, 20
 **What this means for Netflix 2046**
 - Sora's death is the most useful datapoint in this file: raw generation doesn't beat *authored worlds* — but by 2046 generation cost → 0, so Netflix's moat must move from producing content to owning **story IP, consented likenesses, and audience trust**.
 - AI companions already match Netflix's per-user engagement (~2h/day). Treat *relationship* (characters who know you) as the competitor's playbook — and build the ethically defensible version first.
-- Netflix already crossed the GenAI threshold with a trust-forward framing; the 2046 pitch should make "human-meaningful in an infinite-content world" the explicit brand promise — the anti-slop position YouTube currently cannot take (20%+ of its new-user feed is slop).
+- Netflix already crossed the GenAI threshold with a trust-forward framing; a 2046 Netflix could make "human-meaningful in an infinite-content world" the explicit brand promise — the anti-slop position YouTube currently cannot take (20%+ of its new-user feed is slop).
 
 ### FRONT 6 — Music / audio crossover (the hours video never sees)
 **The facts:** Spotify **761M MAU (Q1 2026)**; video podcasts: **500K+ shows, watch time doubled YoY**; video podcasts get ~47% higher engagement than audio-only. Audiobooks: **listening hours +60% in 2025**; half of all audiobook listeners joined *in 2025*; Audiobooks+ passed **1M subs / $100M ARR**, expanding to 180+ markets. Why it eats video time: it's **screen-optional** — any hour Netflix can't serve (driving, running, working) is monetized by audio without competition. And it's converging: 48% of Americans 12+ have both listened to and watched a podcast (Edison 2025).

@@ -1,7 +1,7 @@
-# Kids & Teens Media Landscape — Curated Brief for "Netflix 2046"
+# Kids & Teens Media Landscape
 
 **Who this is about:** today's kids and teens (Gen Alpha / young Gen Z) — the **20–40-year-olds of 2046**, i.e. the exact core subscriber Netflix will be designing for.
-**Curated from:** the project's raw research notes (research pass of 2023–2026 sources). Every stat carries its source + URL; shaky or aging data is flagged ⚠️.
+Every stat carries its source + URL; shaky or aging data is flagged ⚠️.
 
 ---
 
@@ -120,7 +120,7 @@
 
 ## 4. What they DO with media — participatory culture
 
-*This is the heart of the brief. Today's kids are not an audience. They are a labor force, a fandom, and a cast.*
+*This is the heart of the landscape. Today's kids are not an audience. They are a labor force, a fandom, and a cast.*
 
 > **📈 UPDATE (Oct 2026) — fandom now has numbers:** Deloitte *Digital Media Trends 2026* ("Capturing Always-On Fandom"): **~80% of consumers** self-identify as fans of at least one entertainment category; fans spend **+51 min/day (+16%)** with media vs non-fans and **$71/mo vs $56** on SVOD; **55% engage cross-platform** (≈**70%** among Gen Z/millennial fans); **46%** seek fandom content from creators. [Deloitte DMT 2026](https://www.deloitte.com/us/en/insights/industry/technology/digital-media-trends-consumption-habits-survey.html) — cite the **2026 edition**, not the 19th (2025), for fandom numbers.
 
@@ -191,4 +191,4 @@ Today's 8–18-year-olds will be **~28–38 in 2046 — the heart of the core su
 
 ---
 
-*Curated from the project's raw research notes — full source list with URLs preserved inline above. Flagged (⚠️) items: TikTok third-party stats, Qustodio tracker data, Discountly aggregation, PlayVS vendor survey, no fresh second-screening figure, kids-podcast market projections, and the aging US 8–18 census (2021).*
+*Full source list with URLs inline above. Flagged (⚠️) items: TikTok third-party stats, Qustodio tracker data, Discountly aggregation, PlayVS vendor survey, no fresh second-screening figure, kids-podcast market projections, and the aging US 8–18 census (2021).*

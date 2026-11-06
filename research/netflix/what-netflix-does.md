@@ -1,6 +1,6 @@
 # What Netflix Does
 
-> Curated from the project's raw research notes. Research date: **October 13, 2026** — all figures dated inline, source URLs preserved. Siblings: [culture.md](culture.md) · [experiments.md](experiments.md) · [ceo-interview.md](ceo-interview.md) · [README](../README.md)
+> All figures dated inline, source URLs preserved. Siblings: [culture.md](culture.md) · [experiments.md](experiments.md) · [ceo-interview.md](ceo-interview.md) · [README](../README.md)
 
 ---
 
@@ -124,7 +124,7 @@ Key live deal terms (as-of dates kept):
 - **Dec 5, 2025** — Netflix signs agreement to acquire Warner Bros. (studios, HBO, HBO Max, WB Games) for **$82.7B enterprise value / $72B equity** ($27.75/share), post-spinoff of the cable networks. $2–3B projected synergies; $5.8B breakup fee; antitrust opposition. Sarandos: "Our mission has always been to entertain the world." Sources: https://variety.com/2025/tv/news/netflix-to-acquire-warner-bros-82-7-billion-deal-1236601034/ ; https://about.netflix.com/news/netflix-to-acquire-warner-bros
 - **Feb 26, 2026** — WBD board deems Paramount Skydance's higher bid "superior"; **Netflix declines to match and withdraws**. Sources: https://www.latimes.com/politics/story/2026-02-26/warner-bros-discovery-shifts-gears-says-it-now-favors-paramount-deal-over-netflix ; https://www.foxbusiness.com/media/netflix-backs-out-warner-bros-bidding-war-after-paramount-made-supperior-offer
 - **Apr 23, 2026** — WBD shareholders approve Paramount's $31/share offer (with Netflix's breakup fee paid). Source: https://en.wikipedia.org/wiki/Acquisition_of_Warner_Bros._Discovery_by_Paramount_Skydance
-- **Why it matters for a 2046 pitch:** it revealed (a) Netflix's appetite to become a century-scale studio conglomerate, (b) its antitrust/political constraints ("unequaled market power" — Rep. Issa), and (c) its willingness to walk away over price/regulatory risk — see the experiment-pattern "there is a walk-away price" in [experiments.md](experiments.md).
+- **Why it matters for a 2046 concept:** it revealed (a) Netflix's appetite to become a century-scale studio conglomerate, (b) its antitrust/political constraints ("unequaled market power" — Rep. Issa), and (c) its willingness to walk away over price/regulatory risk — see the experiment-pattern "there is a walk-away price" in [experiments.md](experiments.md).
 
 ## 8. Strategic themes (synthesis for the 2046 prompt)
 
@@ -138,7 +138,7 @@ Key live deal terms (as-of dates kept):
 8. **Competitive self-image:** <10% of TV time = headroom; ~7% of a $670B addressable market captured. Sources: https://deadline.com/2025/01/netflix-q4-2024-earnings-subscribers-nfl-squid-game-1236262728/ ; https://defenseworld.net/2026/07/18/netflix-q2-earnings-call-highlights.html
 9. **The 2026 wobble:** stock −43% YoY (Oct 2026), failed WB mega-deal, slowing US growth — the present-day tension a 2046 scenario should inherit. Source: https://stockanalysis.com/stocks/nflx/market-cap
 
-**Surprising facts worth using in the pitch:**
+**Surprising facts:**
 - The most-watched Netflix film ever (KPop Demon Hunters) set the record in ~9 weeks — and Netflix doesn't own the animation studio behind it (Sony Pictures Animation co-produced). Sources: https://comicbook.com/movies/news/netflix-movies-most-watched-all-time-kpop-demon-hunters ; https://www.netflix.com/tudum/articles/kpop-demon-hunters-most-popular-netflix-film
 - "Sports network" Netflix: live is <1% of viewing hours — it's an acquisition/ad machine. Source: https://www.cnbc.com/2026/07/16/netflix-nflx-earnings-q2-2026.html
 - The ad audience (~190–250M) out-populates most countries, built in under 4 years. Source: https://forbes.com/sites/andymeek/2026/05/16/if-netflixs-ad-tier-audience-was-a-country-it-would-rank-among-the-largest-on-earth
@@ -147,4 +147,4 @@ Key live deal terms (as-of dates kept):
 
 ---
 
-*Full consolidated source list (50+ URLs, company/official, Wikipedia, press/trade) preserved in the project's raw research notes § Sources.*
+*Sources (50+ URLs: company/official, Wikipedia, press/trade) are inline above.*

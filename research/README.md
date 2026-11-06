@@ -6,7 +6,7 @@ The curated evidence behind the paper and the nine final weak signals. Everythin
 |---|---|
 | [`netflix/what-netflix-does.md`](netflix/what-netflix-does.md) | Netflix's position: scale, revenue, ads, the attention gap vs YouTube |
 | [`netflix/culture.md`](netflix/culture.md) | How Netflix actually decides (dream team, keeper test, "70% gut / 30% data") — why a heresy like NetFeel is pilot-able there |
-| [`netflix/experiments.md`](netflix/experiments.md) | The win/fail ledger and 10 decision patterns — the single most load-bearing file: NetFeel is pitched as the *next* experiment in this ledger |
+| [`netflix/experiments.md`](netflix/experiments.md) | The win/fail ledger and 10 decision patterns — the single most load-bearing file: NetFeel is framed as the *next* experiment in this ledger |
 | [`netflix/ceo-interview.md`](netflix/ceo-interview.md) | Sarandos on AI: "a tool for creators, not instead of creators" |
 | [`netflix/future-roadmap.md`](netflix/future-roadmap.md) | The 2026 wobble, 2030 targets, production-tech/EMEA roadmap, labeled 2046 projections |
 | [`tech-horizon/tech-to-2046.md`](tech-horizon/tech-to-2046.md) | Maturity-tagged tech table: what's shipping, scaling, emerging, speculative — and what 2046 can honestly assume |

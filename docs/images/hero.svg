@@ -15,7 +15,7 @@
     <text x="64" y="150" font-size="76" font-weight="800" letter-spacing="3" fill="#e50914">NETFEEL <tspan fill="#f5f5f5" font-weight="300">2046</tspan></text>
     <text x="66" y="205" font-size="25" fill="#d6d6d6">Not <tspan font-style="italic">what</tspan> you want to watch.</text>
     <text x="66" y="240" font-size="25" fill="#d6d6d6"><tspan font-weight="700" fill="#ffffff">How</tspan> you want to feel.</text>
-    <text x="66" y="320" font-size="15" letter-spacing="2" fill="#8a8a8a">A DESIGN FICTION · NOT AFFILIATED WITH NETFLIX</text>
+    <text x="66" y="320" font-size="15" letter-spacing="2" fill="#8a8a8a">WEAK SIGNALS · PROTOTYPES · A DESIGN FICTION</text>
 
     <!-- the loop -->
     <g transform="translate(935 200)">
