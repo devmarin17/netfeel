@@ -1259,7 +1259,7 @@
       .then(poll).catch(function (e) { say("Error: " + e.message, true); });
   }
   function reset() {
-    if (!confirm("Reset the taste model to its simulated October month? (Rehearsal reset)")) return;
+    if (!confirm("Reset the taste model to its simulated October month? (Demo reset)")) return;
     if (session) endSession(true);
     feedBanner = null;
     api("POST", "/api/reset").then(function () { prevPickTitle = null; poll(); say("Model reset."); });
@@ -1431,7 +1431,7 @@
   setInterval(drawAll, 250);
   setInterval(drawAlgo, 1500);
   setSource();
-  // Rehearsal hook (console): __n46.watch() starts a reaction read without YouTube, __n46.end() prints the receipt.
+  // Debug hook (console): __n46.watch() starts a reaction read without YouTube, __n46.end() prints the receipt.
   window.__n46 = { watch: function () { if (!current) return; startSession(); }, end: function () { endSession(); } };
 })();
 </script>

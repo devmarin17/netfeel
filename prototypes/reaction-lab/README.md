@@ -2,6 +2,8 @@
 
 A working NetFeel prototype: watch a clip, a face model on the laptop reads your reaction on-device, and the app recommends what to watch next for the feeling you want. See [SPEC.md](SPEC.md) and [ALGORITHM.md](ALGORITHM.md). Clips can be local files or pasted YouTube links (via the YouTube IFrame Player API) — both get an intended-feeling tag and work exactly the same.
 
+![Reaction Lab: the player, the camera-off Skip Button, live signals, the feeling receipt and the feeling picker](../../docs/images/reaction-lab.png)
+
 ## Run it
 
 ```bash

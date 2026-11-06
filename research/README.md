@@ -1,6 +1,6 @@
 # Research base
 
-The curated evidence behind the paper and the nine final weak signals. Everything here was researched and source-checked in October–November 2026; each stat carries its source and date inline.
+The curated evidence behind the paper and the nine final weak signals. Everything here was researched and source-checked; each stat carries its source and date inline.
 
 | File | What it establishes |
 |---|---|
@@ -14,4 +14,4 @@ The curated evidence behind the paper and the nine final weak signals. Everythin
 | [`battleground/threat-map.md`](battleground/threat-map.md) | The zero-sum attention fight: 7 fronts, ranked existential threats |
 | [`sources/source-library.md`](sources/source-library.md) | The provenance layer: every source verified, dated, and mapped to the file it feeds |
 
-**A note on voice:** these are working research notes, kept close to how they were written during the project (some speak in "you/your pitch"). The dates matter: sources from 2011–2025 are real; events dated 2026 are projections of this design fiction. See the disclaimer in the [repo README](../README.md).
+**A note on voice:** these are working research notes, kept close to how they were written during the project (some address the reader as the person making the case for the concept). The dates matter: sources from 2011–2025 are real; events dated 2026 are projections of this design fiction. See the disclaimer in the [repo README](../README.md).

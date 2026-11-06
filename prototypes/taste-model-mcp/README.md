@@ -9,6 +9,12 @@ The member-owned taste model from the **NetFeel 2046** design fiction, working t
 
 The algorithm asks; the body answers.
 
+| Before a pick: only your live heart | After a pick: the reasons, what else fits, and what's behind it |
+|---|---|
+| ![The stage page before a pick: a big live heart-rate number against your resting rate](../../docs/images/stage-heart.png) | ![The stage page after a pick: reason lines, tiles that fit tonight, the vault, heartbeat and algorithm panels](../../docs/images/stage-pick-reasons.png) |
+
+*Shown with the simulated heart (press **S**); with a watch connected the same page reads your real heart rate.*
+
 ```
 Claude Desktop ──(local MCP, stdio)──► mcp-server.js ─┐
                                                       ├─► data/taste-model.json  (the vault)
@@ -34,7 +40,7 @@ npm run reset    # rebuild the simulated member's model (90 invented evenings)
 npm start        # stage page on http://localhost:4046
 ```
 
-To connect **Claude Desktop**: run `npm run check` — it prints the exact `claude_desktop_config.json` entry. Full walk-through, the stage script and a failure playbook: [SETUP.md](SETUP.md).
+To connect **Claude Desktop**: run `npm run check` — it prints the exact `claude_desktop_config.json` entry. Full walk-through, a 40-second demo script and troubleshooting: [SETUP.md](SETUP.md).
 
 ## Design stances (implemented, not just claimed)
 

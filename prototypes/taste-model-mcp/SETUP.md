@@ -78,11 +78,11 @@ Open **Chrome** at http://localhost:4046 and go full screen (**Ctrl+Cmd+F**).
 2. Claude calls the model → the stage page shows **Our Planet** with reasons and **PAID PLACEMENT: NONE · audit A0001**.
 3. On the stage page press **F** (Re-rank with my heart). If your heart rate is about 12 or more above your resting heart rate (with the default resting 62: from 74 bpm; a smaller bump deliberately keeps Our Planet), the pick re-ranks to **Headspace Guide to Sleep**, with ♥ reason lines. Close to resting → "plan as usual" (honest).
 4. Optional, in Claude: **"Open my taste model"** → the vault: what his body taught it, what it avoids, paid placements ever: 0.
-5. Press **R** to reset before the next rehearsal.
+5. Press **R** to reset before the next run.
 
 ## 7. Trailers (already done; change one only if a video disappears)
 
-All 25 titles and the 3 Easter-egg videos have a verified YouTube id in `data/catalog.json` (checked on 4 Nov 2026 with YouTube's oEmbed: the video exists and may be embedded; Netflix's own channel wherever one exists, regional Netflix channels for Midnight Diner and Ares). Videos can still be taken down later: check them again before the pitch with `node -e` over the catalog, or just click through the tiles. To replace one:
+All 25 titles and the 3 Easter-egg videos have a verified YouTube id in `data/catalog.json` (checked with YouTube's oEmbed: the video exists and may be embedded; Netflix's own channel wherever one exists, regional Netflix channels for Midnight Diner and Ares). Videos can still be taken down later: check them again before a demo with `node -e` over the catalog, or just click through the tiles. To replace one:
 
 1. Find the official trailer on YouTube (the stage page shows a "find it on YouTube ↗" link).
 2. Copy the 11 characters after `watch?v=` (e.g. `https://www.youtube.com/watch?v=AbCdEfGhIjK` → `AbCdEfGhIjK`).
@@ -92,9 +92,9 @@ Without an id, a neutral title card ("Trailer not available in this demo") is sh
 
 ---
 
-## The 40 seconds on stage
+## Demo walkthrough (40 seconds)
 
-Setup before you start talking: `npm run reset` → `npm start` → Chrome full screen on the stage page (hard refresh: Cmd+Shift+R) → Garmin connected (the big number is live) → Claude Desktop in a fresh chat, one Cmd+Tab away. The page opens on your live heart and nothing else: that is the first beat.
+Setup before you start: `npm run reset` → `npm start` → Chrome full screen on the stage page (hard refresh: Cmd+Shift+R) → Garmin connected (the big number is live) → Claude Desktop in a fresh chat, one Cmd+Tab away. The page opens on your live heart and nothing else: that is the first beat.
 
 | Time | Do | Say |
 |---|---|---|
@@ -103,11 +103,11 @@ Setup before you start talking: `npm run reset` → `npm start` → Chrome full 
 | 20–30 s | Cmd+Tab back: the trailer and the pick land, your heart moves to the right | "His assistant called *his* taste model. Netflix built it, Daan owns it. One pick and why, from his body, not his clicks. And look: paid placement, none." |
 | 30–40 s | Press **F**. The page asks *Share this heart read with your model?* Press **F** again (Share once) | "It asks me first: share once, or skip. I share… and it changes its mind: I'm running hot, so it picks a stronger wind-down. The algorithm asks, the body answers." |
 
-Bridge to 2046 (slide): *"That's 2026, on a watch you already own. In 2046, it's how every evening starts."*
+Bridge to 2046: *"That's 2026, on a watch you already own. In 2046, it's how every evening starts."*
 
 **Encore (10 s, optional):** in Claude Desktop type *Get me fired up, I want to watch a mountain bike race. Done by 23:00.* (or press **B** on the page). Jackson Goldstone's Hardline run appears, marked Off-script, still "Paid placement: none". Say: "There are no bikes in Daan's diary. It still knew what to do with 'fired up'."
 
-## If something fails on stage
+## Troubleshooting
 
 | Problem | Do this |
 |---|---|
@@ -117,9 +117,9 @@ Bridge to 2046 (slide): *"That's 2026, on a watch you already own. In 2046, it's
 | Watch drops mid-demo | The number greys out and the page retries for about 15 s. Then **C** (reconnect) or **S**. |
 | The trailer doesn't play (offline, or YouTube removed it) | The pick, the reasons and the heart still work. Click another tile, or carry on without the video. |
 | Page shows old data / looks stale | Cmd+Shift+R. Still wrong: is `npm start` running in Terminal? |
-| Pick already showing from a rehearsal | Press **R** (reset), or run `npm run reset`. |
+| Pick already showing from an earlier run | Press **R** (reset), or run `npm run reset`. |
 | F does nothing | Click an empty part of the page first (keys pause while a text field is focused). F asks first: press **F** again to share, **Esc** to skip. For a faster run, switch off "Ask me before each read is shared". |
-| Laptop dies | Play the backup screen recording (record one before you present, with QuickTime: File → New Screen Recording). |
+| Laptop dies | Play the backup screen recording (record one in advance, with QuickTime: File → New Screen Recording). |
 
 ## The page
 
@@ -141,11 +141,11 @@ One page, scrolling, no inner scroll areas. The top of the page (**the screen**)
 4. **Re-rank with my heart** (**F**): asks first (**consent per read**): the page shows the number it would share. **F** again = Share once, **Esc** = Skip (nothing is sent; the change log notes that you skipped). Share once feeds the read on purpose (logged in the model, valid 15 min) and re-ranks now. The switch **Ask me before each read is shared** (on by default) turns the question off if you want to go faster.
 5. **Forget tonight's heart** (two clicks, so it can't happen by accident): deletes every raw heart reading: the reads logged in the model, the live trace, the watch receipt, the "Live read" lines in the change log and on the pick. It also switches sharing off. The audit log is untouched and still verifies, because it never stores raw heart rates (only the stress weight a pick used). `npm run check` tests this.
 
-**On stage:** sharing is off by default, so Claude's first pick is the plain one (Our Planet) and pressing **F** is the moment it changes its mind. After every **F** the page shows a banner either way ("… → Headspace Guide to Sleep" or "kept Our Planet") and a toast. If you turn sharing **on**, Claude's first pick already uses your heart, so a nervous presenter gets Headspace straight away (the reason line says why).
+**In a demo:** sharing is off by default, so Claude's first pick is the plain one (Our Planet) and pressing **F** is the moment it changes its mind. After every **F** the page shows a banner either way ("… → Headspace Guide to Sleep" or "kept Our Planet") and a toast. If you turn sharing **on**, Claude's first pick already uses your heart, so a nervous demo-giver gets Headspace straight away (the reason line says why).
 
 **Simulated heart (S):** a backup that starts about 20 bpm above your resting rate, so **F** flips the pick. Every label says "Simulated" and it never invents HRV, skin contact or battery.
 
-**Stage mode (P):** hides the side panels and enlarges the pick, "Paid placement: none" and the live heart for the back row. Press **P** again to leave.
+**Stage mode (P):** hides the side panels and enlarges the pick, "Paid placement: none" and the live heart for a projector. Press **P** again to leave.
 
 **If the watch drops:** the number greys out ("Signal lost · last read N s ago") and the page retries by itself for about 15 s. If that fails, press **C** or **S**.
 

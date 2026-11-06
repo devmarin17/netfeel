@@ -2,7 +2,7 @@
 
 > **Earlier concept — superseded.** This was the project's first, bigger frame (three ideas in one loop). The project later narrowed to the single-product **NetFeel** concept — see [`../paper/netfeel-paper.md`](../paper/netfeel-paper.md). This document is kept as the project's history; its world-building and economics tables fed the final paper.
 
-*Concept document for the "Netflix 2046" design-futures brief. Drafted October 2026.*
+*Concept document for the Design Future Course's "Netflix 2046" brief.*
 
 ---
 

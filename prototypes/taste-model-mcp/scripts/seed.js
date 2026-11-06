@@ -1,5 +1,5 @@
 // Builds Daan's taste model from his SIMULATED diary of evenings (Aug – Nov 2026).
-// Run: npm run reset   (also use it to reset between rehearsals)
+// Run: npm run reset   (also use it to reset between demo runs)
 "use strict";
 
 const fs = require("fs");
@@ -132,7 +132,7 @@ const diaryRange = () => {
 
 function build() {
   const catalog = loadCatalog();
-  // Keep a resting heart rate you measured with your watch: a rehearsal reset shouldn't wipe your body data.
+  // Keep a resting heart rate you measured with your watch: a demo reset shouldn't wipe your body data.
   let kept = null;
   try {
     const old = JSON.parse(fs.readFileSync(FILES.model, "utf8")).member;

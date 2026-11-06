@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400" viewBox="0 0 1200 400" role="img" aria-label="NETFEEL 2046: not what you want to watch, how you want to feel. Sense, Learn, Ask, Own.">
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="50%" r="55%">
+      <stop offset="0" stop-color="#e50914" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e50914" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#e50914"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="400" rx="20" fill="#0b0b0d"/>
+  <rect width="1200" height="400" rx="20" fill="url(#glow)"/>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="64" y="150" font-size="76" font-weight="800" letter-spacing="3" fill="#e50914">NETFEEL <tspan fill="#f5f5f5" font-weight="300">2046</tspan></text>
+    <text x="66" y="205" font-size="25" fill="#d6d6d6">Not <tspan font-style="italic">what</tspan> you want to watch.</text>
+    <text x="66" y="240" font-size="25" fill="#d6d6d6"><tspan font-weight="700" fill="#ffffff">How</tspan> you want to feel.</text>
+    <text x="66" y="320" font-size="15" letter-spacing="2" fill="#8a8a8a">A DESIGN FICTION · NOT AFFILIATED WITH NETFLIX</text>
+
+    <!-- the loop -->
+    <g transform="translate(935 200)">
+      <circle r="118" fill="none" stroke="#3a3a3f" stroke-width="2" stroke-dasharray="4 8"/>
+      <path d="M 40 -111 A 118 118 0 0 1 111 -40" fill="none" stroke="#e50914" stroke-width="3" marker-end="url(#arr)"/>
+      <path d="M 111 40 A 118 118 0 0 1 40 111" fill="none" stroke="#e50914" stroke-width="3" marker-end="url(#arr)"/>
+      <path d="M -40 111 A 118 118 0 0 1 -111 40" fill="none" stroke="#e50914" stroke-width="3" marker-end="url(#arr)"/>
+      <path d="M -111 -40 A 118 118 0 0 1 -40 -111" fill="none" stroke="#e50914" stroke-width="3" marker-end="url(#arr)"/>
+      <g font-size="20" font-weight="700" fill="#ffffff" text-anchor="middle">
+        <text x="0" y="-110">Sense</text>
+        <text x="135" y="7" text-anchor="start">Learn</text>
+        <text x="0" y="124">Ask</text>
+        <text x="-135" y="7" text-anchor="end">Own</text>
+      </g>
+      <text y="-4" font-size="38" text-anchor="middle" fill="#e50914">♥</text>
+      <text y="26" font-size="12" letter-spacing="1.5" text-anchor="middle" fill="#9a9a9a">ON-DEVICE</text>
+    </g>
+  </g>
+</svg>

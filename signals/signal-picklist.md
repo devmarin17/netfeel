@@ -1,6 +1,6 @@
 # NetFeel weak signals
 
-Each signal is named as what we can already see today. The line under it explains it and is ready to say on a slide.
+Each signal is named as what we can already see today. The line under it explains it in plain words.
 
 ## Must-haves
 

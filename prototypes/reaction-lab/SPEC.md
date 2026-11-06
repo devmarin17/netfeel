@@ -80,4 +80,4 @@ Every value is taken **minus the person's own baseline**, because faces differ.
 
 ## Explicitly not in v0
 
-No server, no accounts, no YouTube, no heart-rate. Those are the 2028 pilot. Here they are only a note on the slide.
+No server, no accounts, no YouTube, no heart-rate. Those belong to the 2028 pilot in the fiction and are out of scope here.

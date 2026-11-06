@@ -1,8 +1,8 @@
 # NetFeel: Netflix 2046
 
-*The paper behind the pitch. Facts checked on 3 Nov 2026: first against the repo research and web search, then against the opened source pages. Presented 5 Nov 2026 as an eight-minute talk with a live demo.*
+*The paper behind the concept, written for the Design Future Course. Every fact was checked against the repo research and web search, then against the opened source pages.*
 
-**Legend:** ✅ = verified against the source page (3 Nov 2026) · ⚠️ = still unconfirmed (only search results, or a blocked page) · *(added)* = not in the original draft, added after the research check · *(fixed)* = wording corrected after the fact check
+**Legend:** ✅ = verified against the source page · ⚠️ = still unconfirmed (only search results, or a blocked page) · *(added)* = not in the original draft, added after the research check · *(fixed)* = wording corrected after the fact check
 
 ---
 
@@ -22,8 +22,6 @@
 **The showcase:** **perspectives.** Selected films let you switch whose eyes you watch through, so the same story gives a different feeling and builds empathy.
 
 **Why it matters for Netflix:** Netflix is financially strong, but attention is the limit. YouTube holds nearly twice Netflix's share of US TV time. Netflix can't win by out-uploading YouTube. It *can* win on something YouTube's ad-and-data model makes hard: **trust with your feelings.**
-
-> **For the slides:** this summary is the spine of the talk. The one line ("not what you want to watch, how you want to feel") is the opening and the closing.
 
 ---
 
@@ -66,8 +64,6 @@ YouTube is **open**; Netflix is **curated**. That gives YouTube:
 - **Social media, user-generated content and AI** mean creators set the pace (W2, §1.4) → perspectives give creators a new format inside Netflix.
 - **Broadcasters moving into streaming and partnering with social** → a trusted feeling layer is something Netflix could license to partners ⚠️ (no verified broadcaster evidence in the repo yet; say it as our view).
 
-> **For the slides (S1, ~45 s):** one chart (YouTube 15.8% vs Netflix 7.7% of US TV time, Aug 2026) + one line: "Netflix doesn't have a money problem. It has an attention problem." Mention the culture in one sentence: "Netflix changes its own rules — after an experiment proves it."
-
 ---
 
 ## 2. Trends and weak signals
@@ -86,7 +82,7 @@ Two levels, following the project's weak-signals method (signals that carry the 
 | T5 | **Discovery moved to social.** 52% of fans say social media is the main way they discover new content; **73% of Gen Z fans** ✅ | 2026 | Deloitte, 2026 Digital Media Trends (24 Mar 2026) |
 
 ### 2.2 Weak signals: all of them, ranked
-**Tiers:** 🔴 **Key**: on a slide, carries the argument · 🟠 **Support**: mentioned or in the Q&A · ⚪ **Background**: in this paper only.
+**Tiers:** 🔴 **Key**: carries the argument · 🟠 **Support**: strengthens it · ⚪ **Background**: context only.
 **Type:** *Weak* = early and fringe · *Emerging* = growing, not mainstream yet · *Trend* = already measurable and mainstream (kept as context).
 
 #### 🔴 Key signals
@@ -95,7 +91,7 @@ Two levels, following the project's weak-signals method (signals that carry the 
 | **W4** *(+W14)* | **Media that reacts to your heartbeat.** A horror game adapts its music and enemies to the player's heart rate in real time | Drexel master's thesis (Dahiya): 15 participants, engagement **6.00 vs 4.86** for the control group. Players *didn't notice* the changes (the control group rated the music as more adaptive), and the author calls for more transparency (2025 ⚠️ year from one reference list). Supporting: Bhagat et al., "Facial Emotion Recognition using CNN", *Procedia Computer Science* 235 (2024) ✅; the 65.68% accuracy figure ⚠️ couldn't be read on the page. Use it as a **limitation**: camera reading is still unreliable | One student project, 15 people: tiny, early, odd | Every story can listen to your body. NetFeel picks (and later shapes) content by how it actually lands on *you* | Feeling picks, transparency |
 | **W8** | **Teens practise entering fiction ("reality shifting").** Self-hypnosis to "shift" into fictional worlds | 1.7B+ views of #realityshifting clips on one platform, a 40,000-member forum (peer-reviewed study, **2021** ✅ *(fixed date)*; USA Today, May 2024) | A niche internet subculture, not a behaviour most people share | Audiences want to *be inside* stories, not watch them from outside | **Perspectives** |
 | **W6** | **Media used to reach a state.** Sleep content and the ASMR economy | **About 63% of ASMR viewers** use it to fall asleep ✅ *(fixed)* (HAUS ASMR report, Mar 2026, an industry source); 15% of Japan's YouTube audience watches ASMR weekly ⚠️ | People choose by *feeling*, not genre, but only inside one niche format so far | Netflix sells states ("calm by 23:00"), not hours | Feeling picks, emotion search |
-| **W18** *(added, owner's new signal)* | **Everyone gets a personal AI assistant, and it starts acting for you.** | ChatGPT reached ~800M **weekly** users by Apr 2025, the fastest consumer adoption ever (BOND/Meeker, May 2025) ✅. Assistants now **act**: ChatGPT Instant Checkout buys for you (29 Sep 2025, US) ✅; Google opened Google Home to third-party AI agents via MCP (16 Sep 2026) ✅ *(fixed date)* | Using chatbots is already a trend. The *weak* part is the assistant **acting on your behalf**: one assistant, one country, single items | You tell your assistant "I need to calm down"; it asks NetFeel; Netflix answers. The assistant becomes the remote | Emotion search via assistant, data ownership |
+| **W18** *(added, author's new signal)* | **Everyone gets a personal AI assistant, and it starts acting for you.** | ChatGPT reached ~800M **weekly** users by Apr 2025, the fastest consumer adoption ever (BOND/Meeker, May 2025) ✅. Assistants now **act**: ChatGPT Instant Checkout buys for you (29 Sep 2025, US) ✅; Google opened Google Home to third-party AI agents via MCP (16 Sep 2026) ✅ *(fixed date)* | Using chatbots is already a trend. The *weak* part is the assistant **acting on your behalf**: one assistant, one country, single items | You tell your assistant "I need to calm down"; it asks NetFeel; Netflix answers. The assistant becomes the remote | Emotion search via assistant, data ownership |
 | **W10** | **Kids already hand their emotions to machines.** | **72% of US teens** have used AI companions, 33% for social or relationship reasons, and about a third of companion users discussed serious matters with AI instead of a person (Common Sense Media, Jul 2025) ✅ *(fixed)*; 64% of US teens use AI chatbots (Pew, 9 Dec 2025) ✅ *(data added)*; see also W11, W12 | Companions are new and contested, not yet a normal, trusted habit | 2046's 30-year-olds grew up sharing feelings with software: emotion-aware media feels normal, *if* it's trustworthy | Feeling picks, trust |
 
 #### 🟠 Support signals
@@ -121,12 +117,12 @@ Two levels, following the project's weak-signals method (signals that carry the 
 | W17 | **Fewer shared moments.** Deloitte's "signpost for the future": *"Hyper-personalization, enabled by AI, becomes so ubiquitous that there are fewer 'shared' cultural media moments."* A scenario, not survey data | Deloitte, 2026 Media & Entertainment Industry Outlook, 2 Mar 2026 ✅ | Emerging issue | Shared viewing becomes something you *choose* |
 | W21 *(added)* | **AI drives data-centre power** (a *pressure*, not a weak signal). ~415 TWh in 2024 → ~945 TWh by 2030 | IEA, *Energy and AI*, Apr 2025 (via Scientific American, Down To Earth) ✅ | Trend | Sensing is cheap; generating content per person is not. Personal versions need a cost and carbon limit |
 
-**The owner's three insights from the research** (kept, used in sections 5 and 6):
+**The author's three insights from the research** (kept, used in sections 5 and 6):
 - In a world of free, creator-led video, **"quality" is defined by how the viewer feels about the experience, not by budget** Deloitte: *"the 'quality' of content may be increasingly determined by how much audiences value their experience consuming it, not by how much was spent to produce it"* (2026 Media & Entertainment Industry Outlook) ✅.
 - **Creator bonds are strong** → viewers choosing a creator's or character's perspective is plausible.
 - **People choose music by feeling**, not by genre or BPM. NetFeel applies that to film.
 
-### 2.3 Six-category overview *(added; teacher review: signals across six categories)*
+### 2.3 Six-category overview *(added)*
 | Category | Signals | What it tells us |
 |---|---|---|
 | **Social relationships** | W10 kids and AI emotions · W17 fewer shared moments | Feelings are already shared with machines; shared culture needs to be designed back in |
@@ -153,8 +149,6 @@ W19/W20 rules ─┘   W8 entering fiction              ─────▶ Showc
 - **B1 (balancing):** comfort-only picks → fewer surprises and shared moments → members get bored → Netflix adds live and communal viewings.
 - **B2 (balancing):** data misuse or scandal → regulation (AI Act, DMA) → limits on data → trust has to be re-earned.
 
-> **For the slides (S2, ~1:15):** don't show all 21 signals. Show the **5 key signals** as cards (each: one image, one number, year, source), plus one sentence: "Trends give us the tools; these weak signals tell us where it's going." Put the six-category table on the handout. Backup slide: the full ranked list.
-
 ---
 
 ## 3. The 2046 scenario: one evening with Noa
@@ -175,8 +169,6 @@ W19/W20 rules ─┘   W8 entering fiction              ─────▶ Showc
 | **How people watch** (consumption) | Browse rows, pick by genre, autoplay; ~47 s on one screen | Ask by feeling, often through an assistant; NetFeel picks for the state you want, then stops; perspectives let you re-enter a story; watching together means sharing reactions, not a room |
 | **How content gets made** (production) | Test screenings, focus groups, A/B artwork | Directors set **emotion rails** (the feelings each scene should allow); an opt-in, aggregated, anonymous scene-level signal (no individual readings leave the device) shows **how scenes really land** (a "Body Panel" replacing focus groups); key films ship with **perspective tracks**; AI fills in versions inside the director's rails, and human-made scenes are labelled |
 | **Who the creators are** (creators) | Studios and showrunners for Netflix; creators on YouTube | Directors become **feeling designers**; actors and creators record **perspectives**; creators earn per perspective watched; "verified human-made" is a mark of quality |
-
-> **For the slides (S3, ~1:30):** tell the evening as a **story**, not bullets: 4 frames (Noa asks the assistant for a good cry → the pick with its reason → the film → the feeling receipt and delete). Then one 3-row slide: watch / made / creators. Show, don't tell.
 
 ---
 
@@ -200,8 +192,6 @@ W19/W20 rules ─┘   W8 entering fiction              ─────▶ Showc
 | **2028** | **Pilot:** 12 weeks, A/B, bring-your-own wearable or phone camera, two lanes: *cozy/sleep* and *horror/thriller*. Metric: **State-Hit Rate**, the % of evenings where the body confirms the feeling you asked for | Netflix's own experiment pattern (ads, live) |
 | **2030s** | Feeling search in every Netflix app; assistants call NetFeel; first perspective tracks on one franchise; the Netflix wearable bundle launches. *Barriers:* sensor accuracy, EU high-risk rules. *Owner:* Netflix | AI search + DMA-style portability |
 | **2046** | NetFeel is how most members choose; perspectives are a standard storytelling format; State-Hit Rate replaces watch hours as the headline metric | The scenario in section 3 |
-
-> **For the slides (S4, ~45 s):** one timeline strip, 2026 → 2028 → 2030s → 2046, with the pilot and its metric big. Line: "This is how Netflix has always changed: heresy, experiment, new rule."
 
 ---
 
@@ -233,7 +223,7 @@ Selected films let you **switch between characters' perspectives**. The director
 4. **It plays to Netflix's strengths:** a curated catalogue, the best recommendation engine in streaming, and an experiment culture.
 5. **It's hard for YouTube to copy.** A business built on ads and data struggles to promise *"your feelings are never sold."*
 
-### 5.5 How NetFeel stands out (the owner's three principles)
+### 5.5 How NetFeel stands out (the author's three principles)
 1. **Transparent picks.** The horror game study found players didn't notice invisible changes (W4). NetFeel always shows the reason ("because your pulse stayed high during X"), so it feels like a service, not surveillance.
 2. **Shared culture, designed back in.** Personalisation can mean fewer shared moments (W17). NetFeel adds communal viewings where friends opt in to see each other's reactions, and live events everyone feels together.
 3. **Feeling data owned by the viewer.** Processed on the device, only a mood profile kept, deletable. In the EU, regulators are already wary of emotion inference (W19), and portability rules point the same way (W20).
@@ -244,15 +234,15 @@ Selected films let you **switch between characters' perspectives**. The director
 | **Taste-model MCP demo** | A real Garmin heart rate → a taste model the member owns → Claude Desktop (a real AI assistant) asks it for a pick | [`prototypes/taste-model-mcp/`](../prototypes/taste-model-mcp/) |
 | **Reaction Lab** | A laptop camera reads your reaction on the device → feeling receipt → recommendations by feeling | [`prototypes/reaction-lab/`](../prototypes/reaction-lab/) |
 
-The paper presents the full 2046 world. The MVP is the part that already works in 2026.
+![The taste-model demo: a pick with its reasons, the live heart beside it, and the vault, algorithm and audit underneath](../docs/images/stage-pick-reasons.png)
 
-> **For the slides (S5–S6, ~1:45):** S5: the four steps as one loop graphic (Sense → Learn → Ask → Own) + the 30–45 s **video** of the MVP (heart rate → assistant → pick). S6: perspectives, one frame, "same story, different feeling". End S5 with the music line.
+The paper presents the full 2046 world. The MVP is the part that already works in 2026.
 
 ---
 
 ## 6. Consequences: who wins, who loses
 
-### 6.1 Impact matrix *(added; teacher review: consequences across the six categories)*
+### 6.1 Impact matrix *(added)*
 | | Social relationships | Individual behaviour | Politics & government | Environment | Economics | Education & culture |
 |---|---|---|---|---|---|---|
 | **Feeling picks** (sense + learn + ask) | Fewer arguments over what to watch; risk: less discovery of the unexpected | Evenings planned by feeling; risk: people avoid every uncomfortable feeling | Emotion data becomes a regulated category, like health data | More sensors and wearables → more e-waste | Wearable bundles; new metric (State-Hit Rate); feeling-based ads become a temptation | Media literacy has to include "how platforms read you" |
@@ -283,53 +273,33 @@ The paper presents the full 2046 world. The MVP is the part that already works i
 
 **The value we're betting on:** a person's feelings are theirs, and the platform has to earn the right to hold them. Choosing feeling over watch hours costs Netflix some ad-driven engagement, and that's deliberate.
 
-> **For the slides (S7, ~1:00):** show the matrix as a simplified 3×6 grid of icons, then **say** the top two harms (sensor divide, feeling data for ads) and the guardrails. The ethics part is 25% of the grade, so give it at least 30–45 s of spoken time. Full matrix on the handout.
+---
+
+## 7. The close
+
+*"Netflix 2046 won't ask what you want to watch. It will ask how you want to feel, and then let you keep the answer."*
+
+Every 2046 element above traces back to a 2026 trend or signal (section 2.4): plausible, not just provocative.
 
 ---
 
-## 7. Narrative and format
+## Sources and open items
 
-### 7.1 Slide plan (~7:35 + Q&A)
-| Slide | Content | Section | Time |
-|---|---|---|---|
-| S0 | Cold open: one line, in-world: *"I need a good cry tonight."* | 3 | 0:20 |
-| S1 | Netflix 2026: strong, but attention is the limit + culture in one line | 1 | 0:45 |
-| S2 | Trends → 5 key weak signals | 2 | 1:15 |
-| S3 | Noa's evening, 2046 + watch / made / creators | 3 | 1:30 |
-| S4 | How Netflix stays up to date: culture + the path to 2046 | 4 | 0:45 |
-| S5 | NetFeel: Sense → Learn → Ask → Own + MVP video | 5 | 1:15 |
-| S6 | Showcase: perspectives | 5 | 0:30 |
-| S7 | Consequences: matrix, harms, guardrails | 6 | 1:00 |
-| S8 | The ask: run the 2028 NetFeel pilot + close line | 4, 0 | 0:15 |
+**Status after source checks.** Everything marked ✅ above was verified on the opened source page. These items are still open:
 
-**Close line:** *"Netflix 2046 won't ask what you want to watch. It will ask how you want to feel, and then let you keep the answer."*
-
-### 7.2 Format
-- **Deck** with images, not bullets — show, don't tell.
-- **Video:** a 30–45 s screen recording of the MVP.
-- **Handout:** the six-category table + the impact matrix + the feedback loops + the timeline, with the course methods named: horizon scanning · systems thinking · consequence mapping · ethics · world-building.
-- **Credibility check:** plausible, not just provocative: every 2046 element traces back to a 2026 trend or signal (section 2.4).
-- **Q&A cards:** sensor accuracy · EU AI Act (high-risk, not banned) · people without wearables · creators and the "feeling score" · ad tier vs "never used for ads" · how Netflix stays up to date.
-
----
-
-## Sources and to-verify list
-
-**Status after source checks (3 Nov 2026).** Three agents opened the source pages. Everything marked ✅ above was verified on the page. These items are still open:
-
-| Claim | Why still ⚠️ | What to do |
+| Claim | Why still ⚠️ | How it's handled |
 |---|---|---|
 | Sarandos "not growing as fast as I want" | Bloomberg blocked; confirmed via Barrett Media and Entrepreneur | Fine to quote; cite Bloomberg Screentime, 1 Oct 2026 |
 | T1 "research output keeps rising" | The graph data isn't in the page text | Look at the graph once, or say "a growing research field" |
 | W4 thesis year (2025) | From one reference list only | Check the Drexel page in a browser |
 | W14 65.68% / 7 emotions | ScienceDirect blocked scripts | Open the paper in a browser, or drop the number |
-| W6 15% of Japan's YouTube audience | Search results only | Drop it from the slides |
+| W6 15% of Japan's YouTube audience | Search results only | Treated as unconfirmed |
 | W13 Ofcom 65% / 34% | Ofcom PDF blocked; secondary sources only | Open the Ofcom report in a browser |
 | W19 "legal" claims | Not a legal opinion | Say "high-risk, not banned", never "legal" |
-| Pew 2018 "learning on YouTube" | Search results only, dated | Fine as background; not on a slide |
+| Pew 2018 "learning on YouTube" | Search results only, dated | Background only |
 
 **Dropped:** "members grew faster than hours" (no source) and "the free tier explains older viewers" (no source).
 
-Full verification was done on 3 Nov 2026 against opened primary sources (audience reports, tech/policy texts, Netflix letters and Nielsen).
+Full verification was done against opened primary sources (audience reports, tech/policy texts, Netflix letters and Nielsen).
 
 **Main sources:** Netflix shareholder letters incl. Q3 2026 (20 Oct 2026) and "What We Watched" (2025–26) · Nielsen The Gauge (2025–26) · Common Sense Media (2025, 2026) · Pew (2025) · Deloitte Digital Media Trends (2025, 2026) and 2026 M&E Industry Outlook · Ofcom (2026) · Kapwing via The Guardian and Tubefilter (2025, 2026) · Mark, G. (2023), *Attention Span* · Dahiya, Drexel University thesis · EU AI Act and DMA · IEA (2025) · BOND (2025). Full detail: [`research/sources/source-library.md`](../research/sources/source-library.md).
